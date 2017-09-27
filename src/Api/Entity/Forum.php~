@@ -1,0 +1,89 @@
+<?php
+
+namespace Api\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Forum
+ *
+ * @ORM\Table(name="forum")
+ * @ORM\Entity
+ */
+class Forum
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="parent_id", type="bigint", nullable=true)
+     */
+    private $parentId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="category", type="text", length=65535, nullable=true)
+     */
+    private $category;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="author", type="string", length=255, nullable=false)
+     */
+    private $author;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255, nullable=false)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="content", type="text", nullable=false)
+     */
+    private $content;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="timestamp", type="datetime", nullable=false)
+     */
+    private $timestamp = 'CURRENT_TIMESTAMP';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="active", type="integer", nullable=false)
+     */
+    private $active = '1';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="deleted", type="integer", nullable=false)
+     */
+    private $deleted = '0';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="content_markdown", type="text", nullable=true)
+     */
+    private $contentMarkdown;
+
+
+}
+

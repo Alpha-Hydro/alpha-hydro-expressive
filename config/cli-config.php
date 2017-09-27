@@ -8,15 +8,14 @@
  */
 
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
-use Interop\Container\ContainerInterface;
 
 chdir(dirname(__DIR__));
 require 'vendor/autoload.php';
 
 return call_user_func(function (){
-    /** @var ContainerInterface $container */
+    /** @var \Interop\Container\ContainerInterface \$container */
     $container = require 'config/container.php';
 
-    $entityManager = $container->get(Doctrine\ORM\EntityManager::class);
+    $entityManager = $container->get(\Doctrine\ORM\EntityManager::class);
     return ConsoleRunner::createHelperSet($entityManager);
 });

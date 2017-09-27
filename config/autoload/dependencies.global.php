@@ -12,7 +12,7 @@ return [
     // service names.
     'dependencies' => [
         'abstract_factories' => [
-            //\Zend\ServiceManager\AbstractFactory\ReflectionBasedAbstractFactory::class
+            \Zend\ServiceManager\AbstractFactory\ReflectionBasedAbstractFactory::class,
         ],
         // Use 'aliases' to alias a service name to another service. The
         // key is the alias name, the value is the service to which it points.
@@ -24,16 +24,18 @@ return [
         // class name.
         'invokables' => [
             // Fully\Qualified\InterfaceName::class => Fully\Qualified\ClassName::class,
-            Doctrine\DBAL\Logging\DebugStack::class => Doctrine\DBAL\Logging\DebugStack::class,
+            \Doctrine\DBAL\Logging\DebugStack::class => \Doctrine\DBAL\Logging\DebugStack::class,
 
             Helper\ServerUrlHelper::class => Helper\ServerUrlHelper::class,
+            Middleware\ImplicitHeadMiddleware::class => Middleware\ImplicitHeadMiddleware::class,
+            Middleware\ImplicitOptionsMiddleware::class => Middleware\ImplicitOptionsMiddleware::class,
         ],
         // Use 'factories' for services provided by callbacks/factory classes.
         'factories'  => [
             Application::class                => Container\ApplicationFactory::class,
             Delegate\NotFoundDelegate::class  => Container\NotFoundDelegateFactory::class,
 
-            Doctrine\ORM\EntityManager::class => ContainerInteropDoctrine\EntityManagerFactory::class,
+            \Doctrine\ORM\EntityManager::class => ContainerInteropDoctrine\EntityManagerFactory::class,
 
             Helper\ServerUrlMiddleware::class => Helper\ServerUrlMiddlewareFactory::class,
             Helper\UrlHelper::class           => Helper\UrlHelperFactory::class,

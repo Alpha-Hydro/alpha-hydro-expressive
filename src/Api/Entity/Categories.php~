@@ -1,0 +1,159 @@
+<?php
+
+namespace Api\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Categories
+ *
+ * @ORM\Table(name="categories", indexes={@ORM\Index(name="order", columns={"order"}), @ORM\Index(name="parent_id", columns={"parent_id"})})
+ * @ORM\Entity
+ */
+class Categories
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="parent_id", type="bigint", nullable=false)
+     */
+    private $parentId = '0';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     */
+    private $image;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", length=65535, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="add_date", type="datetime", nullable=true)
+     */
+    private $addDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="mod_date", type="datetime", nullable=true)
+     */
+    private $modDate;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="order", type="bigint", nullable=true)
+     */
+    private $order;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="generate", type="boolean", nullable=true)
+     */
+    private $generate;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="active", type="boolean", nullable=false)
+     */
+    private $active = '1';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="full_path", type="string", length=255, nullable=true)
+     */
+    private $fullPath;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="meta_description", type="text", nullable=true)
+     */
+    private $metaDescription;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="meta_keywords", type="string", length=255, nullable=true)
+     */
+    private $metaKeywords;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="meta_title", type="string", length=255, nullable=true)
+     */
+    private $metaTitle;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="path", type="string", length=128, nullable=true)
+     */
+    private $path;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="sorting", type="integer", nullable=false)
+     */
+    private $sorting = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="deleted", type="integer", nullable=false)
+     */
+    private $deleted = '0';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="upload_path", type="string", length=128, nullable=true)
+     */
+    private $uploadPath;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="content_markdown", type="text", length=65535, nullable=true)
+     */
+    private $contentMarkdown;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="content_html", type="text", length=65535, nullable=true)
+     */
+    private $contentHtml;
+
+
+}
+
