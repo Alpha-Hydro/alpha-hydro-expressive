@@ -1,12 +1,12 @@
 <?php
 
+use Zend\Expressive\Router\FastRouteRouter;
 use Zend\Expressive\Router\RouterInterface;
-use Zend\Expressive\Router\ZendRouter;
 
 return [
     'dependencies' => [
         'invokables' => [
-            RouterInterface::class => ZendRouter::class,
+            RouterInterface::class => FastRouteRouter::class,
         ],
     ],
 ];

@@ -15,6 +15,7 @@
         "zendframework/zend-component-installer": "^1.0",
         "zendframework/zend-config-aggregator": "^1.0",
         "zendframework/zend-expressive": "^2.0.2",
+        "zendframework/zend-expressive-fastroute": "^2.1",
         "zendframework/zend-expressive-helpers": "^4.0",
         "zendframework/zend-expressive-twigrenderer": "^1.4",
         "zendframework/zend-expressive-zendrouter": "^2.0.1",

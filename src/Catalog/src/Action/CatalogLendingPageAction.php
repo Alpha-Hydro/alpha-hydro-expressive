@@ -15,11 +15,10 @@ use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Expressive\Router\RouteResult;
 use Zend\Expressive\Template;
 
 
-class CatalogCategoryListAction implements ServerMiddlewareInterface
+class CatalogLendingPageAction implements ServerMiddlewareInterface
 {
 
     /**
@@ -50,45 +49,20 @@ class CatalogCategoryListAction implements ServerMiddlewareInterface
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-        /** @var RouteResult $routeResult */
-        $routeResult = $request->getAttribute(RouteResult::class);
-
-        $routeMatchedParams = $routeResult->getMatchedParams();
-
-        if (empty($routeMatchedParams['full_path'])) {
-            throw new \RuntimeException('Invalid route: "full_path" not set in matched route params.');
-        }
-
-        $fullPath = $routeMatchedParams['full_path'];
-
-        /** @var Categories $currentCategory */
-        $currentCategory = $this->entityManager
-            ->getRepository(Categories::class)
-            ->findOneByFullPath($fullPath);
-
-        // @Todo if not find currentCategory
-
-        if (!$currentCategory)
-            return new HtmlResponse($this->templateRenderer->render('error::404'), 404);
-
-        $parentId = $currentCategory->getId();
 
         $categories = $this->entityManager->getRepository(Categories::class)->findBy(
             [
-                'parentId' => $parentId,
+                'parentId' => 0,
                 'active' => 1,
                 'deleted' => 0,
             ],
             ['sorting' => 'ASC']
         );
 
-        // @Todo if empty Categories
-
         $data = [
-            'currentCategory' => $currentCategory,
             'categories' => $categories,
         ];
 
-        return new HtmlResponse($this->templateRenderer->render('catalog::listCategory', $data));
+        return new HtmlResponse($this->templateRenderer->render('catalog::lendingCategory', $data));
     }
 }

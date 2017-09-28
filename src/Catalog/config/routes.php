@@ -9,4 +9,5 @@
 
 use Catalog\Action;
 
-$app->get('/catalog', Action\CatalogCategoryListAction::class, 'catalog_category_list');
+$app->get('/catalog', Action\CatalogLendingPageAction::class, 'catalog_category_lending');
+$app->get('/catalog/{full_path:[\w\-\/]+}', Action\CatalogCategoryListAction::class, 'catalog_category_list');
