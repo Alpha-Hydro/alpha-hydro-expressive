@@ -1,0 +1,17 @@
+$alpha-font-size-default: $font-size-base;
+//noinspection SassScssResolvedByNameOnly
+$alpha-font-size-small: ceil(($alpha-font-size-default * 0.85)); //~8pt, ~11px;
+//noinspection SassScssResolvedByNameOnly
+$alpha-font-size-large: ceil(($alpha-font-size-default * 1.6)); //~17pt, ~23px;
+
+$alpha-gray-darker: #525252;
+$alpha-gray-dark: #6A6A6A;
+$alpha-gray: #ABABAB;
+$alpha-gray-light: #CCCCCC;
+$alpha-gray-lighter: #ECECEC;
+
+$alpha-orange: #F48123;
+$alpha-blue: #0895D8;
+
+$height-footer: 80px;
+$padding-top-footer: 25px;

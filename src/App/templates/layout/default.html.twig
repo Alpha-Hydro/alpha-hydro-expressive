@@ -6,7 +6,8 @@
     <title>{% block title %}{% endblock %} - Альфа-Гидро</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/bootstrap/ah-bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/global.css') }}" />
     {% block stylesheets %}{% endblock %}
 </head>
 <body class="app">
@@ -49,6 +50,31 @@
                 </div>
             </div>
         </nav>
+        <div class="main-head">
+            <div class="container" role="banner">
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 col-xs-4">
+                        <a href="{{ path('home') }}" class="logo png"></a>
+                    </div>
+                    <div class="col-md-8 col-sm-8 col-xs-8">
+                        <div class="app-contacts">
+                            <div class="row">
+                                <div class="col-md-4 col-md-offset-1 hidden-sm hidden-xs">
+                                    <div class="adress">193312, г. Санкт-Петербург ул.Кржижановского, д.12/1</div>
+                                </div>
+                                <div class="col-md-3 hidden-sm hidden-xs">
+                                    <div class="work-time">9:00 - 18:00</div>
+                                </div>
+                                <div class="col-md-4 col-sm-12 col-xs-12 text-right">
+                                    <div class="phone">+ 7 (812) <span class="text-size-large">44-949-44</span></div>
+                                    <div class="text-size-small mail"><a href="mailto:info@alpha-hydro.com"><i class="fa fa-envelope"></i>  info@alpha-hydro.com</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
 
     <div class="app-content">
@@ -67,7 +93,7 @@
             {% endblock %}
         </div>
     </footer>
-
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="{{ asset('js/bundle.js') }}"></script>
     {% block javascript %}{% endblock %}
 </body>

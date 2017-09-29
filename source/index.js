@@ -1,2 +1,2 @@
-import 'bootstrap-sass/assets/stylesheets/_bootstrap.scss';
-import './sass/global.scss';
+import './javascript/bootstrap/collapse';
+import './javascript/bootstrap/transition';

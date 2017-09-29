@@ -16,3 +16,10 @@ body {
 h2 a {
   color: #68b604;
 }
+
+.text-size-small{
+  font-size: $alpha-font-size-small;
+}
+.text-size-large{
+  font-size: $alpha-font-size-large;
+}
