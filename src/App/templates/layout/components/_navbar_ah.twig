@@ -1,0 +1,55 @@
+{% block stylesheets %}
+    <style>
+        body{
+            padding-top: 20pt;
+        }
+    </style>
+{% endblock %}
+
+<nav class="navbar navbar-ah">
+    <div class="container">
+        <ul class="nav navbar-nav">
+            <li>
+                <a href="{{ path('home') }}">
+                    О компании
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('catalog_category_lending') }}">
+                    Каталог
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('home') }}">
+                    Производство
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('home') }}">
+                    Детали трубопроводов
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('home') }}">
+                    Масла
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('home') }}">
+                    Форум
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('home') }}">
+                    Пресса
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('home') }}">
+                    Контакты
+                </a>
+            </li>
+        </ul>
+        {{ include('@layout/components/_search_form.twig') }}
+    </div>
+</nav>

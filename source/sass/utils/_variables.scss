@@ -1,5 +1,9 @@
+@import "../bootstrap/bootstrap-variables";
+
 $alpha-font-size-default: $font-size-base;
 //noinspection SassScssResolvedByNameOnly
+$alpha-font-size-smaller: ceil(($alpha-font-size-default * 0.8)); //~8pt, ~11px;
+// noinspection SassScssResolvedByNameOnly
 $alpha-font-size-small: ceil(($alpha-font-size-default * 0.85)); //~8pt, ~11px;
 //noinspection SassScssResolvedByNameOnly
 $alpha-font-size-large: ceil(($alpha-font-size-default * 1.6)); //~17pt, ~23px;

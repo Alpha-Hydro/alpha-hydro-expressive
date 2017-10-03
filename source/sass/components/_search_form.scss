@@ -1,0 +1,36 @@
+@import "compass/css3/box-shadow";
+@import "../bootstrap/bootstrap-variables";
+
+@import "../utils/variables";
+@import "../utils/sprite";
+
+.navbar{
+  .search-form{
+    padding-right: 10pt;
+    input[type='text']{
+      border: 1px solid $alpha-gray;
+      @include box-shadow(inset $alpha-gray-light 0px 0px 8px);
+      color: $alpha-gray-dark;
+      font-size: $alpha-font-size-smaller;
+      margin-top: 7px;
+    }
+    .search-autocomplete{
+      left: 0;
+      right: auto;
+      top: 30px;
+      >li{
+        >a{
+          border-bottom: 1px dotted $alpha-gray-light;
+          &:hover{
+            background-color: $alpha-gray;
+          }
+        }
+        &:last-child{
+          >a{
+            border-bottom: none;
+          }
+        }
+      }
+    }
+  }
+}

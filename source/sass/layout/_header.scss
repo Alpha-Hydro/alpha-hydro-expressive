@@ -1,4 +1,7 @@
 .app-header {
+  .navbar{
+    font-size: 85%;
+  }
   .main-head{
     margin-bottom: 17pt;
     .app-contacts{
@@ -6,6 +9,9 @@
         margin-top: 5px;
         padding-top: 15px;
         background: image-url('workdays-bar.jpg', false, false) no-repeat;
+      }
+      .phone{
+        margin-top: -13px;
       }
     }
   }

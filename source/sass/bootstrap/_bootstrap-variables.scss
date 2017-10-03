@@ -41,7 +41,6 @@ $gray-light:             lighten($gray-base, 46.7%); // #777
 //
 //## Font, line-height, and color for body text, headings, and more.
 
-// $font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif
 $font-family-sans-serif:     'PT Sans', sans-serif;
 // $font-family-serif:       Georgia, "Times New Roman", Times, serif
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
@@ -51,8 +50,8 @@ $font-family-base:           $font-family-sans-serif;
 
 // $font-size-base:          14px
 $font-size-base:             12pt; //~10.5pt
-// $font-size-large:         ceil(($font-size-base * 1.25)) // ~18px
-// $font-size-small:         ceil(($font-size-base * 0.85)) // ~12px
+$font-size-large:         ceil(($font-size-base * 1.25)); // ~18px
+$font-size-small:         ceil(($font-size-base * 0.85)); // ~12px
 
 // $font-size-h1:            floor(($font-size-base * 2.6)) // ~36px
 // $font-size-h2:            floor(($font-size-base * 2.15)) // ~30px
@@ -294,8 +293,8 @@ $border-radius-small:       0;
 
 // Small screen / tablet
 //** Deprecated `$screen-sm` as of v3.0.1
-// $screen-sm:                  768px
-// $screen-sm-min:              $screen-sm
+$screen-sm:                  768px;
+$screen-sm-min:              $screen-sm;
 //** Deprecated `$screen-tablet` as of v3.0.1
 // $screen-tablet:              $screen-sm-min
 
@@ -328,9 +327,9 @@ $border-radius-small:       0;
 // $grid-gutter-width:         30px
 // Navbar collapse
 //** Point at which the navbar becomes uncollapsed.
-// $grid-float-breakpoint:     $screen-sm-min
+$grid-float-breakpoint:     $screen-sm-min;
 //** Point at which the navbar begins collapsing.
-// $grid-float-breakpoint-max: ($grid-float-breakpoint - 1)
+$grid-float-breakpoint-max: ($grid-float-breakpoint - 1);
 
 //== Container sizes
 //
@@ -356,9 +355,8 @@ $border-radius-small:       0;
 //##
 
 // Basics of a navbar
-// $navbar-height:                    50px
-$navbar-height:                    40px;
-// $navbar-margin-bottom:             $line-height-computed
+$navbar-height:                    38px;
+$navbar-margin-bottom:             $line-height-computed;
 // $navbar-border-radius:             $border-radius-base
 // $navbar-padding-horizontal:        floor(($grid-gutter-width / 2))
 // $navbar-padding-vertical:          (($navbar-height - $line-height-computed) / 2)
