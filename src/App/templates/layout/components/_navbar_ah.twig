@@ -1,12 +1,17 @@
 {% block stylesheets %}
     <style>
         body{
-            padding-top: 20pt;
+            padding-top: 10pt;
+        }
+        @media (min-width: 768px) {
+            body{
+                padding-top: 20pt;
+            }
         }
     </style>
 {% endblock %}
 
-<nav class="navbar navbar-ah">
+<nav class="navbar navbar-ah hidden-xs">
     <div class="container">
         <ul class="nav navbar-nav">
             <li>
@@ -44,10 +49,13 @@
                     Пресса
                 </a>
             </li>
-            <li>
+            <li class="hidden-sm">
                 <a href="{{ path('home') }}">
                     Контакты
                 </a>
+            </li>
+            <li class="hidden-md hidden-lg">
+                <button class="btn btn-link" type="submit"><i class="fa fa-search"></i></button>
             </li>
         </ul>
         {{ include('@layout/components/_search_form.twig') }}

@@ -1,5 +1,10 @@
 @import "bootstrap/bootstrap-variables";
 
+@import "vendors/corpus/whitespace";
+@import "vendors/corpus/positioning";
+@import "vendors/corpus/breakpoints";
+@import "vendors/corpus/sizing";
+
 @import "utils/variables";
 @import "utils/mixins";
 @import "utils/sprite";

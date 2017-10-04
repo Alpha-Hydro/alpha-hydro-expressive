@@ -1,3 +1,6 @@
+@import "../vendors/corpus/whitespace";
+@import "../utils/variables";
+
 .app {
   display: flex;
   min-height: 100vh;
@@ -20,3 +23,9 @@ h2 a {
 .text-size-large{
   font-size: $alpha-font-size-large;
 }
+
+.w100  { width:  calc(100% -  #{$padding + $margin}); }
+.w90   { width:  calc(90%  -  #{$padding + $margin}); }
+.w95   { width:  calc(95%  -  #{$padding + $margin}); }
+.w85   { width:  calc(85%  -  #{$padding + $margin}); }
+.w80   { width:  calc(80%  -  #{$padding + $margin}); }

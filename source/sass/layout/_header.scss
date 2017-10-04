@@ -1,17 +1,49 @@
+@import "../utils/variables";
+@import "../bootstrap/bootstrap-variables";
+
 .app-header {
   .navbar{
     font-size: 85%;
   }
   .main-head{
     margin-bottom: 17pt;
+    .logo{
+      display: block;
+      min-width: 244px;
+      min-height: 48px;
+      &.svg{
+        background: image-url('logo/alpha-hydro-logo-ru.svg', false, false) no-repeat center;
+        background-size: 244px 48px;
+
+        @media (min-width: $screen-sm-min) {
+          background-position: left;
+        }
+      }
+      &.png{
+        background: image-url('logo/alfa-hydro.png', false, false) no-repeat center;
+        @media (min-width: $screen-sm-min) {
+          background-position: left;
+        }
+      }
+    }
     .app-contacts{
+      .address{
+        margin-top: 4px;
+      }
       .work-time{
-        margin-top: 5px;
+        margin: {
+          top: 11px;
+          left: calc(100% - 118px);
+        }
         padding-top: 15px;
         background: image-url('workdays-bar.jpg', false, false) no-repeat;
       }
       .phone{
-        margin-top: -13px;
+        margin-top: -6px;
+      }
+      .mail{
+        font-size: $alpha-font-size-smaller;
+        line-height: $alpha-font-size-smaller;
       }
     }
   }
