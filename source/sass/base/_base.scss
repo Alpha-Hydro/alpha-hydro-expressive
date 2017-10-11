@@ -17,6 +17,15 @@ h2 a {
   color: #68b604;
 }
 
+.ah-orange{
+  color: $alpha-orange;
+}
+
+.ah-blue,
+h2 a{
+  color: $alpha-blue;
+}
+
 .text-size-small{
   font-size: $alpha-font-size-small;
 }
