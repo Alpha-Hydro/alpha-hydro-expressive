@@ -24,11 +24,19 @@ $navbar-ah-toggle-hover-bg: #333;
 $navbar-ah-toggle-icon-bar-bg: #fff;
 
 .navbar-ah {
-  background-color: $navbar-ah-bg;
-  border-color: $navbar-ah-border;
+  //background-color: $navbar-ah-bg;
+  //border-color: $navbar-ah-border;
 
   //noinspection CssInvalidFunction
-  background: sprite($main-menu, menu-bg);
+  //background: sprite($main-menu, menu-bg);
+
+  @media (min-width: $screen-sm-min) {
+    background-color: $navbar-ah-bg;
+    border-color: $navbar-ah-border;
+
+    //noinspection CssInvalidFunction
+    background: sprite($main-menu, menu-bg);
+  }
 
   .navbar-brand {
     color: $navbar-ah-brand-color;
@@ -41,37 +49,43 @@ $navbar-ah-toggle-icon-bar-bg: #fff;
 
   .navbar-text {
     color: $navbar-ah-color;
+    @media (min-width: $screen-sm-min) {
+      color: $navbar-ah-color;
+    }
   }
 
   .navbar-nav {
-    > li > a {
-      color: $navbar-ah-link-color;
-      line-height: ceil($line-height-computed - 2pt);
-      background: image-url('menu-item-inactive.png', false, false) transparent no-repeat center bottom;
+    @media (min-width: $screen-sm-min) {
+      > li > a {
+        color: $navbar-ah-link-color;
+        line-height: ceil($line-height-computed - 2pt);
+        background: image-url('menu-item-inactive.png', false, false) transparent no-repeat center bottom;
 
-      &:hover,
-      &:focus {
-        color: $navbar-ah-link-hover-color;
-        //background-color: $navbar-ah-link-hover-bg;
-        background: image-url('menu-item-active.png', false, false) transparent no-repeat center bottom / contain;
+        &:hover,
+        &:focus {
+          color: $navbar-ah-link-hover-color;
+          //background-color: $navbar-ah-link-hover-bg;
+          background: image-url('menu-item-active.png', false, false) transparent no-repeat center bottom / contain;
+        }
+      }
+      > .active > a {
+        &,
+        &:hover,
+        &:focus {
+          color: $navbar-ah-link-active-color;
+          background-color: $navbar-ah-link-active-bg;
+        }
+      }
+      > .disabled > a {
+        &,
+        &:hover,
+        &:focus {
+          color: $navbar-ah-link-disabled-color;
+          background-color: $navbar-ah-link-disabled-bg;
+        }
       }
     }
-    > .active > a {
-      &,
-      &:hover,
-      &:focus {
-        color: $navbar-ah-link-active-color;
-        background-color: $navbar-ah-link-active-bg;
-      }
-    }
-    > .disabled > a {
-      &,
-      &:hover,
-      &:focus {
-        color: $navbar-ah-link-disabled-color;
-        background-color: $navbar-ah-link-disabled-bg;
-      }
-    }
+
   }
 
   // Darken the responsive nav toggle

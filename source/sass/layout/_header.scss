@@ -54,14 +54,6 @@ body{
       }
     }
 
-    @media (min-width: $screen-xs-min) {
-      padding:{
-        top: $main-head-padding-sm;
-        bottom: $main-head-padding-sm;
-      }
-
-    }
-
     @media (min-width: $screen-sm-min) {
       padding:{
         top: $main-head-padding;
@@ -79,11 +71,8 @@ body{
         background: image-url('logo/alpha-hydro-logo-ru.svg', false, false) no-repeat center;
         background-size: auto $main-logo-height-xs;
 
-        @media (min-width: $screen-xs-min) {
-          background-size: auto $main-logo-height;
-        }
-
         @media (min-width: $screen-sm-min) {
+          background-size: auto $main-logo-height;
           background-position: left;
           //background-size: auto 48px;
         }

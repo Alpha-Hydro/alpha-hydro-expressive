@@ -26,7 +26,7 @@ $menu-line-height: 40px;
     }
   }
 
-  .sidebar-heading{
+  &-heading{
     background-color: lighten($alpha-gray-lighter, 3%);
     .badge{
       margin-top: 12px;
@@ -45,7 +45,7 @@ $menu-line-height: 40px;
       }
     }
   }
-  .sidebar-item{
+  &-item{
     background-color: lighten($alpha-gray-lighter, 3%);
     &.sidebar-item-current{
       background-color: $alpha-gray-dark;
@@ -112,5 +112,29 @@ $menu-line-height: 40px;
   }
   .list-group-item{
     padding: 0;
+  }
+  &-dropdown{
+    @media (max-width: $screen-xs-max){
+      position: fixed;
+      top: 0;
+      left: -100%;
+      z-index: 2000;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      >ul{
+        width: 75%;
+        max-width: 300px;
+      }
+
+      @include transition(
+          left .2s ease-in-out 0s
+      );
+
+      &.open{
+        left: 0;
+        overflow: auto;
+      }
+    }
   }
 }
