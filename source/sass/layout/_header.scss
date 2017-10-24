@@ -31,9 +31,6 @@ body{
     z-index: $zindex-navbar-fixed;
   }
 
-  .navbar{
-    font-size: 85%;
-  }
   .main-head{
     padding:{
       top: $main-head-padding-xs;
@@ -107,7 +104,7 @@ body{
     }
 
     .sidebar-toggle,
-    .navbar-ah-toggle
+    .main-menu-toggle
     {
       position: relative;
       padding: 6px 12px;
@@ -129,7 +126,7 @@ body{
       margin-left: 10px;
     }
 
-    .navbar-ah-toggle{
+    .main-menu-toggle{
       float: right;
       margin-right: 10px;
     }

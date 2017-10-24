@@ -1,19 +1,36 @@
-import './javascript/bootstrap/collapse';
-import './javascript/bootstrap/transition';
+let sidebarToggle = $('.sidebar-toggle');
+let sidebarDropdown = $('.sidebar-dropdown');
 
-let toggle = $('.sidebar-toggle');
-let dropdown = $('.sidebar-dropdown');
-
-toggle.click(function (e) {
+sidebarToggle.click(function (e) {
 	e.preventDefault();
 	e.stopPropagation();
 
 	$('html').css('overflow', 'hidden');
-	dropdown.toggleClass('open');
+	sidebarDropdown.toggleClass('open');
 
 	$(document).one('click', function closeMenu(e) {
-		if (dropdown.has(e.target).length === 0){
-			dropdown.removeClass('open');
+		if (sidebarDropdown.has(e.target).length === 0){
+			sidebarDropdown.removeClass('open');
+			$('html').css('overflow', 'auto');
+		}else{
+			$(document).one('click', closeMenu);
+		}
+	})
+});
+
+let mainMenuToggle = $('.main-menu-toggle');
+let mainMehuDropdown = $('.main-menu-dropdown');
+
+mainMenuToggle.click(function (e) {
+	e.preventDefault();
+	e.stopPropagation();
+
+	$('html').css('overflow', 'hidden');
+	mainMehuDropdown.toggleClass('open');
+
+	$(document).one('click', function closeMenu(e) {
+		if (mainMehuDropdown.has(e.target).length === 0){
+			mainMehuDropdown.removeClass('open');
 			$('html').css('overflow', 'auto');
 		}else{
 			$(document).one('click', closeMenu);

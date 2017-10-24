@@ -1,4 +1,5 @@
 @import "compass/css3/transition";
+@import "compass/css3/box-shadow";
 
 //noinspection ALL
 @mixin red-box($all-children: false){
@@ -50,5 +51,19 @@
     text-decoration: none;
     border-color: #dddddd !important;
     @extend .z-depth-#{$z-depth};
+  }
+}
+
+@mixin crop-bottom-shadow(){
+  position: relative;
+  &:after{
+    content: "";
+    width: 90%;
+    height: 0;
+    display: block;
+    position: absolute;
+    left: 5%;
+    z-index: -1;
+    @include box-shadow(rgba(0,0,0,.6) 0 0 8px 2px);
   }
 }

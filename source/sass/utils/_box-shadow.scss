@@ -1,4 +1,5 @@
 @import "compass/css3/box-shadow";
+@import "mixins";
 
 // Z-levels
 .z-depth-0 {
@@ -24,17 +25,7 @@
 }
 
 .crop-bottom-shadow{
-  position: relative;
-  &:after{
-    content: "";
-    width: 90%;
-    height: 0;
-    display: block;
-    position: absolute;
-    left: 5%;
-    z-index: -1;
-    @include box-shadow(rgba(0,0,0,.6) 0 0 8px 2px);
-  }
+  @include crop-bottom-shadow();
 }
 
 .hover-shadow{
