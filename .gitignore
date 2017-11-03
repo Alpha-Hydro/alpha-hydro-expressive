@@ -90,7 +90,9 @@ data/DoctrineORMModule/cache/
 demos/
 extras/documentation
 
-/.sass-cache/
-/public/img/
-/public/css/
-/public/js/
+/.sass-cache/*
+/public/img/*
+/public/css/*
+/public/js/*
+/public/upload/*
+/public/files/*
