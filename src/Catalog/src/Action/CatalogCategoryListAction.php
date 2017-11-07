@@ -82,12 +82,29 @@ class CatalogCategoryListAction implements ServerMiddlewareInterface
             ['sorting' => 'ASC']
         );
 
+        $sidebarListCategories = $categories;
+
+        if ($parentId != 0){
+            $parentCategory = $this->entityManager->getRepository(Categories::class)->find($parentId);
+            $sidebarListCategories = $this->entityManager->getRepository(Categories::class)->findBy(
+                [
+                    'parentId' => $parentCategory->getParentId(),
+                    'active' => 1,
+                    'deleted' => 0,
+                ],
+                ['sorting' => 'ASC']
+            );
+        }
+
         // @Todo if empty Categories
 
         $data = [
             'currentCategory' => $currentCategory,
             'categories' => $categories,
+            'sidebarListCategories' => $sidebarListCategories,
         ];
+
+        //var_dump($request->getAttribute('categoryId'));
 
         return new HtmlResponse($this->templateRenderer->render('catalog::listCategory', $data));
     }

@@ -61,6 +61,7 @@ class CatalogLendingPageAction implements ServerMiddlewareInterface
 
         $data = [
             'categories' => $categories,
+            'sidebarListCategories' => $categories,
         ];
 
         return new HtmlResponse($this->templateRenderer->render('catalog::lendingCategory', $data));

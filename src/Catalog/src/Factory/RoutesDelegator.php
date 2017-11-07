@@ -9,6 +9,7 @@
 
 namespace Catalog\Factory;
 
+use Catalog\Middleware\FullPathMiddleware;
 use Psr\Container\ContainerInterface;
 use Zend\Expressive\Application;
 use Zend\Expressive\Helper\ServerUrlMiddleware;
@@ -28,9 +29,13 @@ class RoutesDelegator
         $app->pipe(ErrorHandler::class);
         $app->pipe(ServerUrlMiddleware::class);
         $app->pipeRoutingMiddleware();
+
         $app->pipe(ImplicitHeadMiddleware::class);
         $app->pipe(ImplicitOptionsMiddleware::class);
         $app->pipe(UrlHelperMiddleware::class);
+
+        $app->pipe(FullPathMiddleware::class);
+
         $app->pipeDispatchMiddleware();
         $app->pipe(NotFoundHandler::class);
 

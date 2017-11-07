@@ -1,9 +1,15 @@
 <div class="sidebar-dropdown hidden-sm col-md-3 sidebar">
     <ul class="list-group crop-bottom-shadow">
-        {% for category in categories %}
-            <li class="list-group-item sidebar-item">
-                <a href="{{ path('catalog_category_lending') }}/{{ category.fullPath }}">{{ category.name }}</a>
-            </li>
+        {% for category in sidebarListCategories %}
+            {% if currentCategory is defined and category.id == currentCategory.id %}
+                <li class="list-group-item sidebar-item sidebar-item-current">
+                    <span>{{ category.name }}</span>
+                </li>
+            {% else %}
+                <li class="list-group-item sidebar-item">
+                    <a href="{{ path('catalog_category_lending') }}/{{ category.fullPath }}">{{ category.name }}</a>
+                </li>
+            {% endif %}
         {% endfor %}
     </ul>
 </div>

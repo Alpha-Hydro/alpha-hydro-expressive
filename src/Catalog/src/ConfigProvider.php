@@ -1,6 +1,7 @@
 <?php
 
 namespace Catalog;
+use Catalog\Factory\FullPathMiddlewareFactory;
 use Zend\Expressive\Application;
 
 /**
@@ -41,6 +42,9 @@ class ConfigProvider
             'delegators' => [
                 Application::class => [
                     Factory\RoutesDelegator::class,
+                ],
+                Middleware\FullPathMiddleware::class => [
+                    Factory\FullPathMiddlewareFactory::class,
                 ],
             ],
         ];
