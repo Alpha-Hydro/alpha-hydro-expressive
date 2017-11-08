@@ -84,7 +84,7 @@ class CatalogCategoryListAction implements ServerMiddlewareInterface
 
         $sidebarListCategories = $categories;
 
-        if ($parentId != 0){
+        if ($parentId != 0) {
             $parentCategory = $this->entityManager->getRepository(Categories::class)->find($parentId);
             $sidebarListCategories = $this->entityManager->getRepository(Categories::class)->findBy(
                 [
@@ -98,10 +98,15 @@ class CatalogCategoryListAction implements ServerMiddlewareInterface
 
         // @Todo if empty Categories
 
+        $parentCategory = (isset($parentCategory) && $parentCategory->getParentId() != 0)
+            ? $this->entityManager->getRepository(Categories::class)->find($parentCategory->getParentId())
+            : null;
+
         $data = [
             'currentCategory' => $currentCategory,
             'categories' => $categories,
             'sidebarListCategories' => $sidebarListCategories,
+            'parentCategory' => $parentCategory,
         ];
 
         //var_dump($request->getAttribute('categoryId'));

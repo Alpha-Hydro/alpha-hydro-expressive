@@ -29,8 +29,9 @@ $menu-line-height: 40px;
   &-heading{
     background-color: lighten($alpha-gray-lighter, 3%);
     .badge{
-      margin-top: 12px;
+      font-size: $alpha-font-size-smaller;
       display: none;
+      float: right;
       @include transition(all 0.2s ease-in-out 0s);
     }
     a{
@@ -41,7 +42,7 @@ $menu-line-height: 40px;
     }
     &:hover{
       .badge{
-        display: block;
+        display: inline-block;
       }
     }
   }
