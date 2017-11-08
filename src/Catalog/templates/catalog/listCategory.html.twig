@@ -1,7 +1,9 @@
 {% extends '@layout/default.html.twig' %}
-{% set pageHeader =  currentCategory.name %}
+{% set pageHeader =  currentCategory.name | default('Каталог Продукции') %}
 
-{% block title %}Каталог Продукции - {{ currentCategory.name }}{% endblock %}
+{% block title %}
+    {{ currentCategory.name | default('Каталог Продукции') }}
+{% endblock %}
 
 {% block pageHeader %}
     {{ include('@layout/components/_pageHeader.twig') }}
@@ -12,16 +14,5 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row">
-        {% for category in categories %}
-            <div class="col-md-4">
-                <h2>
-                    <a href="/catalog/{{ category.fullPath }}">
-                        <i class="fa fa-refresh"></i> {{ category.name }}
-                    </a>
-                </h2>
-            </div>
-        {% endfor %}
-    </div>
-
+    {{ include('@layout/components/catalog/_categories_list_item.twig') }}
 {% endblock %}

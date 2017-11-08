@@ -1,0 +1,11 @@
+@import "compass/css3/flexbox";
+
+.flex-box{
+  @include display-flex();
+  @include flex-wrap(wrap);
+  &-item{
+    margin: 10px;
+    padding: 0 5px;
+    @include flex(1 1 calc(25% - 20px));
+  }
+}

@@ -9,6 +9,7 @@
 @import "utils/mixins";
 @import "utils/sprite";
 @import "utils/box-shadow";
+@import "utils/flex_box_item";
 
 @import "base/base";
 
@@ -17,3 +18,4 @@
 @import "components/search_form";
 @import "components/main_menu";
 @import "components/sidebar_menu";
+@import "components/categories_list";
