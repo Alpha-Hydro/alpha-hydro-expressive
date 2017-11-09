@@ -2,16 +2,15 @@
 
 namespace Api\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Categories
+ * Products
  *
- * @ORM\Table(name="categories", indexes={@ORM\Index(name="order", columns={"order"}), @ORM\Index(name="parent_id", columns={"parent_id"})})
+ * @ORM\Table(name="products", indexes={@ORM\Index(name="order", columns={"order"}), @ORM\Index(name="product_id", columns={"parent_id"}), @ORM\Index(name="s_name", columns={"s_name"}), @ORM\Index(name="sku", columns={"sku"}), @ORM\Index(name="category_id", columns={"category_id"})})
  * @ORM\Entity
  */
-class Categories
+class Products
 {
     /**
      * @var integer
@@ -25,9 +24,16 @@ class Categories
     /**
      * @var integer
      *
-     * @ORM\Column(name="parent_id", type="bigint", nullable=false)
+     * @ORM\Column(name="category_id", type="integer", nullable=false)
      */
-    private $parentId = '0';
+    private $categoryId;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="parent_id", type="boolean", nullable=true)
+     */
+    private $parentId;
 
     /**
      * @var string
@@ -39,9 +45,44 @@ class Categories
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     * @ORM\Column(name="a_images", type="text", length=65535, nullable=true)
+     */
+    private $aImages;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="draft", type="string", length=255, nullable=true)
+     */
+    private $draft;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sku", type="string", length=255, nullable=false)
+     */
+    private $sku;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="text", length=65535, nullable=true)
      */
     private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="s_name", type="string", length=2028, nullable=true)
+     */
+    private $sName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="note", type="text", length=65535, nullable=true)
+     */
+    private $note;
 
     /**
      * @var string
@@ -70,13 +111,6 @@ class Categories
      * @ORM\Column(name="order", type="bigint", nullable=true)
      */
     private $order;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="generate", type="boolean", nullable=true)
-     */
-    private $generate;
 
     /**
      * @var boolean
@@ -121,11 +155,11 @@ class Categories
     private $path;
 
     /**
-     * @var integer
+     * @var boolean
      *
-     * @ORM\Column(name="sorting", type="integer", nullable=false)
+     * @ORM\Column(name="sorting", type="boolean", nullable=false)
      */
-    private $sorting = '0';
+    private $sorting;
 
     /**
      * @var integer
@@ -144,48 +178,33 @@ class Categories
     /**
      * @var string
      *
-     * @ORM\Column(name="content_markdown", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="upload_path_draft", type="string", length=128, nullable=true)
      */
-    private $contentMarkdown;
+    private $uploadPathDraft;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="content_html", type="text", length=65535, nullable=true)
+     * @ORM\ManyToOne(targetEntity="\App\Entity\Categories", inversedBy="categories")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
-    private $contentHtml;
-
+    protected $category;
 
     /**
-     * @ORM\OneToMany(targetEntity="\Api\Entity\Products", mappedBy="products")
-     * @ORM\JoinColumn(name="id", referencedColumnName="category_id")
+     * @return Categories
      */
-    protected $products;
-
-    /**
-     * Categories constructor.
-     */
-    public function __construct()
+    public function getCategory()
     {
-        $this->products = new ArrayCollection();
+        return $this->category;
     }
 
     /**
-     * @return ArrayCollection
+     * @param Categories $category
      */
-    public function getProducts()
+    public function setCategory($category)
     {
-        return $this->products;
+        $this->category = $category;
+        $category->addProduct($this);
     }
 
-
-    /**
-     * @param Products $product
-     */
-    public function addProduct($product)
-    {
-        $this->products[] = $product;
-    }
 
 
     /**
@@ -199,11 +218,35 @@ class Categories
     }
 
     /**
+     * Set categoryId
+     *
+     * @param integer $categoryId
+     *
+     * @return Products
+     */
+    public function setCategoryId($categoryId)
+    {
+        $this->categoryId = $categoryId;
+
+        return $this;
+    }
+
+    /**
+     * Get categoryId
+     *
+     * @return integer
+     */
+    public function getCategoryId()
+    {
+        return $this->categoryId;
+    }
+
+    /**
      * Set parentId
      *
-     * @param integer $parentId
+     * @param boolean $parentId
      *
-     * @return Categories
+     * @return Products
      */
     public function setParentId($parentId)
     {
@@ -215,7 +258,7 @@ class Categories
     /**
      * Get parentId
      *
-     * @return integer
+     * @return boolean
      */
     public function getParentId()
     {
@@ -227,7 +270,7 @@ class Categories
      *
      * @param string $image
      *
-     * @return Categories
+     * @return Products
      */
     public function setImage($image)
     {
@@ -247,11 +290,83 @@ class Categories
     }
 
     /**
+     * Set aImages
+     *
+     * @param string $aImages
+     *
+     * @return Products
+     */
+    public function setAImages($aImages)
+    {
+        $this->aImages = $aImages;
+
+        return $this;
+    }
+
+    /**
+     * Get aImages
+     *
+     * @return string
+     */
+    public function getAImages()
+    {
+        return $this->aImages;
+    }
+
+    /**
+     * Set draft
+     *
+     * @param string $draft
+     *
+     * @return Products
+     */
+    public function setDraft($draft)
+    {
+        $this->draft = $draft;
+
+        return $this;
+    }
+
+    /**
+     * Get draft
+     *
+     * @return string
+     */
+    public function getDraft()
+    {
+        return $this->draft;
+    }
+
+    /**
+     * Set sku
+     *
+     * @param string $sku
+     *
+     * @return Products
+     */
+    public function setSku($sku)
+    {
+        $this->sku = $sku;
+
+        return $this;
+    }
+
+    /**
+     * Get sku
+     *
+     * @return string
+     */
+    public function getSku()
+    {
+        return $this->sku;
+    }
+
+    /**
      * Set name
      *
      * @param string $name
      *
-     * @return Categories
+     * @return Products
      */
     public function setName($name)
     {
@@ -271,11 +386,59 @@ class Categories
     }
 
     /**
+     * Set sName
+     *
+     * @param string $sName
+     *
+     * @return Products
+     */
+    public function setSName($sName)
+    {
+        $this->sName = $sName;
+
+        return $this;
+    }
+
+    /**
+     * Get sName
+     *
+     * @return string
+     */
+    public function getSName()
+    {
+        return $this->sName;
+    }
+
+    /**
+     * Set note
+     *
+     * @param string $note
+     *
+     * @return Products
+     */
+    public function setNote($note)
+    {
+        $this->note = $note;
+
+        return $this;
+    }
+
+    /**
+     * Get note
+     *
+     * @return string
+     */
+    public function getNote()
+    {
+        return $this->note;
+    }
+
+    /**
      * Set description
      *
      * @param string $description
      *
-     * @return Categories
+     * @return Products
      */
     public function setDescription($description)
     {
@@ -299,7 +462,7 @@ class Categories
      *
      * @param \DateTime $addDate
      *
-     * @return Categories
+     * @return Products
      */
     public function setAddDate($addDate)
     {
@@ -323,7 +486,7 @@ class Categories
      *
      * @param \DateTime $modDate
      *
-     * @return Categories
+     * @return Products
      */
     public function setModDate($modDate)
     {
@@ -347,7 +510,7 @@ class Categories
      *
      * @param integer $order
      *
-     * @return Categories
+     * @return Products
      */
     public function setOrder($order)
     {
@@ -367,35 +530,11 @@ class Categories
     }
 
     /**
-     * Set generate
-     *
-     * @param boolean $generate
-     *
-     * @return Categories
-     */
-    public function setGenerate($generate)
-    {
-        $this->generate = $generate;
-
-        return $this;
-    }
-
-    /**
-     * Get generate
-     *
-     * @return boolean
-     */
-    public function getGenerate()
-    {
-        return $this->generate;
-    }
-
-    /**
      * Set active
      *
      * @param boolean $active
      *
-     * @return Categories
+     * @return Products
      */
     public function setActive($active)
     {
@@ -419,7 +558,7 @@ class Categories
      *
      * @param string $fullPath
      *
-     * @return Categories
+     * @return Products
      */
     public function setFullPath($fullPath)
     {
@@ -443,7 +582,7 @@ class Categories
      *
      * @param string $metaDescription
      *
-     * @return Categories
+     * @return Products
      */
     public function setMetaDescription($metaDescription)
     {
@@ -467,7 +606,7 @@ class Categories
      *
      * @param string $metaKeywords
      *
-     * @return Categories
+     * @return Products
      */
     public function setMetaKeywords($metaKeywords)
     {
@@ -491,7 +630,7 @@ class Categories
      *
      * @param string $metaTitle
      *
-     * @return Categories
+     * @return Products
      */
     public function setMetaTitle($metaTitle)
     {
@@ -515,7 +654,7 @@ class Categories
      *
      * @param string $path
      *
-     * @return Categories
+     * @return Products
      */
     public function setPath($path)
     {
@@ -537,9 +676,9 @@ class Categories
     /**
      * Set sorting
      *
-     * @param integer $sorting
+     * @param boolean $sorting
      *
-     * @return Categories
+     * @return Products
      */
     public function setSorting($sorting)
     {
@@ -551,7 +690,7 @@ class Categories
     /**
      * Get sorting
      *
-     * @return integer
+     * @return boolean
      */
     public function getSorting()
     {
@@ -563,7 +702,7 @@ class Categories
      *
      * @param integer $deleted
      *
-     * @return Categories
+     * @return Products
      */
     public function setDeleted($deleted)
     {
@@ -587,7 +726,7 @@ class Categories
      *
      * @param string $uploadPath
      *
-     * @return Categories
+     * @return Products
      */
     public function setUploadPath($uploadPath)
     {
@@ -607,50 +746,26 @@ class Categories
     }
 
     /**
-     * Set contentMarkdown
+     * Set uploadPathDraft
      *
-     * @param string $contentMarkdown
+     * @param string $uploadPathDraft
      *
-     * @return Categories
+     * @return Products
      */
-    public function setContentMarkdown($contentMarkdown)
+    public function setUploadPathDraft($uploadPathDraft)
     {
-        $this->contentMarkdown = $contentMarkdown;
+        $this->uploadPathDraft = $uploadPathDraft;
 
         return $this;
     }
 
     /**
-     * Get contentMarkdown
+     * Get uploadPathDraft
      *
      * @return string
      */
-    public function getContentMarkdown()
+    public function getUploadPathDraft()
     {
-        return $this->contentMarkdown;
-    }
-
-    /**
-     * Set contentHtml
-     *
-     * @param string $contentHtml
-     *
-     * @return Categories
-     */
-    public function setContentHtml($contentHtml)
-    {
-        $this->contentHtml = $contentHtml;
-
-        return $this;
-    }
-
-    /**
-     * Get contentHtml
-     *
-     * @return string
-     */
-    public function getContentHtml()
-    {
-        return $this->contentHtml;
+        return $this->uploadPathDraft;
     }
 }

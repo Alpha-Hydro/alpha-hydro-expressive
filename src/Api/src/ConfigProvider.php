@@ -52,9 +52,6 @@ class ConfigProvider
     {
         return [
             'paths' => [
-                /*'app'    => [__DIR__ . '/../templates/app'],
-                'error'  => [__DIR__ . '/../templates/error'],
-                'layout' => [__DIR__ . '/../templates/layout'],*/
             ],
         ];
     }
@@ -72,7 +69,6 @@ class ConfigProvider
                     'class' => AnnotationDriver::class,
                     'cache' => 'array',
                     'paths' => [
-                        //dirname(__DIR__) . '/config/doctrine' => 'Api\Entity',
                         dirname(__DIR__) . '/src/Api/Entity' => './src/Api/Entity',
                     ],
                 ],

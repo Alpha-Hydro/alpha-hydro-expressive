@@ -59,7 +59,7 @@ class ConfigProvider
 **Генерируем объекты и экспортируем информацию об «аннотации» в ./src/Api/Entity** 
 
 ```cmd
-doctrine orm:convert-mapping --namespace="Api\Entity\\" --filter="\\Categories$" --force --from-database annotation src
+vendor\bin\doctrine orm:convert-mapping --namespace="Api\Entity\\" --filter="\\Categories$" --force --from-database annotation src
 ```
 
 > --filter - Regexp выражение, которое фильтрует создаваемые сущности (не имя таблицы)
