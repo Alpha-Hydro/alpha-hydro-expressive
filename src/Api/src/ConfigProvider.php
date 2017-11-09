@@ -1,6 +1,7 @@
 <?php
 
 namespace Api;
+use Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain;
 use Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 
@@ -61,6 +62,7 @@ class ConfigProvider
         return [
             'driver' => [
                 'orm_default' => [
+                    'class' => MappingDriverChain::class,
                     'drivers' => [
                         'Api\Entity' => 'api_entity',
                     ],
@@ -69,7 +71,7 @@ class ConfigProvider
                     'class' => AnnotationDriver::class,
                     'cache' => 'array',
                     'paths' => [
-                        dirname(__DIR__) . '/src/Api/Entity' => './src/Api/Entity',
+                        dirname(__DIR__) . '/src/Api/Entity' => dirname(__DIR__) . '/src/Entity',
                     ],
                 ],
             ],

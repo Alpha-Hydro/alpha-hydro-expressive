@@ -10,6 +10,7 @@
 namespace Catalog\Action;
 
 use Api\Entity\Categories;
+use Api\Entity\Products;
 use Doctrine\ORM\EntityManager;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
@@ -65,6 +66,10 @@ class CatalogCategoryListAction implements ServerMiddlewareInterface
         $currentCategory = $this->entityManager
             ->getRepository(Categories::class)
             ->findOneByFullPath($fullPath);
+
+
+        $categoryProducts = $currentCategory->getProducts();
+        //var_dump($categoryProducts->toArray());
 
         // @Todo if not find currentCategory
 

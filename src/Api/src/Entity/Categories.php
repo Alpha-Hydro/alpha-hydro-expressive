@@ -160,7 +160,7 @@ class Categories
      * @ORM\OneToMany(targetEntity="\Api\Entity\Products", mappedBy="products")
      * @ORM\JoinColumn(name="id", referencedColumnName="category_id")
      */
-    protected $products;
+    private $products;
 
     /**
      * Categories constructor.
@@ -176,6 +176,14 @@ class Categories
     public function getProducts()
     {
         return $this->products;
+    }
+
+    /**
+     * @param mixed $products
+     */
+    public function setProducts($products)
+    {
+        $this->products = $products;
     }
 
 
