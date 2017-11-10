@@ -157,10 +157,28 @@ class Categories
 
 
     /**
-     * @ORM\OneToMany(targetEntity="\Api\Entity\Products", mappedBy="products")
+     * @ORM\OneToMany(targetEntity="Products", mappedBy="category")
      * @ORM\JoinColumn(name="id", referencedColumnName="category_id")
+     *
+     * @var ArrayCollection
      */
     private $products;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Categories", mappedBy="parent")
+     *
+     * @var ArrayCollection
+     */
+    private $children;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Categories", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     *
+     * @var Categories
+     */
+    private $parent;
 
     /**
      * Categories constructor.
@@ -168,6 +186,7 @@ class Categories
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->children = new ArrayCollection();
     }
 
     /**
@@ -177,6 +196,24 @@ class Categories
     {
         return $this->products;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    /**
+     * @return Categories
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+
 
     /**
      * @param mixed $products

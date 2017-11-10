@@ -69,7 +69,7 @@ class CatalogCategoryListAction implements ServerMiddlewareInterface
 
 
         $categoryProducts = $currentCategory->getProducts();
-        //var_dump($categoryProducts->toArray());
+        var_dump($categoryProducts->toArray());
 
         // @Todo if not find currentCategory
 

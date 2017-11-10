@@ -183,7 +183,7 @@ class Products
     private $uploadPathDraft;
 
     /**
-     * @ORM\ManyToOne(targetEntity="\Api\Entity\Categories", inversedBy="categories")
+     * @ORM\ManyToOne(targetEntity="Categories", inversedBy="products")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     private $category;
