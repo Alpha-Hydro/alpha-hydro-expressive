@@ -14,6 +14,7 @@ use Api\Entity\Products;
 use Doctrine\ORM\EntityManager;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Router\RouteResult;
@@ -47,7 +48,8 @@ class CatalogCategoryListAction implements ServerMiddlewareInterface
      * @param ServerRequestInterface $request
      * @param DelegateInterface $delegate
      *
-     * @return HtmlResponse
+     *
+     * @return ResponseInterface|HtmlResponse
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
@@ -62,32 +64,33 @@ class CatalogCategoryListAction implements ServerMiddlewareInterface
 
         $fullPath = $routeMatchedParams['full_path'];
 
+        //Находим по переданному параметру текущую категорию
         /** @var Categories $currentCategory */
         $currentCategory = $this->entityManager
             ->getRepository(Categories::class)
             ->findOneByFullPath($fullPath);
 
 
-        $categoryProducts = $currentCategory->getProducts();
-        var_dump($categoryProducts->toArray());
-
-        // @Todo if not find currentCategory
-
+        // Если категория не найдена, то возможно это продукт
+        // Передаем параметр далее по "трубопроводу"
+        // (делегируем следующему Middleware, указанному в config.routes, в нашем случае ProductAction)
         if (!$currentCategory)
-            return new HtmlResponse($this->templateRenderer->render('error::404'), 404);
+            return $delegate->process($request);
+
+
+        //Получаем список категорий в текущей категории
+        $categoriesList = $currentCategory->getChildren();
+
+
+        $productList = null;
+        if ($categoriesList->count() == 0){
+            $productList = $currentCategory->getProducts();
+        }
+
+
+        $sidebarListCategories = $categoriesList;
 
         $parentId = $currentCategory->getId();
-
-        $categories = $this->entityManager->getRepository(Categories::class)->findBy(
-            [
-                'parentId' => $parentId,
-                'active' => 1,
-                'deleted' => 0,
-            ],
-            ['sorting' => 'ASC']
-        );
-
-        $sidebarListCategories = $categories;
 
         if ($parentId != 0) {
             $parentCategory = $this->entityManager->getRepository(Categories::class)->find($parentId);
@@ -109,9 +112,10 @@ class CatalogCategoryListAction implements ServerMiddlewareInterface
 
         $data = [
             'currentCategory' => $currentCategory,
-            'categories' => $categories,
+            'categories' => $categoriesList,
             'sidebarListCategories' => $sidebarListCategories,
             'parentCategory' => $parentCategory,
+            'productList' => $productList,
         ];
 
         //var_dump($request->getAttribute('categoryId'));

@@ -12,4 +12,6 @@ use Zend\Expressive\Application;
 
 /** @var Application $app */
 $app->get('/catalog', Action\CatalogLendingPageAction::class, 'catalog_category_lending');
-$app->get('/catalog/{full_path:[\w\-\/]+}', Action\CatalogCategoryListAction::class, 'catalog_category_list');
+$app->get('/catalog/{full_path:[\w\-\/]+}',
+    [Action\CatalogCategoryListAction::class, Action\ProductAction::class],
+    'catalog_category_list');

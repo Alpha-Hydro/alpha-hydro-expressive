@@ -14,5 +14,12 @@
 {% endblock %}
 
 {% block content %}
-    {{ include('@layout/components/catalog/_categories_list_item.twig') }}
+    <div  class="col-xs-12 col-sm-12 col-md-9">
+        {% if productList is not null %}
+            {{ include('@layout/components/catalog/_categories_list_product.twig') }}
+        {% else %}
+            {{ include('@layout/components/catalog/_categories_list_item.twig') }}
+        {% endif %}
+        {{ include('@layout/components/catalog/_category_content_html.twig') }}
+    </div>
 {% endblock %}

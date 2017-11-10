@@ -34,7 +34,7 @@ class RoutesDelegator
         $app->pipe(ImplicitOptionsMiddleware::class);
         $app->pipe(UrlHelperMiddleware::class);
 
-        $app->pipe(FullPathMiddleware::class);
+        //$app->pipe(FullPathMiddleware::class);
 
         $app->pipeDispatchMiddleware();
         $app->pipe(NotFoundHandler::class);
