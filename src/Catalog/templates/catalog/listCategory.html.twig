@@ -15,7 +15,7 @@
 
 {% block content %}
     <div  class="col-xs-12 col-sm-12 col-md-9">
-        {% if productList is not null %}
+        {% if productList is defined and productList is not null %}
             {{ include('@layout/components/catalog/_categories_list_product.twig') }}
         {% else %}
             {{ include('@layout/components/catalog/_categories_list_item.twig') }}
