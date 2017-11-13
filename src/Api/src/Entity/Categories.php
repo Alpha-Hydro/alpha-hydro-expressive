@@ -3,7 +3,7 @@
 namespace Api\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,7 +17,7 @@ class Categories
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Column(name="id", type="bigint", precision=0, scale=0, nullable=false, unique=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -26,226 +26,168 @@ class Categories
     /**
      * @var integer
      *
-     * @ORM\Column(name="parent_id", type="bigint", nullable=false)
+     * @ORM\Column(name="parent_id", type="bigint", precision=0, scale=0, nullable=false, unique=false)
      */
-    private $parentId = '0';
+    private $parentId;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     * @ORM\Column(name="image", type="string", length=255, precision=0, scale=0, nullable=true, unique=false)
      */
     private $image;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     * @ORM\Column(name="name", type="string", length=255, precision=0, scale=0, nullable=false, unique=false)
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="description", type="text", length=65535, precision=0, scale=0, nullable=true, unique=false)
      */
     private $description;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="add_date", type="datetime", nullable=true)
+     * @ORM\Column(name="add_date", type="datetime", precision=0, scale=0, nullable=true, unique=false)
      */
     private $addDate;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="mod_date", type="datetime", nullable=true)
+     * @ORM\Column(name="mod_date", type="datetime", precision=0, scale=0, nullable=true, unique=false)
      */
     private $modDate;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="order", type="bigint", nullable=true)
+     * @ORM\Column(name="order", type="bigint", precision=0, scale=0, nullable=true, unique=false)
      */
     private $order;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="generate", type="boolean", nullable=true)
+     * @ORM\Column(name="generate", type="boolean", precision=0, scale=0, nullable=true, unique=false)
      */
     private $generate;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="active", type="boolean", nullable=false)
+     * @ORM\Column(name="active", type="boolean", precision=0, scale=0, nullable=false, unique=false)
      */
-    private $active = '1';
+    private $active;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="full_path", type="string", length=255, nullable=true)
+     * @ORM\Column(name="full_path", type="string", length=255, precision=0, scale=0, nullable=true, unique=false)
      */
     private $fullPath;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="meta_description", type="text", nullable=true)
+     * @ORM\Column(name="meta_description", type="text", precision=0, scale=0, nullable=true, unique=false)
      */
     private $metaDescription;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="meta_keywords", type="string", length=255, nullable=true)
+     * @ORM\Column(name="meta_keywords", type="string", length=255, precision=0, scale=0, nullable=true, unique=false)
      */
     private $metaKeywords;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="meta_title", type="string", length=255, nullable=true)
+     * @ORM\Column(name="meta_title", type="string", length=255, precision=0, scale=0, nullable=true, unique=false)
      */
     private $metaTitle;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="path", type="string", length=128, nullable=true)
+     * @ORM\Column(name="path", type="string", length=128, precision=0, scale=0, nullable=true, unique=false)
      */
     private $path;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="sorting", type="integer", nullable=false)
+     * @ORM\Column(name="sorting", type="integer", precision=0, scale=0, nullable=false, unique=false)
      */
-    private $sorting = '0';
+    private $sorting;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="deleted", type="integer", nullable=false)
+     * @ORM\Column(name="deleted", type="integer", precision=0, scale=0, nullable=false, unique=false)
      */
-    private $deleted = '0';
+    private $deleted;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="upload_path", type="string", length=128, nullable=true)
+     * @ORM\Column(name="upload_path", type="string", length=128, precision=0, scale=0, nullable=true, unique=false)
      */
     private $uploadPath;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="content_markdown", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="content_markdown", type="text", length=65535, precision=0, scale=0, nullable=true, unique=false)
      */
     private $contentMarkdown;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="content_html", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="content_html", type="text", length=65535, precision=0, scale=0, nullable=true, unique=false)
      */
     private $contentHtml;
 
-
     /**
-     * @ORM\OneToMany(targetEntity="Products", mappedBy="category")
-     * @ORM\JoinColumn(name="id", referencedColumnName="category_id")
+     * @var Collection
      *
-     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Api\Entity\Products", mappedBy="category")
      */
     private $products;
 
-
     /**
-     * @ORM\OneToMany(targetEntity="Categories", mappedBy="parent")
+     * @var Collection
      *
-     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Api\Entity\Categories", mappedBy="parent")
      */
     private $children;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Categories", inversedBy="children")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
-     *
      * @var Categories
+     *
+     * @ORM\ManyToOne(targetEntity="Api\Entity\Categories", inversedBy="children")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true)
+     * })
      */
     private $parent;
 
     /**
-     * Categories constructor.
+     * Constructor
      */
     public function __construct()
     {
         $this->products = new ArrayCollection();
         $this->children = new ArrayCollection();
     }
-
-    /**
-     * @param bool $all
-     * @return ArrayCollection
-     */
-    public function getProducts($all = false)
-    {
-        $criteria = Criteria::create();
-        if (!$all){
-            $criteria
-                ->where(Criteria::expr()->eq('active', 1))
-                ->where(Criteria::expr()->eq('deleted', 0))
-            ;
-        }
-        $criteria->orderBy(['sorting' => Criteria::ASC]);
-
-        return $this->products->matching($criteria);
-    }
-
-    /**
-     * @param bool $all
-     * @return ArrayCollection
-     */
-    public function getChildren($all = false)
-    {
-        $criteria = Criteria::create();
-        if (!$all){
-            $criteria
-                ->where(Criteria::expr()->eq('active', 1))
-                ->where(Criteria::expr()->eq('deleted', 0))
-            ;
-        }
-        $criteria->orderBy(['sorting' => Criteria::ASC]);
-
-        return $this->children->matching($criteria);
-    }
-
-    /**
-     * @return Categories | null
-     */
-    public function getParent()
-    {
-        $parentId = $this->parentId;
-        if ($parentId != 0)
-            return $this->parent;
-
-        return null;
-    }
-
-    /**
-     * @param Products $product
-     */
-    public function addProduct($product)
-    {
-        $this->products[] = $product;
-    }
-
 
     /**
      * Get id
@@ -711,5 +653,97 @@ class Categories
     public function getContentHtml()
     {
         return $this->contentHtml;
+    }
+
+    /**
+     * Add product
+     *
+     * @param Products $product
+     *
+     * @return Categories
+     */
+    public function addProduct(Products $product)
+    {
+        $this->products[] = $product;
+
+        return $this;
+    }
+
+    /**
+     * Remove product
+     *
+     * @param Products $product
+     */
+    public function removeProduct(Products $product)
+    {
+        $this->products->removeElement($product);
+    }
+
+    /**
+     * Get products
+     *
+     * @return Collection
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * Add child
+     *
+     * @param Categories $child
+     *
+     * @return Categories
+     */
+    public function addChild(Categories $child)
+    {
+        $this->children[] = $child;
+
+        return $this;
+    }
+
+    /**
+     * Remove child
+     *
+     * @param Categories $child
+     */
+    public function removeChild(Categories $child)
+    {
+        $this->children->removeElement($child);
+    }
+
+    /**
+     * Get children
+     *
+     * @return Collection
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param Categories $parent
+     *
+     * @return Categories
+     */
+    public function setParent(Categories $parent = null)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return Categories
+     */
+    public function getParent()
+    {
+        return $this->parent;
     }
 }

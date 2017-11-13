@@ -38,3 +38,19 @@ h2 a{
 .w95   { width:  calc(95%  -  #{$padding + $margin}); }
 .w85   { width:  calc(85%  -  #{$padding + $margin}); }
 .w80   { width:  calc(80%  -  #{$padding + $margin}); }
+
+h1, h2, h3, h4, h5, h6{
+  > small {
+    display: block;
+  }
+  &.secondary-header{
+    margin-bottom: 8px;
+  }
+}
+
+a,
+button,
+[type='button'],
+[type='submit']{
+  outline: medium none !important;
+}

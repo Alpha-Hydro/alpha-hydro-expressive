@@ -2,6 +2,7 @@
 
 namespace Api\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,7 +16,7 @@ class Products
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Column(name="id", type="bigint", precision=0, scale=0, nullable=false, unique=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -24,188 +25,188 @@ class Products
     /**
      * @var integer
      *
-     * @ORM\Column(name="category_id", type="integer", nullable=false)
+     * @ORM\Column(name="category_id", type="integer", precision=0, scale=0, nullable=false, unique=false)
      */
     private $categoryId;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="parent_id", type="boolean", nullable=true)
+     * @ORM\Column(name="parent_id", type="boolean", precision=0, scale=0, nullable=true, unique=false)
      */
     private $parentId;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     * @ORM\Column(name="image", type="string", length=255, precision=0, scale=0, nullable=true, unique=false)
      */
     private $image;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="a_images", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="a_images", type="text", length=65535, precision=0, scale=0, nullable=true, unique=false)
      */
     private $aImages;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="draft", type="string", length=255, nullable=true)
+     * @ORM\Column(name="draft", type="string", length=255, precision=0, scale=0, nullable=true, unique=false)
      */
     private $draft;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="sku", type="string", length=255, nullable=false)
+     * @ORM\Column(name="sku", type="string", length=255, precision=0, scale=0, nullable=false, unique=false)
      */
     private $sku;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="name", type="text", length=65535, precision=0, scale=0, nullable=true, unique=false)
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="s_name", type="string", length=2028, nullable=true)
+     * @ORM\Column(name="s_name", type="string", length=2028, precision=0, scale=0, nullable=true, unique=false)
      */
     private $sName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="note", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="note", type="text", length=65535, precision=0, scale=0, nullable=true, unique=false)
      */
     private $note;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="description", type="text", length=65535, precision=0, scale=0, nullable=true, unique=false)
      */
     private $description;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="add_date", type="datetime", nullable=true)
+     * @ORM\Column(name="add_date", type="datetime", precision=0, scale=0, nullable=true, unique=false)
      */
     private $addDate;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="mod_date", type="datetime", nullable=true)
+     * @ORM\Column(name="mod_date", type="datetime", precision=0, scale=0, nullable=true, unique=false)
      */
     private $modDate;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="order", type="bigint", nullable=true)
+     * @ORM\Column(name="order", type="bigint", precision=0, scale=0, nullable=true, unique=false)
      */
     private $order;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="active", type="boolean", nullable=false)
+     * @ORM\Column(name="active", type="boolean", precision=0, scale=0, nullable=false, unique=false)
      */
-    private $active = '1';
+    private $active;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="full_path", type="string", length=255, nullable=true)
+     * @ORM\Column(name="full_path", type="string", length=255, precision=0, scale=0, nullable=true, unique=false)
      */
     private $fullPath;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="meta_description", type="text", nullable=true)
+     * @ORM\Column(name="meta_description", type="text", precision=0, scale=0, nullable=true, unique=false)
      */
     private $metaDescription;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="meta_keywords", type="string", length=255, nullable=true)
+     * @ORM\Column(name="meta_keywords", type="string", length=255, precision=0, scale=0, nullable=true, unique=false)
      */
     private $metaKeywords;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="meta_title", type="string", length=255, nullable=true)
+     * @ORM\Column(name="meta_title", type="string", length=255, precision=0, scale=0, nullable=true, unique=false)
      */
     private $metaTitle;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="path", type="string", length=128, nullable=true)
+     * @ORM\Column(name="path", type="string", length=128, precision=0, scale=0, nullable=true, unique=false)
      */
     private $path;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="sorting", type="boolean", nullable=false)
+     * @ORM\Column(name="sorting", type="boolean", precision=0, scale=0, nullable=false, unique=false)
      */
     private $sorting;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="deleted", type="integer", nullable=false)
+     * @ORM\Column(name="deleted", type="integer", precision=0, scale=0, nullable=false, unique=false)
      */
-    private $deleted = '0';
+    private $deleted;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="upload_path", type="string", length=128, nullable=true)
+     * @ORM\Column(name="upload_path", type="string", length=128, precision=0, scale=0, nullable=true, unique=false)
      */
     private $uploadPath;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="upload_path_draft", type="string", length=128, nullable=true)
+     * @ORM\Column(name="upload_path_draft", type="string", length=128, precision=0, scale=0, nullable=true, unique=false)
      */
     private $uploadPathDraft;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Categories", inversedBy="products")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     * @var Categories
+     *
+     * @ORM\ManyToOne(targetEntity="Api\Entity\Categories", inversedBy="products")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true)
+     * })
      */
     private $category;
 
     /**
-     * @return Categories
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="Api\Entity\ProductParams", mappedBy="product")
      */
-    public function getCategory()
-    {
-        return $this->category;
-    }
+    private $params;
 
     /**
-     * @param Categories $category
+     * Constructor
      */
-    public function setCategory($category)
+    public function __construct()
     {
-        $this->category = $category;
-        $category->addProduct($this);
+        $this->params = new ArrayCollection();
     }
-
-
 
     /**
      * Get id
@@ -768,4 +769,63 @@ class Products
     {
         return $this->uploadPathDraft;
     }
+
+    /**
+     * Set category
+     *
+     * @param Categories $category
+     *
+     * @return Products
+     */
+    public function setCategory(Categories $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return Categories
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Add param
+     *
+     * @param ProductParams $param
+     *
+     * @return Products
+     */
+    public function addParam(ProductParams $param)
+    {
+        $this->params[] = $param;
+
+        return $this;
+    }
+
+    /**
+     * Remove param
+     *
+     * @param ProductParams $param
+     */
+    public function removeParam(ProductParams $param)
+    {
+        $this->params->removeElement($param);
+    }
+
+    /**
+     * Get params
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getParams()
+    {
+        return $this->params;
+    }
 }
+
