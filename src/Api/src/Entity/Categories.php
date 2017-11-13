@@ -4,6 +4,7 @@ namespace Api\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -682,11 +683,21 @@ class Categories
     /**
      * Get products
      *
+     * @param bool $all
      * @return Collection
      */
-    public function getProducts()
+    public function getProducts($all = false)
     {
-        return $this->products;
+        $criteria = Criteria::create();
+        if (!$all){
+            $criteria
+                ->where(Criteria::expr()->eq('active', 1))
+                ->where(Criteria::expr()->eq('deleted', 0))
+            ;
+        }
+        $criteria->orderBy(['sorting' => Criteria::ASC]);
+
+        return $this->products->matching($criteria);
     }
 
     /**
@@ -716,11 +727,21 @@ class Categories
     /**
      * Get children
      *
+     * @param bool $all
      * @return Collection
      */
-    public function getChildren()
+    public function getChildren($all = false)
     {
-        return $this->children;
+        $criteria = Criteria::create();
+        if (!$all){
+            $criteria
+                ->where(Criteria::expr()->eq('active', 1))
+                ->where(Criteria::expr()->eq('deleted', 0))
+            ;
+        }
+        $criteria->orderBy(['sorting' => Criteria::ASC]);
+
+        return $this->children->matching($criteria);
     }
 
     /**
@@ -744,6 +765,10 @@ class Categories
      */
     public function getParent()
     {
-        return $this->parent;
+        $parentId = $this->parentId;
+        if ($parentId != 0)
+            return $this->parent;
+
+        return null;
     }
 }

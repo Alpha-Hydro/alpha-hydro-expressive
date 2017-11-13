@@ -20,7 +20,7 @@ $menu-line-height: 40px;
         display: block;
         position: relative;
         padding: 10px 15px;
-        font-size: $alpha-font-size-smaller;
+        font-size: $alpha-font-size-small;
         color: $alpha-gray-darker;
       }
     }
@@ -29,7 +29,7 @@ $menu-line-height: 40px;
   &-heading{
     background-color: lighten($alpha-gray-lighter, 3%);
     .badge{
-      font-size: $alpha-font-size-smaller;
+      font-size: $alpha-font-size-small;
       display: none;
       float: right;
       @include transition(all 0.2s ease-in-out 0s);
@@ -52,7 +52,7 @@ $menu-line-height: 40px;
       background-color: $alpha-gray-dark;
       color: #FFFFFF;
       cursor: default;
-      font-size: $alpha-font-size-smaller;
+      font-size: $alpha-font-size-small;
       >span{
         display: block;
         padding: 10px 15px;

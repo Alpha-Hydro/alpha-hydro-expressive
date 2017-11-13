@@ -197,6 +197,7 @@ class Products
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(targetEntity="Api\Entity\ProductParams", mappedBy="product")
+     * @ORM\OrderBy({"order" = "ASC"})
      */
     private $params;
 

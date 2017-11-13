@@ -65,7 +65,7 @@ $main-menu-link-padding-right: $main-menu-link-padding-left;
         display: block;
         position: relative;
         padding: 10px 15px;
-        font-size: $alpha-font-size-smaller;
+        font-size: $alpha-font-size-small;
         color: $alpha-gray-darker;
       }
     }
@@ -103,7 +103,7 @@ $main-menu-link-padding-right: $main-menu-link-padding-left;
           }
           color: $main-menu-link-color;
           text-decoration: none;
-          font-size: $alpha-font-size-smaller;
+          font-size: $alpha-font-size-small;
           background: image-url('menu-item-inactive.png', false, false) transparent no-repeat center bottom;
           outline: none;
           &:hover{

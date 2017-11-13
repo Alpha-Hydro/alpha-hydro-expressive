@@ -11,7 +11,7 @@
       border: 1px solid $alpha-gray;
       @include box-shadow(inset $alpha-gray-light 0px 0px 8px);
       color: $alpha-gray-dark;
-      font-size: $alpha-font-size-smaller;
+      font-size: $alpha-font-size-small;
       margin-top: 7px;
     }
     .search-autocomplete{

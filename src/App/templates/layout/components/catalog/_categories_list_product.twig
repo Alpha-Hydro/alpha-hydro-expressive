@@ -3,7 +3,7 @@
         <div class="product-list">
             {% for product in productList %}
                 <div class="row product-item">
-                    <div class="col-md-3">
+                    <div class="col-sm-3">
                         <div class="thumbnail product-images">
                             <a href="{{ path('catalog_category_list', {'full_path': product.fullPath}) }}">
                                 <img src="{{ product.uploadPath }}{{ product.image }}"
@@ -11,7 +11,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-sm-9">
                         <h2 class="h4">
                             <a href="{{ path('catalog_category_list', {'full_path': product.fullPath}) }}">{{ product.sku }}</a>
                             <small>{{ product.name }}</small>
