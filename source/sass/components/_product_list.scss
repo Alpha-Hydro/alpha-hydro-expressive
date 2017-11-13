@@ -37,5 +37,11 @@
   }
 }
 .product-property{
-  font-size: $alpha-font-size-smaller;
+  font-size: $alpha-font-size-small;
+  th{
+    font-size: $alpha-font-size-smaller;
+  }
+}
+.product-description{
+  font-size: $alpha-font-size-small;
 }

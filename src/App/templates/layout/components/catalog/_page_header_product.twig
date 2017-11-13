@@ -1,0 +1,28 @@
+{% block stylesheets %}
+    <style>
+        .page-header {
+            position: relative;
+            margin: 0;
+        }
+        .print{
+            font-size: 12pt;
+            position: absolute;
+            right: 0;
+            top: calc(21pt);
+        }
+    </style>
+{% endblock %}
+
+<div class="col-md-9 col-md-offset-3">
+    <div class="page-header">
+        <h1 class="h3 secondary-header">
+            {{ product.sku }}
+            <small>{{ product.name }}</small>
+        </h1>
+        <div class="print hidden-xs">
+            <a href="#print" class="alpha-icon-print">
+                <span class="">Печать</span>
+            </a>
+        </div>
+    </div>
+</div>

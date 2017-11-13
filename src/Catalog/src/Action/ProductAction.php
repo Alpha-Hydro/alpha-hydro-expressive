@@ -65,7 +65,17 @@ class ProductAction implements ServerMiddlewareInterface
         if (!$product)
             return new HtmlResponse($this->templateRenderer->render('error::404'), 404);
 
+        $currentCategory = $product->getCategory();
+        $parentCategory = $currentCategory->getParent();
+        $categoryList = $parentCategory->getChildren();
 
-        return new JsonResponse(['product' => $product->getName()]);
+        $data = [
+            'currentCategory' => $currentCategory,
+            'sidebarListCategories' => $categoryList,
+            'parentCategory' => $parentCategory,
+            'product' => $product,
+        ];
+
+        return new HtmlResponse($this->templateRenderer->render('catalog::viewProduct', $data));
     }
 }
