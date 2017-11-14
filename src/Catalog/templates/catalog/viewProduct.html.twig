@@ -14,21 +14,45 @@
 
 {% block content %}
     <div class="col-xs-12 col-sm-12 col-md-9">
-        <div class="row">
-            <div class="product-item">
-                <div class="col-sm-3">
-                    <div class="thumbnail product-images">
-                        <img src="{{ product.uploadPath }}{{ product.image }}"
-                             alt="{{ product.name }}">
-                    </div>
+        <div class="row product-item">
+            <div class="col-sm-3">
+                <div class="thumbnail product-images">
+                    <img src="{{ product.uploadPath }}{{ product.image }}"
+                         alt="{{ product.name }}">
                 </div>
-                <div class="col-sm-9">
-                    <h4>Свойства</h4>
-                    {{ include('@layout/components/catalog/_product_property.twig') }}
+            </div>
+            <div class="col-sm-9">
+                <h4>Свойства</h4>
+                {{ include('@layout/components/catalog/_product_property.twig') }}
+                {% if product.description != '' %}
                     <h4>Описание</h4>
                     <div class="product-description">{{ product.description }}</div>
-                </div>
-
+                {% endif %}
+            </div>
+        </div>
+        <div class="row product-modifications">
+            <div class="col-md-12">
+                <h4>Модификации и размеры</h4>
+                <table class="table table-striped modifications">
+                    <thead>
+                    <tr>
+                        <td>Название</td>
+                        {% for modificationParam in product.modificationParams %}
+                            <td>{{ modificationParam.name }}</td>
+                        {% endfor %}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for modification in product.modifications %}
+                        <tr>
+                            <td>{{ modification.sku }}</td>
+                            {% for paramValues in modification.paramValues %}
+                                <td>{{ paramValues.value }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

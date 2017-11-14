@@ -3,6 +3,7 @@
 namespace Api\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -194,7 +195,7 @@ class Products
     private $category;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var Collection
      *
      * @ORM\OneToMany(targetEntity="Api\Entity\ProductParams", mappedBy="product")
      * @ORM\OrderBy({"order" = "ASC"})
@@ -202,11 +203,28 @@ class Products
     private $params;
 
     /**
+     * @var Collection
+     *
+     * @ORM\OneToMany(targetEntity="Api\Entity\Subproducts", mappedBy="product")
+     */
+    private $modifications;
+
+    /**
+     * @var Collection
+     *
+     * @ORM\OneToMany(targetEntity="Api\Entity\SubproductParams", mappedBy="product")
+     * @ORM\OrderBy({"order" = "ASC"})
+     */
+    private $modificationParams;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->params = new ArrayCollection();
+        $this->modifications = new ArrayCollection();
+        $this->modificationParams = new ArrayCollection();
     }
 
     /**
@@ -822,11 +840,79 @@ class Products
     /**
      * Get params
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getParams()
     {
         return $this->params;
+    }
+
+    /**
+     * Add modification
+     *
+     * @param Subproducts $modification
+     *
+     * @return Products
+     */
+    public function addModification(Subproducts $modification)
+    {
+        $this->modifications[] = $modification;
+
+        return $this;
+    }
+
+    /**
+     * Remove modification
+     *
+     * @param Subproducts $modification
+     */
+    public function removeModification(Subproducts $modification)
+    {
+        $this->modifications->removeElement($modification);
+    }
+
+    /**
+     * Get modifications
+     *
+     * @return Collection
+     */
+    public function getModifications()
+    {
+        return $this->modifications;
+    }
+
+    /**
+     * Add modificationParam
+     *
+     * @param SubproductParams $modificationParam
+     *
+     * @return Products
+     */
+    public function addModificationParam(SubproductParams $modificationParam)
+    {
+        $this->modificationParams[] = $modificationParam;
+
+        return $this;
+    }
+
+    /**
+     * Remove modificationParam
+     *
+     * @param SubproductParams $modificationParam
+     */
+    public function removeModificationParam(SubproductParams $modificationParam)
+    {
+        $this->modificationParams->removeElement($modificationParam);
+    }
+
+    /**
+     * Get modificationParams
+     *
+     * @return Collection
+     */
+    public function getModificationParams()
+    {
+        return $this->modificationParams;
     }
 }
 
