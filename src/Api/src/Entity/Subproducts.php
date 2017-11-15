@@ -88,7 +88,6 @@ class Subproducts
      * @var Collection
      *
      * @ORM\OneToMany(targetEntity="Api\Entity\SubproductParamsValues", mappedBy="subproducts")
-     * @ORM\OrderBy({"paramId" = "ASC"})
      */
     private $paramValues;
 

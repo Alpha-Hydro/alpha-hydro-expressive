@@ -10,16 +10,16 @@
 {% endblock %}
 
 {% block sidebar %}
-    {{ include('@layout/components/catalog/_sidebar.twig') }}
+    {{ include('@catalog/components/_sidebar.twig') }}
 {% endblock %}
 
 {% block content %}
     <div  class="col-xs-12 col-sm-12 col-md-9">
         {% if productList is defined and productList is not null %}
-            {{ include('@layout/components/catalog/_categories_list_product.twig') }}
+            {{ include('@catalog/components/_categories_list_product.twig') }}
         {% else %}
-            {{ include('@layout/components/catalog/_categories_list_item.twig') }}
+            {{ include('@catalog/components/_categories_list_item.twig') }}
         {% endif %}
-        {{ include('@layout/components/catalog/_category_content_html.twig') }}
+        {{ include('@catalog/components/_category_content_html.twig') }}
     </div>
 {% endblock %}

@@ -14,8 +14,13 @@ $alpha-gray: #ABABAB;
 $alpha-gray-light: #CCCCCC;
 $alpha-gray-lighter: #ECECEC;
 
+
 $alpha-orange: #F48123;
+$alpha-orange-dark: #aa6708; //info-block
+
 $alpha-blue: #0895D8;
+$alpha-blue-dark: darken($alpha-blue, 10%); //#1b809e; //info-block
+
 
 $height-footer: 80px;
 $padding-top-footer: 25px;

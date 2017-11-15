@@ -1,3 +1,5 @@
+import "./javascript/bootstrap/modal";
+
 let sidebarToggle = $('.sidebar-toggle');
 let sidebarDropdown = $('.sidebar-dropdown');
 

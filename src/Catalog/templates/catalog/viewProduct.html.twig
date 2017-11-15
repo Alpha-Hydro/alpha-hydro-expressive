@@ -1,58 +1,35 @@
 {% extends '@layout/default.html.twig' %}
 
 {% block title %}
-    {{ product.name }}
+    {{ product.sku }}. {{ product.name }}
 {% endblock %}
 
 {% block pageHeader %}
-    {{ include('@layout/components/catalog/_page_header_product.twig') }}
+    {{ include('@catalog/components/_page_header_product.twig') }}
 {% endblock %}
 
 {% block sidebar %}
-    {{ include('@layout/components/catalog/_sidebar.twig') }}
+    {{ include('@catalog/components/_sidebar.twig') }}
 {% endblock %}
 
 {% block content %}
     <div class="col-xs-12 col-sm-12 col-md-9">
         <div class="row product-item">
             <div class="col-sm-3">
-                <div class="thumbnail product-images">
-                    <img src="{{ product.uploadPath }}{{ product.image }}"
-                         alt="{{ product.name }}">
-                </div>
+                {{ include('@catalog/components/_product_images.twig') }}
             </div>
             <div class="col-sm-9">
-                <h4>Свойства</h4>
-                {{ include('@layout/components/catalog/_product_property.twig') }}
+                {#<h4>Описание</h4>#}
+                {{ include('@catalog/components/_product_property.twig') }}
                 {% if product.description != '' %}
-                    <h4>Описание</h4>
-                    <div class="product-description">{{ product.description }}</div>
+                    {{ include('@catalog/components/_product_descroption.twig') }}
                 {% endif %}
             </div>
         </div>
         <div class="row product-modifications">
             <div class="col-md-12">
                 <h4>Модификации и размеры</h4>
-                <table class="table table-striped modifications">
-                    <thead>
-                    <tr>
-                        <td>Название</td>
-                        {% for modificationParam in product.modificationParams %}
-                            <td>{{ modificationParam.name }}</td>
-                        {% endfor %}
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for modification in product.modifications %}
-                        <tr>
-                            <td>{{ modification.sku }}</td>
-                            {% for paramValues in modification.paramValues %}
-                                <td>{{ paramValues.value }}</td>
-                            {% endfor %}
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                {{ include('@catalog/components/_product_modifications.twig') }}
             </div>
         </div>
     </div>

@@ -14,7 +14,7 @@
                     <a href="{{ path('catalog_category_list', {'full_path': product.fullPath}) }}">{{ product.sku }}</a>
                     <small>{{ product.name }}</small>
                 </h2>
-                {{ include('@layout/components/catalog/_product_property.twig') }}
+                {{ include('@catalog/components/_product_property.twig') }}
             </div>
         </div>
     {% endfor %}

@@ -3,7 +3,10 @@
 .modifications{
   text-align: center;
   max-width: calc(100%);//850px;
-  font-size: 12px;
+  font-size: 1rem;
+  @media (min-width: $screen-lg-min) {
+    font-size: 12px;
+  }
   thead{
     td{
       background-color: $alpha-gray-dark;
