@@ -14,7 +14,18 @@
 {% endblock %}
 
 {% block content %}
-    <div  class="col-xs-12 col-sm-12 col-md-9">
+    <div class="col-xs-12 col-sm-12 col-md-9">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="breadcrumb">
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="{{ path('catalog_category_lending') }}">Каталог</a></li>
+                    {% for item in breadcrumb %}
+                        <li><a href="{{ path('catalog_category_list', {'full_path': item.fullPath}) }}">{{ item.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
         {% if productList is defined and productList is not null %}
             {{ include('@catalog/components/_categories_list_product.twig') }}
         {% else %}

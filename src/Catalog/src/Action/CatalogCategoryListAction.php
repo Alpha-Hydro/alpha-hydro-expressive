@@ -81,34 +81,18 @@ class CatalogCategoryListAction implements ServerMiddlewareInterface
         //Получаем список категорий в текущей категории
         $categoriesList = $currentCategory->getChildren();
 
-
+        //Получаем список протуктов в текущей категории
         $productList = null;
         if ($categoriesList->count() == 0){
             $productList = $currentCategory->getProducts();
         }
 
-
+        //формируем список категорий для sidebar`а
         $sidebarListCategories = $categoriesList;
-
-        $parentId = $currentCategory->getId();
-
-        if ($parentId != 0) {
-            $parentCategory = $this->entityManager->getRepository(Categories::class)->find($parentId);
-            $sidebarListCategories = $this->entityManager->getRepository(Categories::class)->findBy(
-                [
-                    'parentId' => $parentCategory->getParentId(),
-                    'active' => 1,
-                    'deleted' => 0,
-                ],
-                ['sorting' => 'ASC']
-            );
+        $parentCategory = $currentCategory->getParent();
+        if ($parentCategory != null){
+            $sidebarListCategories = $parentCategory->getChildren();
         }
-
-        // @Todo if empty Categories
-
-        $parentCategory = (isset($parentCategory) && $parentCategory->getParentId() != 0)
-            ? $this->entityManager->getRepository(Categories::class)->find($parentCategory->getParentId())
-            : null;
 
         $data = [
             'currentCategory' => $currentCategory,
@@ -116,10 +100,22 @@ class CatalogCategoryListAction implements ServerMiddlewareInterface
             'sidebarListCategories' => $sidebarListCategories,
             'parentCategory' => $parentCategory,
             'productList' => $productList,
+            'breadcrumb' => $this->getBreadcrumb($currentCategory),
         ];
 
-        //var_dump($request->getAttribute('categoryId'));
+        //var_dump($this->getBreadcrumb($currentCategory));
 
         return new HtmlResponse($this->templateRenderer->render('catalog::listCategory', $data));
+    }
+
+    private function getBreadcrumb(Categories $categories, $result = null){
+        if ($categories == null)
+            return null;
+
+        $result[] = $categories;
+        if ($categories->getParent() != null)
+            $this->getBreadcrumb($categories->getParent(), $result);
+
+        return array_reverse($result);
     }
 }
