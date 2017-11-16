@@ -1,0 +1,47 @@
+{% extends '@layout/default.html.twig' %}
+{% set pageHeader = 'Наше производство' %}
+
+{% block title %}{{ pageHeader }}{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        img {max-width: 100%}
+    </style>
+{% endblock %}
+
+{% block pageHeader %}
+    {{ include('@layout/components/_pageHeader.twig') }}
+{% endblock %}
+
+{% block sidebar %}
+    {{ include('@manufacture/components/_sidebar.twig') }}
+{% endblock %}
+
+{% block content %}
+    <div class="col-xs-12 col-sm-12 col-md-9">
+        <div class="page-content mt2">
+            <img src="{{ asset("upload/pages/production.png")}}" alt="Наше производство" class="pull-right">
+            <p>Ассортимент нашей продукции не оставит Вас равнодушными. Компания "АЛЬФА-ГИДРО" имеет возможность предложить Вам:</p>
+
+            <ul>
+                <li><a href="{{ path("catalog_category_lending")}}">Гидравлическое оборудование</a></li>
+                <li><a href="{{ path("manufacture_category_list", {'path': 'gidrostancii'})}}">Гидравлические станции</a></li>
+                <li><a href="{{ path("manufacture_category_list", {'path': 'gidrocilindry'})}}">Гидроцилиндры</a></li>
+                <li>Гидронасосы</li>
+                <li>Гидромоторы</li>
+                <li>Уплотнения</li>
+                <li>Гильзы</li>
+                <li>Штока</li>
+                <li>Трубы</li>
+                <li>РВД</li>
+            </ul>
+
+            <p>Мы произведем гидравлическое оборудование по Вашему техническому заданию, либо наш конструкторский отдел поможет найти Вам оптимальное для Вас решение, спроектирует и составит техническое задание за Вас. Мы отремонтируем Ваше оборудование, проведем профилактику, сделаем дефектацию, запрограммируем электронику, осуществим монтаж, сделаем пусконаладку.</p>
+
+            <p>Сертификаты на продукцию прилагаются по запросу заказчика с указанием сферы использования данного материала.</p>
+
+            <p>Будем рады видеть Вашу компанию в числе наших постоянных клиентов!</p>
+
+        </div>
+    </div>
+{% endblock %}

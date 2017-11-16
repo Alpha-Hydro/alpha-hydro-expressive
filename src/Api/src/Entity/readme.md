@@ -66,8 +66,8 @@ vendor\bin\doctrine orm:convert-mapping --namespace="Api\Entity\\" --filter="\\C
 
 **Генерируем объекты сущностей и добавляем setter/getter**
 
-```cmd
-vendor\bin\doctrine orm:generate-entities src --generate-annotations=true
-```
-
 > К сожалению, Doctrine не поддерживает поддерживает стандарт PSR-4. Чтобы обойти эту проблему , мы должны переместить вручную из ./src/Api/Entity в ./src/Api/src/Entity.
+
+```cmd
+vendor\bin\doctrine orm:generate-entities src --generate-annotations=true --filter="\\Manufacture"
+```

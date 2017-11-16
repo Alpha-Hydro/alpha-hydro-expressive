@@ -5,6 +5,7 @@
 $menu-line-height: 40px;
 
 .sidebar{
+  font-size: $alpha-font-size-small;
   >ul{
     list-style: outside none none;
     margin:{
@@ -20,7 +21,7 @@ $menu-line-height: 40px;
         display: block;
         position: relative;
         padding: 10px 15px;
-        font-size: $alpha-font-size-small;
+        //font-size: $alpha-font-size-small;
         color: $alpha-gray-darker;
       }
     }
@@ -28,13 +29,19 @@ $menu-line-height: 40px;
 
   &-heading{
     background-color: lighten($alpha-gray-lighter, 3%);
+    .span{
+      display: block;
+      position: relative;
+      padding: 10px 15px;
+      //font-size: $alpha-font-size-small;
+    }
     .badge{
-      font-size: $alpha-font-size-small;
+      //font-size: $alpha-font-size-small;
       display: none;
       float: right;
       @include transition(all 0.2s ease-in-out 0s);
     }
-    a{
+    a, .span{
       color: $alpha-gray-darker;
       font-weight: bolder;
       //text-transform: uppercase;

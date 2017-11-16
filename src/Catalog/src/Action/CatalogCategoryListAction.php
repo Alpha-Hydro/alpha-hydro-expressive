@@ -88,9 +88,16 @@ class CatalogCategoryListAction implements ServerMiddlewareInterface
         }
 
         //формируем список категорий для sidebar`а
-        $sidebarListCategories = $categoriesList;
+        $sidebarListCategories = $this->entityManager->getRepository(Categories::class)->findBy(
+            [
+                'parentId' => 0,
+                'active' => 1,
+                'deleted' => 0,
+            ],
+            ['sorting' => 'ASC']
+        );
         $parentCategory = $currentCategory->getParent();
-        if ($parentCategory != null){
+        if ($parentCategory != null && $parentCategory->getId() != 0){
             $sidebarListCategories = $parentCategory->getChildren();
         }
 
@@ -109,7 +116,7 @@ class CatalogCategoryListAction implements ServerMiddlewareInterface
         return new HtmlResponse($this->templateRenderer->render('catalog::listCategory', $data));
     }
 
-    private function getBreadcrumb(Categories $categories, &$result = []){
+    private function getBreadcrumb(Categories $categories = null, &$result = []){
         if ($categories == null)
             return null;
 
