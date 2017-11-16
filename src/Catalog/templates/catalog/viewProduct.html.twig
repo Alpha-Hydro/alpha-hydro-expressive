@@ -14,6 +14,7 @@
 
 {% block content %}
     <div class="col-xs-12 col-sm-12 col-md-9">
+        {{ include('@catalog/components/_breadcrumb.twig') }}
         <div class="row product-item">
             <div class="col-sm-3">
                 {{ include('@catalog/components/_product_images.twig') }}
@@ -22,7 +23,7 @@
                 {#<h4>Описание</h4>#}
                 {{ include('@catalog/components/_product_property.twig') }}
                 {% if product.description != '' %}
-                    {{ include('@catalog/components/_product_descroption.twig') }}
+                    {{ include('@catalog/components/_product_description.twig') }}
                 {% endif %}
             </div>
         </div>

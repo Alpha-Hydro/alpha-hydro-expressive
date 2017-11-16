@@ -9,6 +9,7 @@
 
 namespace Catalog\Action;
 
+use Api\Entity\Categories;
 use Api\Entity\Products;
 use Doctrine\ORM\EntityManager;
 use Interop\Http\ServerMiddleware\DelegateInterface;
@@ -74,8 +75,20 @@ class ProductAction implements ServerMiddlewareInterface
             'sidebarListCategories' => $categoryList,
             'parentCategory' => $parentCategory,
             'product' => $product,
+            'breadcrumb' => $this->getBreadcrumb($currentCategory),
         ];
 
         return new HtmlResponse($this->templateRenderer->render('catalog::viewProduct', $data));
+    }
+
+    private function getBreadcrumb(Categories $categories, &$result = []){
+        if ($categories == null)
+            return null;
+
+        $result[] = $categories;
+        if ($categories->getParent() != null)
+            $this->getBreadcrumb($categories->getParent(), $result);
+
+        return array_reverse($result);
     }
 }

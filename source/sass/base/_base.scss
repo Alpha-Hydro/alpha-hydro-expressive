@@ -26,12 +26,21 @@ h2 a{
   color: $alpha-blue;
 }
 
-.text-size-small{
-  font-size: $alpha-font-size-small;
+.text-size{
+  &-default{
+    font-size: $alpha-font-size-default;
+  }
+  &-smaller{
+    font-size: $alpha-font-size-smaller;
+  }
+  &-small{
+    font-size: $alpha-font-size-small;
+  }
+  &-large{
+    font-size: $alpha-font-size-large;
+  }
 }
-.text-size-large{
-  font-size: $alpha-font-size-large;
-}
+
 
 .w100  { width:  calc(100% -  #{$padding + $margin}); }
 .w90   { width:  calc(90%  -  #{$padding + $margin}); }

@@ -94,13 +94,14 @@ class CatalogCategoryListAction implements ServerMiddlewareInterface
             $sidebarListCategories = $parentCategory->getChildren();
         }
 
+
         $data = [
             'currentCategory' => $currentCategory,
             'categories' => $categoriesList,
             'sidebarListCategories' => $sidebarListCategories,
             'parentCategory' => $parentCategory,
             'productList' => $productList,
-            'breadcrumb' => $this->getBreadcrumb($currentCategory),
+            'breadcrumb' => $this->getBreadcrumb($parentCategory),
         ];
 
         //var_dump($this->getBreadcrumb($currentCategory));
@@ -108,7 +109,7 @@ class CatalogCategoryListAction implements ServerMiddlewareInterface
         return new HtmlResponse($this->templateRenderer->render('catalog::listCategory', $data));
     }
 
-    private function getBreadcrumb(Categories $categories, $result = null){
+    private function getBreadcrumb(Categories $categories, &$result = []){
         if ($categories == null)
             return null;
 
