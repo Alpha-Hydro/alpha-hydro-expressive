@@ -1,0 +1,33 @@
+@import "../utils/variables";
+.manufacture-categories{
+  margin-top: 30px;
+}
+.manufacture-item{
+  /*> img{
+    height: 185px;
+  }*/
+  .manufacture-title{
+    font-size: $alpha-font-size-default;
+    min-height: 2.2em;
+    font-weight: 600;
+  }
+  .manufacture-description{
+    font-size: $alpha-font-size-small;
+    min-height: 60px;
+  }
+  .manufacture-link{
+    >a{
+      color: $alpha-gray-darker;
+      font-size: $alpha-font-size-smaller;
+    }
+  }
+}
+
+.flex-box{
+  &-auto{
+    max-width: calc(100%/3);
+  }
+  .manufacture-item{
+    height: calc(100% - 17pt);
+  }
+}

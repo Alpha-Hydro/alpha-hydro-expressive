@@ -15,5 +15,24 @@
 
 {% block content %}
     <div class="col-xs-12 col-sm-12 col-md-9">
+        {{ include('@manufacture/components/_breadcrumb.twig') }}
+        <div class="row">
+            <div class="flex-box">
+                {% for manufacture in manufactureList %}
+                    <div class="col-md-4 flex-box-auto">
+                        <div class="thumbnail manufacture-item">
+                            <img src="{{ manufacture.image }}" alt="{{ manufacture.title }}">
+                            <div class="caption">
+                                <h4 class="manufacture-title">{{ manufacture.title }}</h4>
+                                <p class="manufacture-description">{{ manufacture.description }}</p>
+                                <p class="text-right manufacture-link">
+                                    <a href="{{ path('manufacture_view', {'full_path': manufacture.fullPath}) }}" class="btn btn-alpha default" title="{{ manufacture.title }}">Подробнее</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 {% endblock %}

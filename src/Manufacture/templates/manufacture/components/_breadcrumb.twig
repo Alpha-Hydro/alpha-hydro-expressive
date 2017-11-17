@@ -1,0 +1,16 @@
+<div class="row hidden-xs">
+    <div class="col-md-12">
+        <ul class="breadcrumb text-size-small">
+            <li><a href="/">Главная</a></li>
+            <li><a href="{{ path('manufacture_lending') }}">Наше производство</a></li>
+            {% if manufacture is not defined %}
+                <li class="active"><span>{{ currentCategory.title }}</span></li>
+            {% else %}
+                <li>
+                    <a href="{{ path('manufacture_category_list', {'path': currentCategory.path}) }}">{{ currentCategory.title }}</a>
+                </li>
+                <li class="active"><span>{{ manufacture.title }}</span></li>
+            {% endif %}
+        </ul>
+    </div>
+</div>

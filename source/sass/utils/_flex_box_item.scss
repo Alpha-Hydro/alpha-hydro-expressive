@@ -8,4 +8,7 @@
     padding: 0 5px;
     @include flex(1 1 calc(25% - 20px));
   }
+  &-auto{
+    @include flex(1 1 auto);
+  }
 }
