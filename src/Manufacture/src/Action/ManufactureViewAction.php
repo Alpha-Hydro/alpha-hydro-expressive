@@ -9,7 +9,7 @@
 
 namespace Manufacture\Action;
 
-use Api\Entity\ManufactureCategories;
+use Api\Entity\Manufacture;
 use Doctrine\ORM\EntityManager;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
@@ -20,7 +20,7 @@ use Zend\Diactoros\Response\JsonResponse;
 use Zend\Expressive\Router\RouteResult;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
-class ManufactureListCategoriesAction implements ServerMiddlewareInterface
+class ManufactureViewAction implements ServerMiddlewareInterface
 {
     /**
      * @var TemplateRendererInterface
@@ -33,7 +33,7 @@ class ManufactureListCategoriesAction implements ServerMiddlewareInterface
     private $entityManager;
 
     /**
-     * ManufactureListCategoriesAction constructor.
+     * ManufactureViewAction constructor.
      * @param TemplateRendererInterface $templateRenderer
      * @param EntityManager $entityManager
      */
@@ -44,11 +44,6 @@ class ManufactureListCategoriesAction implements ServerMiddlewareInterface
     }
 
 
-    /**
-     * @param ServerRequestInterface $request
-     * @param DelegateInterface $delegate
-     * @return ResponseInterface
-     */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         /** @var RouteResult $routeResult */
@@ -56,38 +51,20 @@ class ManufactureListCategoriesAction implements ServerMiddlewareInterface
 
         $routeMatchedParams = $routeResult->getMatchedParams();
 
-        if (empty($routeMatchedParams['path'])) {
-            throw new \RuntimeException('Invalid route: "path" not set in matched route params.');
+        if (empty($routeMatchedParams['full_path'])) {
+            throw new \RuntimeException('Invalid route: "full_path" not set in matched route params.');
         }
 
-        $path = $routeMatchedParams['path'];
+        $fullPath = $routeMatchedParams['full_path'];
 
-        //Находим по переданному параметру текущую категорию
-        /** @var ManufactureCategories $currentCategory */
-        $currentCategory = $this->entityManager
-            ->getRepository(ManufactureCategories::class)
-            ->findOneByPath($path);
+        /** @var Manufacture $manufacture */
+        $manufacture = $this->entityManager->getRepository(Manufacture::class)
+            ->findOneByFullPath($fullPath);
 
-        if (!$currentCategory)
+        if (!$manufacture)
             return new HtmlResponse($this->templateRenderer->render('error::404'), 404);
 
-        $manufactureList = $currentCategory->getManufactures();
 
-        $categories = $this->entityManager->getRepository(ManufactureCategories::class)->findBy(
-            [
-                'parentId' => 0,
-                'active' => 1,
-                'deleted' => 0,
-            ],
-            ['sorting' => 'ASC']
-        );
-
-        $data = [
-            'currentCategory' => $currentCategory,
-            'sidebarListItem' => $categories,
-            'manufactureList' => $manufactureList
-        ];
-
-        return new HtmlResponse($this->templateRenderer->render('manufacture::listManufacture',$data));
+        return new JsonResponse($manufacture->jsonSerialize());
     }
 }

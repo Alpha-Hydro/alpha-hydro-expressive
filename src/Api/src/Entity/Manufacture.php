@@ -126,6 +126,16 @@ class Manufacture
      */
     private $fullPath;
 
+    /**
+     * @var ManufactureCategories
+     *
+     * @ORM\ManyToOne(targetEntity="Api\Entity\ManufactureCategories", inversedBy="manufactures")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true)
+     * })
+     */
+    private $manufactureCategory;
+
 
     /**
      * Get id
@@ -495,6 +505,42 @@ class Manufacture
     public function getFullPath()
     {
         return $this->fullPath;
+    }
+
+    /**
+     * Set manufactureCategory
+     *
+     * @param ManufactureCategories $manufactureCategory
+     *
+     * @return Manufacture
+     */
+    public function setManufactureCategory(ManufactureCategories $manufactureCategory = null)
+    {
+        $this->manufactureCategory = $manufactureCategory;
+
+        return $this;
+    }
+
+    /**
+     * Get manufactureCategory
+     *
+     * @return ManufactureCategories
+     */
+    public function getManufactureCategory()
+    {
+        return $this->manufactureCategory;
+    }
+
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'category' => $this->getManufactureCategory()->getTitle(),
+            'title' => $this->title,
+            'description' => $this->description,
+            'path' => $this->fullPath
+        ];
     }
 }
 

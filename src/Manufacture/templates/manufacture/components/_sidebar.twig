@@ -2,9 +2,9 @@
     <ul class="list-group crop-bottom-shadow">
         <li class="list-group-item sidebar-heading"><span class="span">Производство</span></li>
         {% for item in sidebarListItem %}
-            {% if currentCategory is defined and category.id == currentCategory.id %}
+            {% if currentCategory is defined and item.id == currentCategory.id %}
                 <li class="list-group-item sidebar-item sidebar-item-current">
-                    <span>{{ category.name }}</span>
+                    <span>{{ item.title }}</span>
                 </li>
             {% else %}
                 <li class="list-group-item sidebar-item">

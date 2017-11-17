@@ -2,6 +2,8 @@
 
 namespace Api\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -119,6 +121,20 @@ class ManufactureCategories
      */
     private $deleted;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(targetEntity="Api\Entity\Manufacture", mappedBy="manufactureCategory")
+     */
+    private $manufactures;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->manufactures = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -464,6 +480,40 @@ class ManufactureCategories
     public function getDeleted()
     {
         return $this->deleted;
+    }
+
+    /**
+     * Add manufacture
+     *
+     * @param Manufacture $manufacture
+     *
+     * @return ManufactureCategories
+     */
+    public function addManufacture(Manufacture $manufacture)
+    {
+        $this->manufactures[] = $manufacture;
+
+        return $this;
+    }
+
+    /**
+     * Remove manufacture
+     *
+     * @param Manufacture $manufacture
+     */
+    public function removeManufacture(Manufacture $manufacture)
+    {
+        $this->manufactures->removeElement($manufacture);
+    }
+
+    /**
+     * Get manufactures
+     *
+     * @return Collection
+     */
+    public function getManufactures()
+    {
+        return $this->manufactures;
     }
 }
 

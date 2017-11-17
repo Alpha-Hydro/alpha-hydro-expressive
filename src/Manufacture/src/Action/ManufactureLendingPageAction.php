@@ -59,6 +59,10 @@ class ManufactureLendingPageAction implements ServerMiddlewareInterface
             ['sorting' => 'ASC']
         );
 
-        return new HtmlResponse($this->templateRenderer->render('manufacture::lendingManufacture', ['sidebarListItem' => $categories]));
+        return new HtmlResponse($this->templateRenderer->render('manufacture::lendingManufacture',
+            [
+                'sidebarListItem' => $categories
+            ]
+        ));
     }
 }

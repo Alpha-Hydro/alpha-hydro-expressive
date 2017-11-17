@@ -1,0 +1,19 @@
+{% extends '@layout/default.html.twig' %}
+{% set pageHeader =  currentCategory.title | default('Наше производство') %}
+
+{% block title %}
+    {{ pageHeader }}
+{% endblock %}
+
+{% block pageHeader %}
+    {{ include('@layout/components/_pageHeader.twig') }}
+{% endblock %}
+
+{% block sidebar %}
+    {{ include('@manufacture/components/_sidebar.twig') }}
+{% endblock %}
+
+{% block content %}
+    <div class="col-xs-12 col-sm-12 col-md-9">
+    </div>
+{% endblock %}

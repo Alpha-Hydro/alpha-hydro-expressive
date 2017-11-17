@@ -12,4 +12,5 @@ use Zend\Expressive\Application;
 
 /** @var Application $app */
 $app->get('/manufacture', Action\ManufactureLendingPageAction::class, 'manufacture_lending');
-$app->get('/manufacture/{path:[\w\-\/]+}', Manufacture\Action\ManufactureListCategoriesAction::class, 'manufacture_category_list' );
+$app->get('/manufacture/{path:[\w]+}', Manufacture\Action\ManufactureListCategoriesAction::class, 'manufacture_category_list' );
+$app->get('/manufacture/{full_path:[\w\-\/]+}', Manufacture\Action\ManufactureViewAction::class, 'manufacture_view' );
