@@ -23,11 +23,19 @@
   }
 }
 
-.flex-box{
-  &-auto{
-    max-width: calc(100%/3);
-  }
-  .manufacture-item{
-    height: calc(100% - 17pt);
+.manufacture-list{
+  .flex-box{
+    &-auto{
+      max-width: calc(100%);
+      @media (min-width: $screen-xs-min) {
+      max-width: calc(50%);
+      }
+      @media (min-width: $screen-sm-min) {
+        max-width: calc(100%/3);
+      }
+    }
+    .manufacture-item{
+      height: calc(100% - 17pt);
+    }
   }
 }
