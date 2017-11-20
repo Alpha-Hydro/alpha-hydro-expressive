@@ -10,6 +10,7 @@
 namespace Manufacture\Action;
 
 use Api\Entity\Manufacture;
+use Api\Entity\ManufactureCategories;
 use Doctrine\ORM\EntityManager;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
@@ -64,7 +65,22 @@ class ManufactureViewAction implements ServerMiddlewareInterface
         if (!$manufacture)
             return new HtmlResponse($this->templateRenderer->render('error::404'), 404);
 
+        $currentCategory = $manufacture->getManufactureCategory();
+        $sidebarListItem = $this->entityManager->getRepository(ManufactureCategories::class)->findBy(
+            [
+                'parentId' => 0,
+                'active' => 1,
+                'deleted' => 0,
+            ],
+            ['sorting' => 'ASC']
+        );
 
-        return new JsonResponse($manufacture->jsonSerialize());
+        $data = [
+            'currentCategory' => $currentCategory,
+            'sidebarListItem' => $sidebarListItem,
+            'manufacture' => $manufacture,
+        ];
+
+        return new HtmlResponse($this->templateRenderer->render('manufacture::viewManufacture', $data));
     }
 }

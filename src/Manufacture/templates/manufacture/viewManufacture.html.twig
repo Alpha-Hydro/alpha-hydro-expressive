@@ -1,0 +1,33 @@
+{% extends '@layout/default.html.twig' %}
+{% set pageHeader =  manufacture.title | default('Наше производство') %}
+
+{% block title %}
+    {{ pageHeader }}
+{% endblock %}
+
+{% block pageHeader %}
+    {{ include('@layout/components/_pageHeader.twig') }}
+{% endblock %}
+
+{% block sidebar %}
+    {{ include('@manufacture/components/_sidebar.twig') }}
+{% endblock %}
+
+{% block content %}
+    <div class="col-xs-12 col-sm-12 col-md-9">
+        {{ include('@manufacture/components/_breadcrumb.twig') }}
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="thumbnail z-depth-1">
+                    <img src="{{ manufacture.image }}" alt="{{ manufacture.title }}">
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <p class="lead product-description">{{ manufacture.description }}</p>
+                <div class="product-content-html">
+                    {{ manufacture.contentHtml|default('')|raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

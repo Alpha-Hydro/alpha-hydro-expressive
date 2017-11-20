@@ -19,6 +19,9 @@
       //text-decoration: none;
     }
   }
+  .product-description{
+    font-size: $alpha-font-size-small;
+  }
 }
 .product-images{
   margin:{
@@ -42,7 +45,4 @@
   th{
     font-size: $alpha-font-size-smaller;
   }
-}
-.product-description{
-  font-size: $alpha-font-size-small;
 }
