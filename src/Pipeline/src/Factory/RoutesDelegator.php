@@ -7,7 +7,7 @@
  *
  */
 
-namespace Manufacture\Factory;
+namespace Pipeline\Factory;
 
 use Psr\Container\ContainerInterface;
 use Zend\Expressive\Application;
@@ -40,5 +40,4 @@ class RoutesDelegator
 
         return $app;
     }
-
 }
