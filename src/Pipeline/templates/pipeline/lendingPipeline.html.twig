@@ -1,7 +1,9 @@
 {% extends '@layout/default.html.twig' %}
-{% set pageHeader = 'Наше производство' %}
+{% set pageHeader = page.title | default('Детали трубопроводов') %}
 
-{% block title %}{{ pageHeader }}{% endblock %}
+{% block title %}
+    {{ pageHeader }}
+{% endblock %}
 
 {% block stylesheets %}
     <style>
@@ -14,11 +16,11 @@
 {% endblock %}
 
 {% block sidebar %}
-    {{ include('@manufacture/components/_sidebar.twig') }}
+    {{ include('@pipeline/components/_sidebar.twig') }}
 {% endblock %}
 
 {% block content %}
-    <div class="col-xs-12 col-sm-12 col-md-9">
+    <div class="col-xs-12 col-md-9">
         <div class="page-content mt2">
             {% if page.image is defined and page.image is not null %}
                 <img src="{{ page.image }}" alt="{{ page.title }}" class="pull-right">

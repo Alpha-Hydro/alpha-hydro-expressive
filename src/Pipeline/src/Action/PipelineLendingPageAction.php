@@ -9,11 +9,14 @@
 
 namespace Pipeline\Action;
 
+use Api\Entity\Pages;
+use Api\Entity\PipelineCategories;
 use Doctrine\ORM\EntityManager;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\JsonResponse;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
@@ -44,6 +47,33 @@ class PipelineLendingPageAction implements ServerMiddlewareInterface
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-        return new JsonResponse(['process' => 'ok']);
+        /** @var Pages $indexPage */
+        $indexPage = $this->entityManager->getRepository(Pages::class)->findOneBy([
+            'active' => 1,
+            'deleted' => 0,
+            'path' => 'pipeline',
+        ]);
+
+        if (!$indexPage)
+            return new HtmlResponse($this->templateRenderer
+                ->render('error::404'), 404);
+
+        $categories = $this->entityManager->getRepository(PipelineCategories::class)
+            ->findBy(
+                [
+                    'parentId' => 0,
+                    'active' => 1,
+                    'deleted' => 0,
+                ],
+                ['sorting' => 'ASC']
+            );
+
+        $data = [
+            'page' => $indexPage,
+            'sidebarListItem' => $categories,
+        ];
+
+        return new HtmlResponse($this->templateRenderer
+            ->render('pipeline::lendingPipeline', $data));
     }
 }

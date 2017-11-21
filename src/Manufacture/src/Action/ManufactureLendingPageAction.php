@@ -10,6 +10,7 @@
 namespace Manufacture\Action;
 
 use Api\Entity\ManufactureCategories;
+use Api\Entity\Pages;
 use Doctrine\ORM\EntityManager;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
@@ -50,6 +51,17 @@ class ManufactureLendingPageAction implements ServerMiddlewareInterface
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
+        /** @var Pages $indexPage */
+        $indexPage = $this->entityManager->getRepository(Pages::class)->findOneBy([
+            'active' => 1,
+            'deleted' => 0,
+            'path' => 'manufacture',
+        ]);
+
+        if (!$indexPage)
+            return new HtmlResponse($this->templateRenderer
+                ->render('error::404'), 404);
+
         $categories = $this->entityManager->getRepository(ManufactureCategories::class)->findBy(
             [
                 'parentId' => 0,
@@ -59,10 +71,11 @@ class ManufactureLendingPageAction implements ServerMiddlewareInterface
             ['sorting' => 'ASC']
         );
 
-        return new HtmlResponse($this->templateRenderer->render('manufacture::lendingManufacture',
-            [
-                'sidebarListItem' => $categories
-            ]
-        ));
+        $data = [
+            'page' => $indexPage,
+            'sidebarListItem' => $categories,
+        ];
+
+        return new HtmlResponse($this->templateRenderer->render('manufacture::lendingManufacture', $data));
     }
 }
