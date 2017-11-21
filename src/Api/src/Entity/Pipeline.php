@@ -2,17 +2,15 @@
 
 namespace Api\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * PipelineCategories
+ * Pipeline
  *
- * @ORM\Table(name="pipeline_categories", uniqueConstraints={@ORM\UniqueConstraint(name="unique_id", columns={"id"}), @ORM\UniqueConstraint(name="unique_full_path", columns={"full_path"})})
+ * @ORM\Table(name="pipeline", uniqueConstraints={@ORM\UniqueConstraint(name="unique_id", columns={"id"}), @ORM\UniqueConstraint(name="unique_full_path", columns={"full_path"})})
  * @ORM\Entity
  */
-class PipelineCategories
+class Pipeline
 {
     /**
      * @var integer
@@ -26,9 +24,9 @@ class PipelineCategories
     /**
      * @var integer
      *
-     * @ORM\Column(name="parent_id", type="integer", precision=0, scale=0, nullable=false, unique=false)
+     * @ORM\Column(name="category_id", type="integer", precision=0, scale=0, nullable=false, unique=false)
      */
-    private $parentId;
+    private $categoryId;
 
     /**
      * @var string
@@ -129,19 +127,36 @@ class PipelineCategories
     private $deleted;
 
     /**
-     * @var Collection
+     * @var string
      *
-     * @ORM\OneToMany(targetEntity="Api\Entity\Pipeline", mappedBy="pipelineCategory")
+     * @ORM\Column(name="image_draft", type="string", length=255, precision=0, scale=0, nullable=true, unique=false)
      */
-    private $pipelines;
+    private $imageDraft;
 
     /**
-     * Constructor
+     * @var string
+     *
+     * @ORM\Column(name="image_table", type="string", length=255, precision=0, scale=0, nullable=true, unique=false)
      */
-    public function __construct()
-    {
-        $this->pipelines = new ArrayCollection();
-    }
+    private $imageTable;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="gost_name", type="string", length=255, precision=0, scale=0, nullable=true, unique=false)
+     */
+    private $gostName;
+
+    /**
+     * @var PipelineCategories
+     *
+     * @ORM\ManyToOne(targetEntity="Api\Entity\PipelineCategories", inversedBy="pipelines")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true)
+     * })
+     */
+    private $pipelineCategory;
+
 
     /**
      * Get id
@@ -154,27 +169,27 @@ class PipelineCategories
     }
 
     /**
-     * Set parentId
+     * Set categoryId
      *
-     * @param integer $parentId
+     * @param integer $categoryId
      *
-     * @return PipelineCategories
+     * @return Pipeline
      */
-    public function setParentId($parentId)
+    public function setCategoryId($categoryId)
     {
-        $this->parentId = $parentId;
+        $this->categoryId = $categoryId;
 
         return $this;
     }
 
     /**
-     * Get parentId
+     * Get categoryId
      *
      * @return integer
      */
-    public function getParentId()
+    public function getCategoryId()
     {
-        return $this->parentId;
+        return $this->categoryId;
     }
 
     /**
@@ -182,7 +197,7 @@ class PipelineCategories
      *
      * @param string $path
      *
-     * @return PipelineCategories
+     * @return Pipeline
      */
     public function setPath($path)
     {
@@ -206,7 +221,7 @@ class PipelineCategories
      *
      * @param string $fullPath
      *
-     * @return PipelineCategories
+     * @return Pipeline
      */
     public function setFullPath($fullPath)
     {
@@ -230,7 +245,7 @@ class PipelineCategories
      *
      * @param string $title
      *
-     * @return PipelineCategories
+     * @return Pipeline
      */
     public function setTitle($title)
     {
@@ -254,7 +269,7 @@ class PipelineCategories
      *
      * @param string $description
      *
-     * @return PipelineCategories
+     * @return Pipeline
      */
     public function setDescription($description)
     {
@@ -278,7 +293,7 @@ class PipelineCategories
      *
      * @param string $contentHtml
      *
-     * @return PipelineCategories
+     * @return Pipeline
      */
     public function setContentHtml($contentHtml)
     {
@@ -302,7 +317,7 @@ class PipelineCategories
      *
      * @param string $contentMarkdown
      *
-     * @return PipelineCategories
+     * @return Pipeline
      */
     public function setContentMarkdown($contentMarkdown)
     {
@@ -326,7 +341,7 @@ class PipelineCategories
      *
      * @param string $image
      *
-     * @return PipelineCategories
+     * @return Pipeline
      */
     public function setImage($image)
     {
@@ -350,7 +365,7 @@ class PipelineCategories
      *
      * @param \DateTime $createDate
      *
-     * @return PipelineCategories
+     * @return Pipeline
      */
     public function setCreateDate($createDate)
     {
@@ -374,7 +389,7 @@ class PipelineCategories
      *
      * @param string $metaTitle
      *
-     * @return PipelineCategories
+     * @return Pipeline
      */
     public function setMetaTitle($metaTitle)
     {
@@ -398,7 +413,7 @@ class PipelineCategories
      *
      * @param string $metaDescription
      *
-     * @return PipelineCategories
+     * @return Pipeline
      */
     public function setMetaDescription($metaDescription)
     {
@@ -422,7 +437,7 @@ class PipelineCategories
      *
      * @param string $metaKeywords
      *
-     * @return PipelineCategories
+     * @return Pipeline
      */
     public function setMetaKeywords($metaKeywords)
     {
@@ -446,7 +461,7 @@ class PipelineCategories
      *
      * @param integer $active
      *
-     * @return PipelineCategories
+     * @return Pipeline
      */
     public function setActive($active)
     {
@@ -470,7 +485,7 @@ class PipelineCategories
      *
      * @param integer $sorting
      *
-     * @return PipelineCategories
+     * @return Pipeline
      */
     public function setSorting($sorting)
     {
@@ -494,7 +509,7 @@ class PipelineCategories
      *
      * @param integer $deleted
      *
-     * @return PipelineCategories
+     * @return Pipeline
      */
     public function setDeleted($deleted)
     {
@@ -514,37 +529,99 @@ class PipelineCategories
     }
 
     /**
-     * Add pipeline
+     * Set imageDraft
      *
-     * @param Pipeline $pipeline
+     * @param string $imageDraft
      *
-     * @return PipelineCategories
+     * @return Pipeline
      */
-    public function addPipeline(Pipeline $pipeline)
+    public function setImageDraft($imageDraft)
     {
-        $this->pipelines[] = $pipeline;
+        $this->imageDraft = $imageDraft;
 
         return $this;
     }
 
     /**
-     * Remove pipeline
+     * Get imageDraft
      *
-     * @param Pipeline $pipeline
+     * @return string
      */
-    public function removePipeline(Pipeline $pipeline)
+    public function getImageDraft()
     {
-        $this->pipelines->removeElement($pipeline);
+        return $this->imageDraft;
     }
 
     /**
-     * Get pipelines
+     * Set imageTable
      *
-     * @return Collection
+     * @param string $imageTable
+     *
+     * @return Pipeline
      */
-    public function getPipelines()
+    public function setImageTable($imageTable)
     {
-        return $this->pipelines;
+        $this->imageTable = $imageTable;
+
+        return $this;
+    }
+
+    /**
+     * Get imageTable
+     *
+     * @return string
+     */
+    public function getImageTable()
+    {
+        return $this->imageTable;
+    }
+
+    /**
+     * Set gostName
+     *
+     * @param string $gostName
+     *
+     * @return Pipeline
+     */
+    public function setGostName($gostName)
+    {
+        $this->gostName = $gostName;
+
+        return $this;
+    }
+
+    /**
+     * Get gostName
+     *
+     * @return string
+     */
+    public function getGostName()
+    {
+        return $this->gostName;
+    }
+
+    /**
+     * Set pipelineCategory
+     *
+     * @param PipelineCategories $pipelineCategory
+     *
+     * @return Pipeline
+     */
+    public function setPipelineCategory(PipelineCategories $pipelineCategory = null)
+    {
+        $this->pipelineCategory = $pipelineCategory;
+
+        return $this;
+    }
+
+    /**
+     * Get pipelineCategory
+     *
+     * @return PipelineCategories
+     */
+    public function getPipelineCategory()
+    {
+        return $this->pipelineCategory;
     }
 }
 

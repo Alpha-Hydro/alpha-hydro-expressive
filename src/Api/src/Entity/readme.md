@@ -71,3 +71,9 @@ vendor\bin\doctrine orm:convert-mapping --namespace="Api\Entity\\" --filter="\\C
 ```cmd
 vendor\bin\doctrine orm:generate-entities src --generate-annotations=true --filter="\\Manufacture"
 ```
+
+**Проверяем**
+
+```cmd
+vendor\bin\doctrine orm:validate-schema --skip-sync
+```

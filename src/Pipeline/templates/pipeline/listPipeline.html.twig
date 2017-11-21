@@ -1,0 +1,45 @@
+{% extends '@layout/default.html.twig' %}
+{% set pageHeader =  currentCategory.title | default('Детали трубопроводов') %}
+
+{% block title %}
+    {{ pageHeader }}
+{% endblock %}
+
+{% block pageHeader %}
+    {{ include('@layout/components/_pageHeader.twig') }}
+{% endblock %}
+
+{% block sidebar %}
+    {{ include('@pipeline/components/_sidebar.twig') }}
+{% endblock %}
+
+{% block content %}
+    <div class="col-xs-12 col-md-9">
+        {{ include('@pipeline/components/_breadcrumb.twig') }}
+        <div class="row">
+            <div class="container-fluid">
+                <div class="col-md-3 pull-right">
+                    <div class="thumbnail">
+                        <img src="{{ currentCategory.image }}" alt="{{ currentCategory.title }}">
+                    </div>
+                </div>
+                {{ currentCategory.contentHtml|default('')|raw }}
+            </div>
+        </div>
+        <div class="row mb2">
+            <div class="container-fluid product-list">
+                {% for pipeline in pipelineList %}
+                    <div class="row product-item">
+                        <div class="col-md-9">
+                            <h2 class="h4 mb2">
+                                <a href="{{ pipeline.imageTable }}" target="_blank">{{ pipeline.title }}<img
+                                            src="{{ asset('img/pdf-file.png') }}"
+                                            alt="{{ pipeline.title }}" class="mlr1"></a>
+                            </h2>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

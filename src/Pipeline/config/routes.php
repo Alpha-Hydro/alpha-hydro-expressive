@@ -12,3 +12,5 @@ use Zend\Expressive\Application;
 
 /** @var Application $app */
 $app->get('/pipeline', Action\PipelineLendingPageAction::class, 'pipeline_lending');
+$app->get('/pipeline/{path:[\w]+}', Action\PipelineCategoryViewAction::class, 'pipeline_category_list');
+$app->get('/pipeline/{full_path:[\w\-\/]+}', Action\PipelineViewAction::class, 'pipeline_view');
