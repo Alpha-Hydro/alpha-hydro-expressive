@@ -2,6 +2,8 @@
 
 namespace Api\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -157,6 +159,20 @@ class Pipeline
      */
     private $pipelineCategory;
 
+    /**
+     * @var Collection
+     *
+     * @ORM\OneToMany(targetEntity="Api\Entity\PipelinePropertyValues", mappedBy="pipeline")
+     */
+    private $propertyValues;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->propertyValues = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -622,6 +638,40 @@ class Pipeline
     public function getPipelineCategory()
     {
         return $this->pipelineCategory;
+    }
+
+    /**
+     * Add propertyValue
+     *
+     * @param PipelinePropertyValues $propertyValue
+     *
+     * @return Pipeline
+     */
+    public function addPropertyValue(PipelinePropertyValues $propertyValue)
+    {
+        $this->propertyValues[] = $propertyValue;
+
+        return $this;
+    }
+
+    /**
+     * Remove propertyValue
+     *
+     * @param PipelinePropertyValues $propertyValue
+     */
+    public function removePropertyValue(PipelinePropertyValues $propertyValue)
+    {
+        $this->propertyValues->removeElement($propertyValue);
+    }
+
+    /**
+     * Get propertyValues
+     *
+     * @return Collection
+     */
+    public function getPropertyValues()
+    {
+        return $this->propertyValues;
     }
 }
 

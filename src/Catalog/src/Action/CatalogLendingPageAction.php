@@ -50,14 +50,9 @@ class CatalogLendingPageAction implements ServerMiddlewareInterface
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
 
-        $categories = $this->entityManager->getRepository(Categories::class)->findBy(
-            [
-                'parentId' => 0,
-                'active' => 1,
-                'deleted' => 0,
-            ],
-            ['sorting' => 'ASC']
-        );
+        $categories = $this->entityManager
+            ->getRepository(Categories::class)
+            ->findByActiveNoDeleted();
 
         $data = [
             'categories' => $categories,

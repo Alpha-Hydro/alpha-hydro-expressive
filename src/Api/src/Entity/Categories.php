@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Categories
  *
  * @ORM\Table(name="categories", indexes={@ORM\Index(name="order", columns={"order"}), @ORM\Index(name="parent_id", columns={"parent_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Api\Repository\CategoryRepository")
  */
 class Categories
 {

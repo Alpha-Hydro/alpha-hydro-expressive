@@ -11,6 +11,7 @@ namespace Catalog\Action;
 
 use Api\Entity\Categories;
 use Api\Entity\Products;
+use Api\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManager;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
@@ -88,14 +89,9 @@ class CatalogCategoryListAction implements ServerMiddlewareInterface
         }
 
         //формируем список категорий для sidebar`а
-        $sidebarListCategories = $this->entityManager->getRepository(Categories::class)->findBy(
-            [
-                'parentId' => 0,
-                'active' => 1,
-                'deleted' => 0,
-            ],
-            ['sorting' => 'ASC']
-        );
+        $sidebarListCategories = $this->entityManager
+            ->getRepository(Categories::class)
+            ->findByActiveNoDeleted();
         $parentCategory = $currentCategory->getParent();
         if ($parentCategory != null && $parentCategory->getId() != 0){
             $sidebarListCategories = $parentCategory->getChildren();

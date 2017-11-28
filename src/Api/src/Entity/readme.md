@@ -58,7 +58,7 @@ class ConfigProvider
 
 **Генерируем объекты и экспортируем информацию об «аннотации» в ./src/Api/Entity** 
 
-```cmd
+```bash
 vendor\bin\doctrine orm:convert-mapping --namespace="Api\Entity\\" --filter="\\Categories$" --force --from-database annotation src
 ```
 
@@ -68,12 +68,17 @@ vendor\bin\doctrine orm:convert-mapping --namespace="Api\Entity\\" --filter="\\C
 
 > К сожалению, Doctrine не поддерживает поддерживает стандарт PSR-4. Чтобы обойти эту проблему , мы должны переместить вручную из ./src/Api/Entity в ./src/Api/src/Entity.
 
-```cmd
+```bash
 vendor\bin\doctrine orm:generate-entities src --generate-annotations=true --filter="\\Manufacture"
 ```
 
 **Проверяем**
 
-```cmd
+```bash
 vendor\bin\doctrine orm:validate-schema --skip-sync
+```
+
+**Repository**
+```cmd
+vendor\bin\doctrine orm:generate-repositories --filter="\\Categories$" src
 ```
