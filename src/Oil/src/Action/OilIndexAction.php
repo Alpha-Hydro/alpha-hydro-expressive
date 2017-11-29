@@ -7,20 +7,19 @@
  *
  */
 
-namespace Pipeline\Action;
+namespace Oil\Action;
 
+use Api\Entity\OilCategories;
 use Api\Entity\Pages;
-use Api\Entity\PipelineCategories;
 use Doctrine\ORM\EntityManager;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Diactoros\Response\JsonResponse;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
-class PipelineLendingPageAction implements ServerMiddlewareInterface
+class OilIndexAction implements ServerMiddlewareInterface
 {
 
     /**
@@ -49,13 +48,13 @@ class PipelineLendingPageAction implements ServerMiddlewareInterface
     {
         /** @var Pages $indexPage */
         $indexPage = $this->entityManager->getRepository(Pages::class)
-            ->findByActiveModuleFromPath('pipeline');
+            ->findByActiveModuleFromPath('oil');
 
         if (!$indexPage)
             return new HtmlResponse($this->templateRenderer
                 ->render('error::404'), 404);
 
-        $categories = $this->entityManager->getRepository(PipelineCategories::class)
+        $categories = $this->entityManager->getRepository(OilCategories::class)
             ->findByActiveNoDeleted();
 
         $data = [
@@ -64,6 +63,6 @@ class PipelineLendingPageAction implements ServerMiddlewareInterface
         ];
 
         return new HtmlResponse($this->templateRenderer
-            ->render('pipeline::lendingPipeline', $data));
+            ->render('oil::indexOil', $data));
     }
 }

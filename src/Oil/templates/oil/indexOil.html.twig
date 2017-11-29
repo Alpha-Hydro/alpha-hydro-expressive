@@ -1,0 +1,31 @@
+{% extends '@layout/default.html.twig' %}
+{% set pageHeader = page.title | default('Масла') %}
+
+{% block title %}
+    {{ pageHeader }}
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        img {max-width: 100%}
+    </style>
+{% endblock %}
+
+{% block pageHeader %}
+    {{ include('@layout/components/_pageHeader.twig') }}
+{% endblock %}
+
+{% block sidebar %}
+    {{ include('@pipeline/components/_sidebar.twig') }}
+{% endblock %}
+
+{% block content %}
+    <div class="col-xs-12 col-md-9">
+        <div class="page-content mt2">
+            {% if page.image is defined and page.image is not null %}
+                <img src="{{ page.image }}" alt="{{ page.title }}" class="pull-right">
+            {% endif %}
+            {{ page.contentHtml|default('')|raw }}
+        </div>
+    </div>
+{% endblock %}

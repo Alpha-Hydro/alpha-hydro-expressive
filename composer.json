@@ -35,7 +35,8 @@
             "Api\\": "src/Api/src/",
             "Catalog\\": "src/Catalog/src/",
             "Manufacture\\": "src/Manufacture/src/",
-            "Pipeline\\": "src/Pipeline/src/"
+            "Pipeline\\": "src/Pipeline/src/",
+            "Oil\\": "src/Oil/src/"
         }
     },
     "autoload-dev": {

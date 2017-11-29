@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Pages
  *
  * @ORM\Table(name="pages", uniqueConstraints={@ORM\UniqueConstraint(name="unique_id", columns={"id"}), @ORM\UniqueConstraint(name="unique_path", columns={"path"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Api\Repository\ModuleRepository")
  */
 class Pages
 {
