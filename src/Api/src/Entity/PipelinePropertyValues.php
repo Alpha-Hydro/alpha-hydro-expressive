@@ -47,7 +47,7 @@ class PipelinePropertyValues
      *
      * @ORM\ManyToOne(targetEntity="Api\Entity\PipelineProperty", inversedBy="propertyValues")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="properti_id", referencedColumnName="id", nullable=true)
+     *   @ORM\JoinColumn(name="property_id", referencedColumnName="id", nullable=true)
      * })
      */
     private $pipelineProperty;

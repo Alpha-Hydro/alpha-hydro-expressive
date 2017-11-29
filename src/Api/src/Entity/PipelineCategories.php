@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * PipelineCategories
  *
  * @ORM\Table(name="pipeline_categories", uniqueConstraints={@ORM\UniqueConstraint(name="unique_id", columns={"id"}), @ORM\UniqueConstraint(name="unique_full_path", columns={"full_path"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Api\Repository\PipelineCategoryRepository")
  */
 class PipelineCategories
 {

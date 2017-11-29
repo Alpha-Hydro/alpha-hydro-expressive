@@ -78,6 +78,14 @@ vendor\bin\doctrine orm:generate-entities src --generate-annotations=true --filt
 vendor\bin\doctrine orm:validate-schema --skip-sync
 ```
 
+> Если `[Database] FAIL - The database schema is not in sync with the current mapping file.`
+>
+> Смотрим SQL который нужно внести для синхронизации, без измения самой базы данных
+> ```bash
+> $ vendor\bin\doctrine orm:schema:update --dump-sql
+> ```
+> обычно это внешние и вторичные ключи, поэтому я ставлю `--skip-sync`
+
 **Repository**
 ```cmd
 vendor\bin\doctrine orm:generate-repositories --filter="\\Categories$" src

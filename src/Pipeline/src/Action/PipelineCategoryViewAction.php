@@ -10,6 +10,7 @@
 namespace Pipeline\Action;
 
 use Api\Entity\Pages;
+use Api\Entity\Pipeline;
 use Api\Entity\PipelineCategories;
 use Doctrine\ORM\EntityManager;
 use Interop\Http\ServerMiddleware\DelegateInterface;
@@ -17,6 +18,7 @@ use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterfa
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
+use Zend\Diactoros\Response\JsonResponse;
 use Zend\Expressive\Router\RouteResult;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
@@ -66,22 +68,24 @@ class PipelineCategoryViewAction implements ServerMiddlewareInterface
         if (!$currentCategory)
             return new HtmlResponse($this->templateRenderer->render('error::404'), 404);
 
-        $pipelineList = $currentCategory->getPipelines();
+        $categories = $this->entityManager->getRepository(PipelineCategories::class)
+            ->findByActiveNoDeleted();
 
-        $categories = $this->entityManager->getRepository(PipelineCategories::class)->findBy(
-            [
-                'parentId' => 0,
-                'active' => 1,
-                'deleted' => 0,
-            ],
-            ['sorting' => 'ASC']
-        );
+        $pipelineList = $currentCategory->getPipelines();
+        $pipelineListWithProperties = [];
+        foreach ($pipelineList as $pipeline){
+            $propertyValues = $this->entityManager->getRepository(Pipeline::class)
+                ->findPropertyValuesAnyPipeline($pipeline->getId());
+            $pipelineListWithProperties[$pipeline->getId()]['pipeline'] = $pipeline;
+            $pipelineListWithProperties[$pipeline->getId()]['properties'] = $propertyValues;
+        }
 
         $data = [
-            'page' => $this->entityManager->getRepository(Pages::class)->findOneByPath('pipeline'),
+            'page' => $this->entityManager->getRepository(Pages::class)
+                ->findOneByPath('pipeline'),
             'currentCategory' => $currentCategory,
             'sidebarListItem' => $categories,
-            'pipelineList' => $pipelineList,
+            'pipelineList' => $pipelineListWithProperties,
         ];
 
         return new HtmlResponse($this->templateRenderer->render('pipeline::listPipeline', $data));

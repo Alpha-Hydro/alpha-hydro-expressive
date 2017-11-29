@@ -7,12 +7,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Pipeline
+ * OilCategories
  *
- * @ORM\Table(name="pipeline", uniqueConstraints={@ORM\UniqueConstraint(name="unique_id", columns={"id"}), @ORM\UniqueConstraint(name="unique_full_path", columns={"full_path"})})
- * @ORM\Entity(repositoryClass="Api\Repository\PipelineRepository")
+ * @ORM\Table(name="oil_categories", uniqueConstraints={@ORM\UniqueConstraint(name="oil_categories_id_uindex", columns={"id"}), @ORM\UniqueConstraint(name="oil_categories_full_path_uindex", columns={"full_path"})})
+ * @ORM\Entity(repositoryClass="Api\Repository\OilCategoryRepository")
  */
-class Pipeline
+class OilCategories
 {
     /**
      * @var integer
@@ -26,9 +26,16 @@ class Pipeline
     /**
      * @var integer
      *
-     * @ORM\Column(name="category_id", type="integer", precision=0, scale=0, nullable=false, unique=false)
+     * @ORM\Column(name="parent_id", type="integer", precision=0, scale=0, nullable=false, unique=false)
      */
-    private $categoryId;
+    private $parentId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255, precision=0, scale=0, nullable=false, unique=false)
+     */
+    private $title;
 
     /**
      * @var string
@@ -43,13 +50,6 @@ class Pipeline
      * @ORM\Column(name="full_path", type="string", length=255, precision=0, scale=0, nullable=false, unique=false)
      */
     private $fullPath;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=255, precision=0, scale=0, nullable=false, unique=false)
-     */
-    private $title;
 
     /**
      * @var string
@@ -129,49 +129,18 @@ class Pipeline
     private $deleted;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="image_draft", type="string", length=255, precision=0, scale=0, nullable=true, unique=false)
-     */
-    private $imageDraft;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="image_table", type="string", length=255, precision=0, scale=0, nullable=true, unique=false)
-     */
-    private $imageTable;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="gost_name", type="string", length=255, precision=0, scale=0, nullable=true, unique=false)
-     */
-    private $gostName;
-
-    /**
-     * @var PipelineCategories
-     *
-     * @ORM\ManyToOne(targetEntity="Api\Entity\PipelineCategories", inversedBy="pipelines")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true)
-     * })
-     */
-    private $pipelineCategory;
-
-    /**
      * @var Collection
      *
-     * @ORM\OneToMany(targetEntity="Api\Entity\PipelinePropertyValues", mappedBy="pipeline")
+     * @ORM\OneToMany(targetEntity="Api\Entity\Oil", mappedBy="category")
      */
-    private $propertyValues;
+    private $oils;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->propertyValues = new ArrayCollection();
+        $this->oils = new ArrayCollection();
     }
 
     /**
@@ -185,27 +154,51 @@ class Pipeline
     }
 
     /**
-     * Set categoryId
+     * Set parentId
      *
-     * @param integer $categoryId
+     * @param integer $parentId
      *
-     * @return Pipeline
+     * @return OilCategories
      */
-    public function setCategoryId($categoryId)
+    public function setParentId($parentId)
     {
-        $this->categoryId = $categoryId;
+        $this->parentId = $parentId;
 
         return $this;
     }
 
     /**
-     * Get categoryId
+     * Get parentId
      *
      * @return integer
      */
-    public function getCategoryId()
+    public function getParentId()
     {
-        return $this->categoryId;
+        return $this->parentId;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     *
+     * @return OilCategories
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     /**
@@ -213,7 +206,7 @@ class Pipeline
      *
      * @param string $path
      *
-     * @return Pipeline
+     * @return OilCategories
      */
     public function setPath($path)
     {
@@ -237,7 +230,7 @@ class Pipeline
      *
      * @param string $fullPath
      *
-     * @return Pipeline
+     * @return OilCategories
      */
     public function setFullPath($fullPath)
     {
@@ -257,35 +250,11 @@ class Pipeline
     }
 
     /**
-     * Set title
-     *
-     * @param string $title
-     *
-     * @return Pipeline
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
      * Set description
      *
      * @param string $description
      *
-     * @return Pipeline
+     * @return OilCategories
      */
     public function setDescription($description)
     {
@@ -309,7 +278,7 @@ class Pipeline
      *
      * @param string $contentHtml
      *
-     * @return Pipeline
+     * @return OilCategories
      */
     public function setContentHtml($contentHtml)
     {
@@ -333,7 +302,7 @@ class Pipeline
      *
      * @param string $contentMarkdown
      *
-     * @return Pipeline
+     * @return OilCategories
      */
     public function setContentMarkdown($contentMarkdown)
     {
@@ -357,7 +326,7 @@ class Pipeline
      *
      * @param string $image
      *
-     * @return Pipeline
+     * @return OilCategories
      */
     public function setImage($image)
     {
@@ -381,7 +350,7 @@ class Pipeline
      *
      * @param \DateTime $createDate
      *
-     * @return Pipeline
+     * @return OilCategories
      */
     public function setCreateDate($createDate)
     {
@@ -405,7 +374,7 @@ class Pipeline
      *
      * @param string $metaTitle
      *
-     * @return Pipeline
+     * @return OilCategories
      */
     public function setMetaTitle($metaTitle)
     {
@@ -429,7 +398,7 @@ class Pipeline
      *
      * @param string $metaDescription
      *
-     * @return Pipeline
+     * @return OilCategories
      */
     public function setMetaDescription($metaDescription)
     {
@@ -453,7 +422,7 @@ class Pipeline
      *
      * @param string $metaKeywords
      *
-     * @return Pipeline
+     * @return OilCategories
      */
     public function setMetaKeywords($metaKeywords)
     {
@@ -477,7 +446,7 @@ class Pipeline
      *
      * @param integer $active
      *
-     * @return Pipeline
+     * @return OilCategories
      */
     public function setActive($active)
     {
@@ -501,7 +470,7 @@ class Pipeline
      *
      * @param integer $sorting
      *
-     * @return Pipeline
+     * @return OilCategories
      */
     public function setSorting($sorting)
     {
@@ -525,7 +494,7 @@ class Pipeline
      *
      * @param integer $deleted
      *
-     * @return Pipeline
+     * @return OilCategories
      */
     public function setDeleted($deleted)
     {
@@ -545,133 +514,37 @@ class Pipeline
     }
 
     /**
-     * Set imageDraft
+     * Add oil
      *
-     * @param string $imageDraft
+     * @param Oil $oil
      *
-     * @return Pipeline
+     * @return OilCategories
      */
-    public function setImageDraft($imageDraft)
+    public function addOil(Oil $oil)
     {
-        $this->imageDraft = $imageDraft;
+        $this->oils[] = $oil;
 
         return $this;
     }
 
     /**
-     * Get imageDraft
+     * Remove oil
      *
-     * @return string
+     * @param Oil $oil
      */
-    public function getImageDraft()
+    public function removeOil(Oil $oil)
     {
-        return $this->imageDraft;
+        $this->oils->removeElement($oil);
     }
 
     /**
-     * Set imageTable
-     *
-     * @param string $imageTable
-     *
-     * @return Pipeline
-     */
-    public function setImageTable($imageTable)
-    {
-        $this->imageTable = $imageTable;
-
-        return $this;
-    }
-
-    /**
-     * Get imageTable
-     *
-     * @return string
-     */
-    public function getImageTable()
-    {
-        return $this->imageTable;
-    }
-
-    /**
-     * Set gostName
-     *
-     * @param string $gostName
-     *
-     * @return Pipeline
-     */
-    public function setGostName($gostName)
-    {
-        $this->gostName = $gostName;
-
-        return $this;
-    }
-
-    /**
-     * Get gostName
-     *
-     * @return string
-     */
-    public function getGostName()
-    {
-        return $this->gostName;
-    }
-
-    /**
-     * Set pipelineCategory
-     *
-     * @param PipelineCategories $pipelineCategory
-     *
-     * @return Pipeline
-     */
-    public function setPipelineCategory(PipelineCategories $pipelineCategory = null)
-    {
-        $this->pipelineCategory = $pipelineCategory;
-
-        return $this;
-    }
-
-    /**
-     * Get pipelineCategory
-     *
-     * @return PipelineCategories
-     */
-    public function getPipelineCategory()
-    {
-        return $this->pipelineCategory;
-    }
-
-    /**
-     * Add propertyValue
-     *
-     * @param PipelinePropertyValues $propertyValue
-     *
-     * @return Pipeline
-     */
-    public function addPropertyValue(PipelinePropertyValues $propertyValue)
-    {
-        $this->propertyValues[] = $propertyValue;
-
-        return $this;
-    }
-
-    /**
-     * Remove propertyValue
-     *
-     * @param PipelinePropertyValues $propertyValue
-     */
-    public function removePropertyValue(PipelinePropertyValues $propertyValue)
-    {
-        $this->propertyValues->removeElement($propertyValue);
-    }
-
-    /**
-     * Get propertyValues
+     * Get oils
      *
      * @return Collection
      */
-    public function getPropertyValues()
+    public function getOils()
     {
-        return $this->propertyValues;
+        return $this->oils;
     }
 }
 

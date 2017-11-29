@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * PipelineProperty
  *
  * @ORM\Table(name="pipeline_property", uniqueConstraints={@ORM\UniqueConstraint(name="unique_id", columns={"id"}), @ORM\UniqueConstraint(name="unique_sistem_name", columns={"sistem_name"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Api\Repository\PipelinePropertyRepository")
  */
 class PipelineProperty
 {

@@ -18,7 +18,7 @@
         {{ include('@pipeline/components/_breadcrumb.twig') }}
         <div class="row">
             <div class="container-fluid">
-                <div class="col-md-3 pull-right">
+                <div class="col-xs-6 col-md-3 pull-right">
                     <div class="thumbnail">
                         <img src="{{ currentCategory.image }}" alt="{{ currentCategory.title }}">
                     </div>
@@ -28,14 +28,24 @@
         </div>
         <div class="row mb2">
             <div class="container-fluid product-list">
-                {% for pipeline in pipelineList %}
+                {% for item in pipelineList %}
                     <div class="row product-item">
                         <div class="col-md-9">
                             <h2 class="h4 mb2">
-                                <a href="{{ pipeline.imageTable }}" target="_blank">{{ pipeline.title }}<img
+                                <a href="{{ item.pipeline.imageTable }}" target="_blank">{{ item.pipeline.title }}<img
                                             src="{{ asset('img/pdf-file.png') }}"
-                                            alt="{{ pipeline.title }}" class="mlr1"></a>
+                                            alt="{{ item.pipeline.title }}" class="mlr1"></a>
                             </h2>
+                            <div class="product-property">
+                                <table class="table table-striped table-condensed">
+                                    {% for property in item.properties %}
+                                        <tr>
+                                            <th class="col-xs-4">{{ property.pipelineProperty.name }}</th>
+                                            <td>{{ property.value }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
                         </div>
                     </div>
                 {% endfor %}
