@@ -1,0 +1,16 @@
+.line{
+  margin:{
+    top: 20px;
+    bottom: 35px;
+  }
+  border-bottom: 1px solid $alpha-gray-lighter;
+  .line-dotted{
+    border-bottom-style: dotted;
+  }
+  &:last-child{
+    border-bottom: none;
+    margin:{
+      bottom: 0;
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{% extends '@layout/default.html.twig' %}
+{% set pageHeader =  currentCategory.title | default('Масла') %}
+
+{% block title %}
+    {{ pageHeader }}
+{% endblock %}
+
+{% block pageHeader %}
+    {{ include('@layout/components/_pageHeader.twig') }}
+{% endblock %}
+
+{% block sidebar %}
+    {{ include('@oil/components/_sidebar.twig') }}
+{% endblock %}
+
+{% block content %}
+    <div class="col-xs-12 col-md-9">
+        {{ include('@oil/components/_breadcrumb.twig') }}
+        {% if oilList is not null %}
+            <div class="row">
+                <div class="container-fluid product-list">
+                    {% for item in oilList %}
+                        <div class="media media-item line line-dotted">
+                            <h4 class="media-heading">{{ item.title }}</h4>
+                            {{ item.description }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% else %}
+            <div class="row">
+                <div class="container-fluid">
+                    <div class="col-md-3 pull-right">
+                        <div class="thumbnail">
+                            <img src="{{ currentCategory.image }}" alt="{{ currentCategory.title }}">
+                        </div>
+                    </div>
+                    {{ currentCategory.contentHTML | raw }}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

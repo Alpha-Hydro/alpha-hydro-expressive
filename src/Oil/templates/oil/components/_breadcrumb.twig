@@ -1,0 +1,16 @@
+<div class="row hidden-xs">
+    <div class="col-md-12">
+        <ul class="breadcrumb text-size-small">
+            <li><a href="/">Главная</a></li>
+            <li><a href="{{ path('oil.index') }}">Масла</a></li>
+            {% if product is not defined %}
+                <li class="active"><span>{{ currentCategory.title }}</span></li>
+            {% else %}
+                <li>
+                    <a href="{{ path('oil.list', {'path': currentCategory.path}) }}">{{ currentCategory.title }}</a>
+                </li>
+                <li class="active"><span>{{ product.title }}</span></li>
+            {% endif %}
+        </ul>
+    </div>
+</div>

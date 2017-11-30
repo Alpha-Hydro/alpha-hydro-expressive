@@ -1,0 +1,11 @@
+.media-item{
+  .media-object{
+    max-height: 100px;
+  }
+  .media-heading{
+    font-weight: bolder;
+  }
+  &.line{
+    padding-bottom: 15px;
+  }
+}
