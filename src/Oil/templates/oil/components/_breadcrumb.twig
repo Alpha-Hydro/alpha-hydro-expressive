@@ -7,7 +7,7 @@
                 <li class="active"><span>{{ currentCategory.title }}</span></li>
             {% else %}
                 <li>
-                    <a href="{{ path('oil.list', {'path': currentCategory.path}) }}">{{ currentCategory.title }}</a>
+                    <a href="{{ path('oil.path', {'path': currentCategory.path}) }}">{{ currentCategory.title }}</a>
                 </li>
                 <li class="active"><span>{{ product.title }}</span></li>
             {% endif %}

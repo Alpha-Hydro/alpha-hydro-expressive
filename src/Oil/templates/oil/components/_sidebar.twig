@@ -8,7 +8,7 @@
                 </li>
             {% else %}
                 <li class="list-group-item sidebar-item">
-                    <a href="{{ path('oil.list', {'path': item.path}) }}">{{ item.title }}</a>
+                    <a href="{{ path('oil.path', {'path': item.path}) }}">{{ item.title }}</a>
                 </li>
             {% endif %}
         {% endfor %}

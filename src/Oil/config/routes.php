@@ -12,5 +12,10 @@ use Zend\Expressive\Application;
 
 /** @var Application $app */
 $app->get('/oil', Action\OilIndexAction::class, 'oil.index');
-$app->get('/oil/{path:[\w]+}', Action\OilCategoryAction::class, 'oil.list');
+$app->get('/oil/{path:[\w]+}',
+    [
+        Action\OilCategoryAction::class,
+        Action\OilViewAction::class
+    ],
+    'oil.path');
 

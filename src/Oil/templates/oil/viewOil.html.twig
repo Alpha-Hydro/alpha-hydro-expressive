@@ -1,0 +1,25 @@
+{% extends '@layout/default.html.twig' %}
+{% set pageHeader =  product.title | default('Масла') %}
+
+{% block title %}
+    {{ pageHeader }}
+{% endblock %}
+
+{% block pageHeader %}
+    {{ include('@layout/components/_pageHeader.twig') }}
+{% endblock %}
+
+{% block sidebar %}
+    {{ include('@oil/components/_sidebar.twig') }}
+{% endblock %}
+
+{% block content %}
+    <div class="col-xs-12 col-md-9">
+        {{ include('@oil/components/_breadcrumb.twig') }}
+        <div class="row">
+            <div class="container-fluid">
+                {{ product.contentHTML | raw }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

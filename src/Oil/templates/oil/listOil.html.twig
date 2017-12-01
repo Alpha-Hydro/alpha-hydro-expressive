@@ -16,12 +16,12 @@
 {% block content %}
     <div class="col-xs-12 col-md-9">
         {{ include('@oil/components/_breadcrumb.twig') }}
-        {% if oilList is not null %}
+        {% if oilList is not empty %}
             <div class="row">
                 <div class="container-fluid product-list">
                     {% for item in oilList %}
                         <div class="media media-item line line-dotted">
-                            <h4 class="media-heading">{{ item.title }}</h4>
+                            <h4 class="media-heading"><a href="{{ path('oil.path', {'path': item.path}) }}">{{ item.title }}</a></h4>
                             {{ item.description }}
                         </div>
                     {% endfor %}

@@ -62,23 +62,26 @@ class OilCategoryAction implements ServerMiddlewareInterface
             ->getRepository(OilCategories::class)
             ->findOneByPath($path);
 
-        if (!$currentCategory)
-            return new HtmlResponse($this->templateRenderer->render('error::404'), 404);
-
         /** @var Collection $categories */
         $categories = $this->entityManager
             ->getRepository(OilCategories::class)
             ->findByActiveNoDeleted();
 
-        $oilList = $currentCategory->getOils();
+        $page = $this->entityManager->getRepository(Pages::class)
+            ->findOneByPath('oil');
 
         $data = [
-            'page' => $this->entityManager->getRepository(Pages::class)
-                ->findOneByPath('oil'),
-            'currentCategory' => $currentCategory,
+            'page' => $page,
             'sidebarListItem' => $categories,
-            'oilList' => $oilList,
         ];
+
+        if (!$currentCategory)
+            return $delegate->process($request->withAttribute(self::class, $data));
+
+        $data['currentCategory'] = $currentCategory;
+
+        $oilList = $currentCategory->getOils();
+        $data['oilList'] = $oilList;
 
         return new HtmlResponse($this->templateRenderer->render('oil::listOil', $data));
     }
