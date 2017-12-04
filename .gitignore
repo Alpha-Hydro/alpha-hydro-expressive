@@ -93,10 +93,10 @@ extras/documentation
 
 /.sass-cache/*
 #/public/img/*
-/public/css/*
+#/public/css/*
 /public/js/*
 /public/upload/*
 /public/files/*
-/public/img/main-menu-*.png
-/public/img/icons-*.png
-/public/img/buttons-*.png
+#/public/img/main-menu-*.png
+#/public/img/icons-*.png
+#/public/img/buttons-*.png
