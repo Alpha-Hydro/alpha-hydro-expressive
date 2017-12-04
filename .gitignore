@@ -1,4 +1,5 @@
 .idea
+.protect
 
 clover.xml
 coveralls-upload.json
