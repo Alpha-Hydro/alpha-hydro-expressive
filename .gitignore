@@ -94,7 +94,7 @@ extras/documentation
 /.sass-cache/*
 #/public/img/*
 #/public/css/*
-/public/js/*
+#/public/js/*
 /public/upload/*
 /public/files/*
 #/public/img/main-menu-*.png
