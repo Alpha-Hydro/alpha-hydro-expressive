@@ -101,3 +101,10 @@ extras/documentation
 #/public/img/icons-*.png
 #/public/img/buttons-*.png
 data/*.sql
+source/
+test/
+config.rb
+LICENSE.md
+.babelrc
+*.dist
+webpack.config.js
