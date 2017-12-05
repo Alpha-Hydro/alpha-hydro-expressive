@@ -1,0 +1,10 @@
+@import "compass/utilities/sprites";
+
+//noinspection CssInvalidFunction
+$main-menu: sprite-map("main-menu/*.png", $position: 100%, $spacing: 15px, $repeat: repeat-x);
+//noinspection CssInvalidFunction
+$btn-sprite: sprite-map("buttons/*.png", $position: 100%, $spacing: 5px, $repeat: repeat-x);
+//noinspection CssInvalidFunction
+$icon-sprite: sprite-map("icons/*.png",$position: 100%, $spacing: 5px);
+//noinspection CssInvalidFunction
+$info-block: sprite-map("info-block/*.png",$position: 0, $spacing: 15px);

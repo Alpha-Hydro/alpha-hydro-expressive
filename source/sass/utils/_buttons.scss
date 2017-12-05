@@ -1,0 +1,69 @@
+.btn-alpha{
+  position: relative;
+
+  padding: {
+    top: 0 !important;
+    bottom: 0 !important;
+    left: 6px;
+    right: 6px;
+  };
+  border: none;
+  font: {
+    size: $alpha-font-size-small;
+  };
+  line-height: 20px;
+  height: 20px;
+  @include transition(all .2s ease-in-out);
+  &:hover{
+    @extend .z-depth-1;
+  }
+  &::after, &::before{
+    position: absolute;
+    content: '';
+    display: block;
+    height: 20px;
+    top: 0;
+  }
+
+  &.default{
+    background: sprite($btn-sprite, btn-bg) transparent repeat-x;
+    margin:{
+      right: 8px;
+      left: 8px;
+    }
+    &::after, &::before{
+      width: 8px;
+    }
+    &::after{
+      background: sprite($btn-sprite, btn-right) transparent no-repeat;
+      right: -8px;
+    }
+    &::before{
+      background: sprite($btn-sprite, btn-left) transparent no-repeat;
+      left: -8px;
+    }
+    &:hover{
+      background: sprite($btn-sprite, btn-bg) transparent repeat-x;
+    }
+    .active &{
+      @include btn-alpha-color($alpha-orange);
+    }
+  }
+  &.orange,
+  &.active{
+    background-image: none;
+    @include btn-alpha-color($alpha-orange);
+  }
+
+  &.inverse{
+   @include btn-alpha-color($alpha-gray-darker);
+  }
+}
+.send-form-right{
+  background: sprite($btn-sprite, forum-send) transparent no-repeat;
+  width: 142px;
+  height: 45px;
+  color: transparent;
+  border: medium none;
+  cursor: pointer;
+}

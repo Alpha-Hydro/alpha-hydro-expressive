@@ -1,0 +1,49 @@
+@import "compass/css3/box-shadow";
+@import "compass/css3/transition";
+@import "../bootstrap/bootstrap-variables";
+
+.categories-list {
+  margin: 0 auto;
+  max-width: calc(100%);
+  &-item {
+    background-color: #FFFFFF;
+    /*@media (min-width: $screen-xs-min) {
+      max-width: calc(50% - 20px);
+    }
+    @media (min-width: $screen-sm-min) {
+      max-width: calc(100%/3 - 20px);
+    }*/
+    @media (min-width: $screen-sm-min) {
+      max-width: calc(25% - 20px);
+    }
+    @include transition(all .2s ease-in-out);
+    &:hover{
+      text-decoration: none;
+      cursor: pointer;
+      @extend .z-depth-2;
+    }
+    &-img{
+      margin: {
+        top: 10px;
+        bottom: 10px;
+      };
+      max-width: calc(100% - 10px);
+      @media (min-width: $screen-sm-min) {
+        max-height: 130px;
+        max-width: 160px;
+      }
+    }
+    &-name{
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: normal;
+      color: #525252;
+      padding: {
+        top: 10px;
+        bottom: 25px;
+        left: 10px;
+        right: 10px;
+      };
+    }
+  }
+}

@@ -1,0 +1,143 @@
+@import "compass/css3/transition";
+
+@import "../bootstrap/bootstrap-variables";
+@import "../utils/sprite";
+@import "../utils/variables";
+@import "../utils/list_group_ah";
+@import "../utils/box-shadow";
+
+@import "sidebar_menu";
+
+$main-menu-border: none;
+
+$main-menu-link-line-height: 36px;
+$main-menu-link-font-size: 85%;
+
+$main-menu-link-color: lighten($alpha-gray-light, 15%);
+$main-menu-link-hover-color: #fff;
+$main-menu-link-disabled-color: #444;
+
+$main-menu-link-padding-base: 10px 15px;
+$main-menu-link-padding-top: 0;
+$main-menu-link-padding-bottom: 2px;
+$main-menu-link-padding-left: 12px;
+$main-menu-link-padding-right: $main-menu-link-padding-left;
+
+.main-menu{
+  &-dropdown{
+    @media (max-width: $screen-xs-max) {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      z-index: 2000;
+      right: -100%;
+
+      >ul{
+        width: 75%;
+        max-width: 300px;
+        float: right;
+      }
+
+      @include transition(
+        right .2s ease-in-out 0s
+      );
+
+      &.open{
+        right: 0;
+        overflow: auto;
+      }
+    }
+  }
+  ul{
+    @media (max-width: $screen-xs-max) {
+      @include crop-bottom-shadow();
+    }
+    @extend .list-group;
+    >li{
+      @extend .list-group-item;
+      @extend .sidebar-item;
+      padding: 0;
+      > a{
+        text-decoration: none;
+        display: block;
+        position: relative;
+        padding: 10px 15px;
+        font-size: $alpha-font-size-small;
+        color: $alpha-gray-darker;
+      }
+    }
+  }
+  @media (min-width: $screen-sm-min) {
+    position: relative;
+    //noinspection CssInvalidFunction
+    background: sprite($main-menu, menu-bg);
+    height: $navbar-height;
+    border: $main-menu-border;
+    ul{
+      float: left;
+      margin: 0;
+      padding-left: 0;
+      list-style: outside none none;
+      >li{
+        float: left;
+        position: relative;
+        display: block;
+        background-color: transparent;
+        padding: 0;
+        margin: 0;
+        border: none;
+        &:hover{
+          background-color: transparent;
+        }
+        >a{
+          display: inline-block;
+          line-height: $main-menu-link-line-height;
+          padding: {
+            top: $main-menu-link-padding-top;
+            bottom: $main-menu-link-padding-bottom;
+            right: $main-menu-link-padding-right;
+            left: $main-menu-link-padding-left;
+          }
+          color: $main-menu-link-color;
+          text-decoration: none;
+          font-size: $alpha-font-size-small;
+          background: image-url('menu-item-inactive.png', false, false) transparent no-repeat center bottom;
+          outline: none;
+          &:hover{
+            background: image-url('menu-item-active.png', false, false) transparent no-repeat center bottom / contain;
+          }
+        }
+        &.active{
+          >a{
+            background: image-url('menu-item-active.png', false, false) transparent no-repeat center bottom / contain;
+          }
+        }
+      }
+    }
+
+    .navbar-link {
+      color: $main-menu-link-color;
+      &:hover {
+        color: $main-menu-link-hover-color;
+      }
+    }
+
+    .btn-link {
+      color: $main-menu-link-color;
+      &:hover,
+      &:focus {
+        color: $main-menu-link-hover-color;
+      }
+      &[disabled],
+      fieldset[disabled] & {
+        &:hover,
+        &:focus {
+          color: $main-menu-link-disabled-color;
+        }
+      }
+    }
+  }
+}
