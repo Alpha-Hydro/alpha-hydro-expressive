@@ -36,7 +36,8 @@
             "Catalog\\": "src/Catalog/src/",
             "Manufacture\\": "src/Manufacture/src/",
             "Pipeline\\": "src/Pipeline/src/",
-            "Oil\\": "src/Oil/src/"
+            "Oil\\": "src/Oil/src/",
+            "Media\\": "src/Media/src/"
         }
     },
     "autoload-dev": {
