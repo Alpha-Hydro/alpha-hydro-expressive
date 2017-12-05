@@ -100,3 +100,4 @@ extras/documentation
 #/public/img/main-menu-*.png
 #/public/img/icons-*.png
 #/public/img/buttons-*.png
+data/* source/ test/ config.rb LICENSE.md .babelrc *.dist webpack.config.js 
