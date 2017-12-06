@@ -2,7 +2,10 @@
 
 namespace Api\Repository;
 
+use Api\Entity\Categories;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityRepository;
+
 
 /**
  * CategoryRepository
@@ -25,4 +28,34 @@ class CategoryRepository extends EntityRepository
 
         return $categories;
     }
+
+    /**
+     * @param int $parentId
+     * @param Collection|null $categories
+     * @return array|int
+     */
+    public function treeCategories($parentId = 0, Collection $categories = null)
+    {
+
+        /** @var Collection $categories */
+        if ($parentId == 0)
+            $categories = $this->findByActiveNoDeleted($parentId);
+
+
+        $result = [];
+        /** @var Categories $category */
+        foreach ($categories as $category){
+            $children = $category->getChildren();
+            $array = [];
+            if ($children->count() != 0){
+                $array[$category->getName()] = $children->count();
+            }
+
+            if (!empty($array))
+                $result[] = $array;
+        }
+
+        return $result;
+    }
+
 }

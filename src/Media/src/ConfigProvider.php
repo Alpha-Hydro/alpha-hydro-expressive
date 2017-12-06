@@ -1,6 +1,7 @@
 <?php
 
 namespace Media;
+use Zend\Expressive\Application;
 
 /**
  * The configuration provider for the Media module
@@ -37,6 +38,11 @@ class ConfigProvider
             ],
             'factories'  => [
             ],
+            'delegators' => [
+                Application::class => [
+                    Factory\RoutesDelegator::class,
+                ],
+            ],
         ];
     }
 
@@ -49,9 +55,7 @@ class ConfigProvider
     {
         return [
             'paths' => [
-                'app'    => [__DIR__ . '/../templates/app'],
-                'error'  => [__DIR__ . '/../templates/error'],
-                'layout' => [__DIR__ . '/../templates/layout'],
+                'media'    => [__DIR__ . '/../templates/media'],
             ],
         ];
     }
