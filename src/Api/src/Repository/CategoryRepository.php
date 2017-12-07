@@ -31,28 +31,35 @@ class CategoryRepository extends EntityRepository
 
     /**
      * @param int $parentId
-     * @param Collection|null $categories
      * @return array|int
      */
-    public function treeCategories($parentId = 0, Collection $categories = null)
+    public function treeCategories($parentId = 0)
     {
 
         /** @var Collection $categories */
-        if ($parentId == 0)
-            $categories = $this->findByActiveNoDeleted($parentId);
+        $categories = $this->findByActiveNoDeleted($parentId);
 
 
         $result = [];
+
         /** @var Categories $category */
         foreach ($categories as $category){
             $children = $category->getChildren();
-            $array = [];
             if ($children->count() != 0){
-                $array[$category->getName()] = $children->count();
+                $result[][$category->getName()] = $this->_fetchSubCategoriesInArrayName($children);
             }
+        }
 
-            if (!empty($array))
-                $result[] = $array;
+        return $result;
+    }
+
+    private function _fetchSubCategoriesInArrayName(Collection $categories)
+    {
+        $result = [];
+
+        foreach ($categories as $category){
+            if ($category->getChildren()->count() != 0)
+                $result[][$category->getName()] = $this->_fetchSubCategoriesInArrayName($category->getChildren());
         }
 
         return $result;

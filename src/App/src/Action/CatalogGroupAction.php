@@ -37,8 +37,34 @@ class CatalogGroupAction implements ServerMiddlewareInterface
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         $categories = $this->entityManager->getRepository(Categories::class)
-            ->treeCategories();
+            ->findBy(
+                [
+                    'active' => 1,
+                    'deleted' => 0,
+                ],
+                ['parentId' => 'ASC']
+            );
 
-        return new JsonResponse($categories);
+        $data = [];
+
+        /** @var Categories $category */
+        foreach ($categories as $category){
+
+            if ($category->getChildren()->count() === 0){
+                $array = [];
+                $name = $category->getName();
+                $array['name'] = $name;
+                $parent = $category->getParent();
+                $k = 0;
+                while ($parent != null){
+                    $array['name'.$k] = $parent->getName();
+                    $parent = $parent->getParent();
+                    $k++;
+                }
+                $data[] = $array;
+            }
+        }
+
+        return new JsonResponse($data);
     }
 }
