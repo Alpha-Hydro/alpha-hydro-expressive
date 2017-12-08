@@ -1,0 +1,10 @@
+{% extends '@layout/default.html.twig' %}
+{% set pageHeader = page.title | default('Новости') %}
+
+{% block title %}
+    {{ pageHeader }}
+{% endblock %}
+
+{% block pageHeader %}
+    {{ include('@layout/components/_pageHeader.twig') }}
+{% endblock %}
