@@ -37,13 +37,13 @@ class CatalogGroupAction implements ServerMiddlewareInterface
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         $categories = $this->entityManager->getRepository(Categories::class)
-            ->findBy(
-                [
-                    'active' => 1,
-                    'deleted' => 0,
-                ],
-                ['parentId' => 'ASC']
-            );
+        ->findBy(
+            [
+                'active' => 1,
+                'deleted' => 0,
+            ],
+            ['parentId' => 'ASC']
+        );
 
         $data = [];
 
@@ -53,15 +53,15 @@ class CatalogGroupAction implements ServerMiddlewareInterface
             if ($category->getChildren()->count() === 0){
                 $array = [];
                 $name = $category->getName();
-                $array['name'] = $name;
-                $parent = $category->getParent();
                 $k = 0;
+                $array[$k] = $name;
+                $parent = $category->getParent();
                 while ($parent != null){
-                    $array['name'.$k] = $parent->getName();
-                    $parent = $parent->getParent();
                     $k++;
+                    $array[$k] = $parent->getName();
+                    $parent = $parent->getParent();
                 }
-                $data[] = $array;
+                $data[] = array_reverse($array);
             }
         }
 

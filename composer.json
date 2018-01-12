@@ -37,7 +37,9 @@
             "Manufacture\\": "src/Manufacture/src/",
             "Pipeline\\": "src/Pipeline/src/",
             "Oil\\": "src/Oil/src/",
-            "Media\\": "src/Media/src/"
+            "Media\\": "src/Media/src/",
+            "wandfluh\\": "src/wandfluh/src/",
+            "Wandfluh\\": "src/Wandfluh/src/"
         }
     },
     "autoload-dev": {
