@@ -7,9 +7,8 @@
  *
  */
 
-use Media\Action;
+use Wandfluh\Action;
 use Zend\Expressive\Application;
 
 /** @var Application $app */
-$app->get('/news', Action\NewsListAction::class, 'news.list');
-
+$app->get('/wandfluh', Action\WandfluhLendingPageAction::class, 'wandfluh.lending');
