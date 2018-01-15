@@ -24,8 +24,13 @@
  *     Zend\Expressive\Router\Route::HTTP_METHOD_ANY,
  *     'contact'
  * );
+ *
+ * @var Application $app
  */
+
+use Zend\Expressive\Application;
 
 $app->get('/', App\Action\HomePageAction::class, 'home');
 $app->get('/api/ping', App\Action\PingAction::class, 'api.ping');
 $app->get('/api/categories', App\Action\CatalogGroupAction::class, 'api.categories');
+$app->post('/api/webhook', App\Action\WebhookAction::class, 'api.webhook');
