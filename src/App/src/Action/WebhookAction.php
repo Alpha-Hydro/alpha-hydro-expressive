@@ -19,12 +19,6 @@ class WebhookAction implements ServerMiddlewareInterface
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-        $parseBody = $request->getParsedBody();
-        $payload = $parseBody['playload'];
-
-        if ($payload){
-            shell_exec("cd ../ && git pull");
-        }
-        return null;
+        shell_exec("cd ../ && git pull");
     }
 }
