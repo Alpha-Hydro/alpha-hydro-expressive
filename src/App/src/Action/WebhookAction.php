@@ -23,7 +23,7 @@ class WebhookAction implements ServerMiddlewareInterface
         $payload = $parseBody['playload'];
 
         if ($payload){
-            shell_exec("cd ../ && git pull public");
+            shell_exec("cd ../ && git pull");
         }
         return null;
     }
