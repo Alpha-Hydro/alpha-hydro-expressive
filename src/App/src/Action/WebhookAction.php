@@ -19,6 +19,9 @@ class WebhookAction implements ServerMiddlewareInterface
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-        shell_exec("cd ../ && git pull");
+        $localRepo = realpath(__DIR__.'../../../../');
+        //shell_exec("cd {$localRepo } && git pull");
+
+        return new JsonResponse([$localRepo]);
     }
 }
