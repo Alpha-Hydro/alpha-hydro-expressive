@@ -10,6 +10,7 @@
 namespace Wandfluh\Action;
 
 use Api\Entity\Pages;
+use Api\Entity\WfCategory;
 use Doctrine\ORM\EntityManager;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
@@ -50,8 +51,18 @@ class WandfluhLendingPageAction implements ServerMiddlewareInterface
             return new HtmlResponse($this->templateRenderer
                 ->render('error::404'), 404);
 
+        $categories = $this->entityManager->getRepository(WfCategory::class)
+           ->findByActiveNoDeleted();
 
-        return new HtmlResponse($this->templateRenderer->render('wandfluh::lending'));
+
+        $data = [
+            'page' => $indexPage,
+            'sidebarListItem' => $categories,
+        ];
+
+
+        return new HtmlResponse($this->templateRenderer
+            ->render('wandfluh::lending', $data));
     }
 
 

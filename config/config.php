@@ -11,6 +11,7 @@ $cacheConfig = [
 ];
 
 $aggregator = new ConfigAggregator([
+    \Utils\ConfigProvider::class,
     \Wandfluh\ConfigProvider::class,
     \Media\ConfigProvider::class,
     \Oil\ConfigProvider::class,
