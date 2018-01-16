@@ -20,12 +20,11 @@ class WebhookAction implements ServerMiddlewareInterface
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         $parseBody = $request->getParsedBody();
-        $localRepo = realpath(__DIR__.'/../../../../');
+        $localRepo = realpath(__DIR__ . '/../../../../');
 
-       //if ($parseBody["payload"]["ref"] === "refs/heads/public")
+        if ($parseBody["payload"])
+            shell_exec("cd {$localRepo } && git pull");
 
-         shell_exec("cd {$localRepo } && git pull");
-
-        return new JsonResponse($parseBody);
+        return new JsonResponse(["OK"]);
     }
 }
