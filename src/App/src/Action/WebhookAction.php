@@ -22,8 +22,9 @@ class WebhookAction implements ServerMiddlewareInterface
         $parseBody = $request->getParsedBody();
         $localRepo = realpath(__DIR__ . '/../../../../');
 
-        if ($parseBody["payload"])
+        if ($parseBody["payload"]){
             shell_exec("cd {$localRepo } && git pull");
+        }
 
         return new JsonResponse(["OK"]);
     }
