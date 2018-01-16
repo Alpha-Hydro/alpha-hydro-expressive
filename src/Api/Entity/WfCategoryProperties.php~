@@ -1,0 +1,43 @@
+<?php
+
+namespace Api\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * WfCategoryProperties
+ *
+ * @ORM\Table(name="wf_category_properties", indexes={@ORM\Index(name="fk_category_properties_category1_idx", columns={"category_id"})})
+ * @ORM\Entity
+ */
+class WfCategoryProperties
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="value", type="text", length=65535, nullable=false)
+     */
+    private $value;
+
+    /**
+     * @var \Api\Entity\WfCategory
+     *
+     * @ORM\ManyToOne(targetEntity="Api\Entity\WfCategory")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     * })
+     */
+    private $category;
+
+
+}
+
