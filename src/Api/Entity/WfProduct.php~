@@ -1,0 +1,181 @@
+<?php
+
+namespace Api\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * WfProduct
+ *
+ * @ORM\Table(name="wf_product", indexes={@ORM\Index(name="fk_product_category1_idx", columns={"category_id"}), @ORM\Index(name="fk_product_product_construction1_idx", columns={"product_construction_id"}), @ORM\Index(name="fk_product_product_size1_idx", columns={"product_size_id"}), @ORM\Index(name="fk_product_product_type1_idx", columns={"product_type_id"}), @ORM\Index(name="fk_product_product_control1_idx", columns={"product_control_id"})})
+ * @ORM\Entity
+ */
+class WfProduct
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="data_sheet_no", type="string", length=11, nullable=false)
+     */
+    private $dataSheetNo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="data_sheet_pdf", type="string", length=45, nullable=false)
+     */
+    private $dataSheetPdf;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=128, nullable=true)
+     */
+    private $image;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", length=65535, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="content_markdown", type="text", length=65535, nullable=true)
+     */
+    private $contentMarkdown;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="content_html", type="text", length=65535, nullable=true)
+     */
+    private $contentHtml;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="path", type="string", length=128, nullable=true)
+     */
+    private $path;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="full_path", type="string", length=128, nullable=true)
+     */
+    private $fullPath;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="active", type="boolean", nullable=false)
+     */
+    private $active = '1';
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="deleted", type="boolean", nullable=false)
+     */
+    private $deleted = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="sorting", type="integer", nullable=false)
+     */
+    private $sorting = '0';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="meta_description", type="text", length=65535, nullable=true)
+     */
+    private $metaDescription;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="meta_keywords", type="string", length=255, nullable=true)
+     */
+    private $metaKeywords;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="meta_title", type="string", length=255, nullable=true)
+     */
+    private $metaTitle;
+
+    /**
+     * @var \Api\Entity\WfCategory
+     *
+     * @ORM\ManyToOne(targetEntity="Api\Entity\WfCategory")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     * })
+     */
+    private $category;
+
+    /**
+     * @var \Api\Entity\WfProductConstruction
+     *
+     * @ORM\ManyToOne(targetEntity="Api\Entity\WfProductConstruction")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="product_construction_id", referencedColumnName="id")
+     * })
+     */
+    private $productConstruction;
+
+    /**
+     * @var \Api\Entity\WfProductControl
+     *
+     * @ORM\ManyToOne(targetEntity="Api\Entity\WfProductControl")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="product_control_id", referencedColumnName="id")
+     * })
+     */
+    private $productControl;
+
+    /**
+     * @var \Api\Entity\WfProductSize
+     *
+     * @ORM\ManyToOne(targetEntity="Api\Entity\WfProductSize")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="product_size_id", referencedColumnName="id")
+     * })
+     */
+    private $productSize;
+
+    /**
+     * @var \Api\Entity\WfProductType
+     *
+     * @ORM\ManyToOne(targetEntity="Api\Entity\WfProductType")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="product_type_id", referencedColumnName="id")
+     * })
+     */
+    private $productType;
+
+
+}
+

@@ -1,0 +1,127 @@
+<?php
+
+namespace Api\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * WfCategory
+ *
+ * @ORM\Table(name="wf_category", indexes={@ORM\Index(name="fk_category_category_idx", columns={"parent_id"})})
+ * @ORM\Entity
+ */
+class WfCategory
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=128, nullable=true)
+     */
+    private $image;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", length=65535, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="path", type="string", length=128, nullable=true)
+     */
+    private $path;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="full_path", type="string", length=128, nullable=true)
+     */
+    private $fullPath;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="active", type="boolean", nullable=false)
+     */
+    private $active = '1';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="sorting", type="integer", nullable=false)
+     */
+    private $sorting = '0';
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="deleted", type="boolean", nullable=false)
+     */
+    private $deleted = '0';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="meta_description", type="text", length=65535, nullable=true)
+     */
+    private $metaDescription;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="meta_keywords", type="string", length=255, nullable=true)
+     */
+    private $metaKeywords;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="meta_title", type="string", length=255, nullable=true)
+     */
+    private $metaTitle;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="content_markdown", type="text", length=65535, nullable=true)
+     */
+    private $contentMarkdown;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="content_html", type="text", length=65535, nullable=true)
+     */
+    private $contentHtml;
+
+    /**
+     * @var \Api\Entity\WfCategory
+     *
+     * @ORM\ManyToOne(targetEntity="Api\Entity\WfCategory")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     * })
+     */
+    private $parent;
+
+
+}
+
