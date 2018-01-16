@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * WfCategory
  *
  * @ORM\Table(name="wf_category", indexes={@ORM\Index(name="fk_category_category_idx", columns={"parent_id"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Api\Repository\WfCategoryRepository")
  */
 class WfCategory
 {
