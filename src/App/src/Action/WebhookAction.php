@@ -22,7 +22,7 @@ class WebhookAction implements ServerMiddlewareInterface
         $parseBody = $request->getParsedBody();
         $localRepo = realpath(__DIR__.'/../../../../');
 
-        if ($parseBody["ref"] === "refs/heads/public")
+        if ($parseBody["payload"]["ref"] === "refs/heads/public")
             shell_exec("cd {$localRepo } && git pull");
 
         return new JsonResponse($parseBody);
