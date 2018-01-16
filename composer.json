@@ -39,7 +39,8 @@
             "Oil\\": "src/Oil/src/",
             "Media\\": "src/Media/src/",
             "wandfluh\\": "src/wandfluh/src/",
-            "Wandfluh\\": "src/Wandfluh/src/"
+            "Wandfluh\\": "src/Wandfluh/src/",
+            "Utils\\": "src/Utils/src/"
         }
     },
     "autoload-dev": {
