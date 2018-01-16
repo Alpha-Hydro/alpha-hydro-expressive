@@ -25,6 +25,6 @@ class WebhookAction implements ServerMiddlewareInterface
         if ($parseBody["ref"] === "refs/heads/public")
             shell_exec("cd {$localRepo } && git pull");
 
-        return new JsonResponse(["ref" => $parseBody["ref"]]);
+        return new JsonResponse($parseBody);
     }
 }
