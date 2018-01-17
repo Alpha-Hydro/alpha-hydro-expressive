@@ -47,14 +47,14 @@ class WfCategory
     /**
      * @var string
      *
-     * @ORM\Column(name="path", type="string", length=128, precision=0, scale=0, nullable=true, unique=false)
+     * @ORM\Column(name="path", type="string", length=128, precision=0, scale=0, nullable=false, unique=false)
      */
     private $path;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="full_path", type="string", length=128, precision=0, scale=0, nullable=true, unique=false)
+     * @ORM\Column(name="full_path", type="string", length=128, precision=0, scale=0, nullable=false, unique=true)
      */
     private $fullPath;
 
