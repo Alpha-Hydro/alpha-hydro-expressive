@@ -12,3 +12,17 @@
 {% block sidebar %}
     {{ include('@wandfluh/components/_sidebar.twig') }}
 {% endblock %}
+
+{% block content %}
+    <div class="col-xs-12 col-md-9">
+        <div class="page-content mt2">
+            {% if page.image is defined and page.image is not null %}
+                <img src="{{ page.image }}" alt="{{ page.title }}" class="pull-right">
+            {% endif %}
+            {{ page.contentHtml|default('')|raw }}
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vitae nibh at eros facilisis suscipit. Aliquam pulvinar est non leo tincidunt, venenatis faucibus lectus viverra. Aliquam iaculis gravida accumsan. Nullam hendrerit maximus nisi, id condimentum ipsum lacinia ac. Vivamus varius, mauris et varius ultricies, augue massa auctor nunc, sit amet dapibus justo mauris eget dolor. Aliquam euismod diam posuere, blandit justo vitae, venenatis ligula. Ut scelerisque efficitur ipsum, at auctor magna volutpat vel. Donec non lacinia tellus.</p>
+            <p>Donec dui nunc, bibendum eget arcu vitae, auctor blandit arcu. Maecenas in diam elit. Sed porttitor neque vel leo mollis, et consectetur odio consequat. Duis laoreet pulvinar gravida. Etiam ut sapien vitae ex consectetur tincidunt vitae et arcu. Cras euismod felis vitae nisl dignissim consequat. Maecenas felis magna, porta quis finibus quis, dictum eu diam. Proin vestibulum massa ut mattis venenatis. Proin vitae mauris massa. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+            <p>Integer arcu magna, sodales sed ornare in, finibus eget eros. Sed laoreet lobortis aliquet. Maecenas in laoreet nunc. Ut at felis sagittis leo posuere luctus non vitae neque. Cras tempus risus non aliquam varius. Donec finibus arcu eu rhoncus pretium. Donec scelerisque ante et enim volutpat, sed faucibus dolor congue.</p>
+        </div>
+    </div>
+{% endblock %}

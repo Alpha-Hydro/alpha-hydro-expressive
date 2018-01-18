@@ -29,3 +29,7 @@ INSERT INTO pages VALUES ('', 'wandfluh', 'Гидроаппаратура Wandfl
 /*Убираем кавычки*/
 UPDATE wf_category SET name = REPLACE(name, '\"', '');
 UPDATE wf_category SET image = REPLACE(image, '\"', '');
+
+CREATE UNIQUE INDEX wf_category_full_path_uindex ON wf_category (full_path);
+ALTER TABLE wf_category MODIFY path VARCHAR(128) NOT NULL;
+ALTER TABLE wf_category MODIFY full_path VARCHAR(128) NOT NULL;
