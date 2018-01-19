@@ -1,6 +1,6 @@
 <div class="sidebar-dropdown hidden-sm col-md-3 sidebar">
     <ul class="list-group crop-bottom-shadow">
-        <li class="list-group-item sidebar-heading"><span class="span">{{ page.title }}</span></li>
+        <li class="list-group-item sidebar-heading"><span class="span">{{ parentCategory.name | default('Гидроаппаратура Wandfluh')}}</span></li>
         {% for item in sidebarListItem %}
             {% if currentCategory is defined and item.id == currentCategory.id %}
                 <li class="list-group-item sidebar-item sidebar-item-current">
@@ -8,7 +8,7 @@
                 </li>
             {% else %}
                 <li class="list-group-item sidebar-item">
-                    <a href="">{{ item.name }}</a>
+                    <a href="{{ path('wandfluh.category.list', {'full_path': item.fullPath}) }}">{{ item.name }}</a>
                 </li>
             {% endif %}
         {% endfor %}

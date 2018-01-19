@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="container">
+        <table class="table table-striped">
+            {% for product in productList %}
+                <tr>
+                    <td>{{ product.dataSheetNo }}</td>
+                    <td>{{ product.productConstruction.name }}</td>
+                    <td>{{ product.productSize.name }}</td>
+                    <td>{{ product.productType.name }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
