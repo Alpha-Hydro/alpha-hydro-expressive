@@ -12,3 +12,4 @@ use Zend\Expressive\Application;
 /** @var Application $app */
 $app->get('/wandfluh', Wandfluh\Action\WandfluhLendingPageAction::class, 'wandfluh.lending');
 $app->get('/wandfluh/setPath', Wandfluh\Action\WandfluhSetPathAction::class, 'wandfluh.setpath');
+$app->get('/wandfluh/{full_path:[\w\-\/]+}', Wandfluh\Action\WandfluhCategoryListAction::class, 'wandfluh.category.list');

@@ -58,19 +58,32 @@ class WandfluhCategoryService implements ServiceInterface
 
     /**
      * @param WfCategory $category
-     * @return null|string
+     * @return WfCategory[]
      */
-    public function generateFullPath(WfCategory $category)
-    {
+    public function getBreadcrumb(WfCategory $category){
         $result = [];
         do{
-            $result[] = $category->getPath();
+            $result[] = $category;
             $category = $category->getParent();
         }
         while($category != null);
 
         if (!empty($result))
             $result = array_reverse($result);
+
+        return $result;
+    }
+
+    /**
+     * @param WfCategory $category
+     * @return null|string
+     */
+    public function generateFullPath(WfCategory $category)
+    {
+        $result = [];
+        $array = $this->getBreadcrumb($category);
+        foreach ($array as $item)
+            $result[] = $item->getPath();
 
         return trim(implode('/',$result));
     }

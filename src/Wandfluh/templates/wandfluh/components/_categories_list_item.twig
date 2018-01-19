@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="categories-list flex-box">
+        {% for category in categories %}
+            <div class="categories-list-item text-center flex-box-item z-depth-1">
+                <a href="{{ path('wandfluh.category.list', {'full_path': category.fullPath}) }}">
+                    <img class="categories-list-item-img" src="/upload/wandfluh/img/{{ category.image | default('wandfluh.svg')}}" alt="{{ category.name }}">
+                    <div class="categories-list-item-name">{{ category.name }}</div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
