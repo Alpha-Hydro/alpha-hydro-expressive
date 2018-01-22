@@ -10,13 +10,16 @@
 namespace Wandfluh\Action;
 
 use Api\Entity\WfCategory;
+use Api\Entity\WfProduct;
 use Doctrine\ORM\EntityManager;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Wandfluh\Service\WandfluhCategoryService;
+use Wandfluh\Service\WandfluhProductService;
 use Zend\Diactoros\Response\HtmlResponse;
+use Zend\Diactoros\Response\JsonResponse;
 use Zend\Expressive\Router\RouteResult;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
@@ -36,13 +39,23 @@ class WandfluhCategoryListAction implements ServerMiddlewareInterface
     /**
      * @var WandfluhCategoryService
      */
-    private $wandfluhService;
+    private $wandfluhCategoryService;
 
-    public function __construct(EntityManager $entityManager, TemplateRendererInterface $templateRenderer = null, WandfluhCategoryService $wandfluhCategoryService)
+
+    /**
+     * @var WandfluhProductService
+     */
+    private $wandfluhProductService;
+
+    public function __construct(EntityManager $entityManager,
+                                TemplateRendererInterface $templateRenderer = null,
+                                WandfluhCategoryService $wandfluhCategoryService,
+                                WandfluhProductService $wandfluhProductService)
     {
         $this->entityManager = $entityManager;
         $this->templateRenderer = $templateRenderer;
-        $this->wandfluhService = $wandfluhCategoryService;
+        $this->wandfluhCategoryService = $wandfluhCategoryService;
+        $this->wandfluhProductService = $wandfluhProductService;
     }
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
@@ -68,7 +81,7 @@ class WandfluhCategoryListAction implements ServerMiddlewareInterface
         $categoriesList = $currentCategory->getChildren();
 
         $productList = ($currentCategory->getProducts()->count() != 0)
-            ? $currentCategory->getProducts()
+            ? $this->wandfluhProductService->groupByControl($currentCategory->getProducts())
             : null;
 
         $sidebarListItem = $this->entityManager->getRepository(WfCategory::class)
@@ -83,7 +96,7 @@ class WandfluhCategoryListAction implements ServerMiddlewareInterface
             'sidebarListItem' => $sidebarListItem,
             'parentCategory' => $parentCategory,
             'productList' => $productList,
-            'breadcrumb' => ($parentCategory != null) ? $this->wandfluhService->getBreadcrumb($parentCategory): null,
+            'breadcrumb' => ($parentCategory != null) ? $this->wandfluhCategoryService->getBreadcrumb($parentCategory): null,
         ];
 
         return new HtmlResponse($this->templateRenderer->render('wandfluh::category', $data));
