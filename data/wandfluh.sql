@@ -41,3 +41,5 @@ UPDATE wf_product_construction SET name = REPLACE(name, '\"', '');
 UPDATE wf_product_control SET name = REPLACE(name, '\"', '');
 UPDATE wf_product_size SET name = REPLACE(name, '\"', '');
 UPDATE wf_product_type SET name = REPLACE(name, '\"', '');
+
+UPDATE wf_category_properties SET value = REPLACE(value, '\"', '');
