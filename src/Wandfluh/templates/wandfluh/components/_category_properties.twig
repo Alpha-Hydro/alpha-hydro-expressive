@@ -1,0 +1,16 @@
+{% if currentCategory.properties.count != 0 %}
+    <div class="row">
+        <div class="col-md-9">
+            <ul>
+                {% for property in currentCategory.properties %}
+                    <li>{{ property.value }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <img src="{{ asset('upload/wandfluh/img/' ~ currentCategory.image) }}" class="img-responsive"
+                 alt="{{ currentCategory.name }}">
+        </div>
+    </div>
+    <hr/>
+{% endif %}
