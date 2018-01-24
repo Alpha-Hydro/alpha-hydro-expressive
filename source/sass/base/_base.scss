@@ -23,7 +23,7 @@ h2 a {
 
 .ah-blue,
 h2 a{
-  color: $alpha-blue;
+  color: $alpha-blue-dark;
 }
 
 .text-size{
@@ -38,6 +38,9 @@ h2 a{
   }
   &-large{
     font-size: $alpha-font-size-large;
+  }
+  &-header-large{
+    font-size: ceil(($font-size-base * 3.5));;
   }
 }
 

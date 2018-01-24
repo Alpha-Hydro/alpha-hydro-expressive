@@ -1,4 +1,5 @@
 @import "compass/css3/transition";
+@import "compass/css3/images";
 
 @import "../bootstrap/bootstrap-variables";
 @import "../utils/sprite";
@@ -22,6 +23,15 @@ $main-menu-link-padding-top: 0;
 $main-menu-link-padding-bottom: 2px;
 $main-menu-link-padding-left: 12px;
 $main-menu-link-padding-right: $main-menu-link-padding-left;
+
+@mixin main-menu-background(){
+  // Needs latest Compass, add '@import "compass"' to your scss
+  // Permalink - use to edit and share this gradient:
+  // http://colorzilla.com/gradient-editor/#afafaf+0,8d8d8d+50,727272+50,696969+100
+  background-color: rgb(175,175,175); // Old browsers
+  @include filter-gradient(#afafaf, #696969, vertical); // IE6-9
+  @include background-image(linear-gradient(top, rgba(175,175,175,1) 0%,rgba(141,141,141,1) 50%,rgba(114,114,114,1) 50%,rgba(105,105,105,1) 100%));
+}
 
 .main-menu{
   &-dropdown{
@@ -72,8 +82,7 @@ $main-menu-link-padding-right: $main-menu-link-padding-left;
   }
   @media (min-width: $screen-sm-min) {
     position: relative;
-    //noinspection CssInvalidFunction
-    background: sprite($main-menu, menu-bg);
+    @include main-menu-background;
     height: $navbar-height;
     border: $main-menu-border;
     ul{

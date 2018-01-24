@@ -8,6 +8,11 @@
     padding: 0 5px;
     @include flex(1 1 calc(25% - 20px));
   }
+  &-item-3{
+    margin: 10px;
+    padding: 0 5px;
+    @include flex(1 1 calc(100%/3 - 20px));
+  }
   &-auto{
     @include flex(1 1 auto);
   }
