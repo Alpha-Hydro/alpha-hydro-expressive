@@ -28,6 +28,8 @@ $menu-line-height: 40px;
   }
 
   &-heading{
+    //border: none;
+    //background-color: transparent;
     background-color: lighten($alpha-gray-lighter, 3%);
     .span{
       display: block;
@@ -44,7 +46,8 @@ $menu-line-height: 40px;
     a, .span{
       color: $alpha-gray-darker;
       font-weight: bolder;
-      //text-transform: uppercase;
+      text-transform: uppercase;
+      font-size: $alpha-font-size-default;
       @include text-shadow(rgb(255, 255, 255) 0 1px 0);
     }
     &:hover{

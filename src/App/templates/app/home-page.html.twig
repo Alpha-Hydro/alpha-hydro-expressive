@@ -2,94 +2,80 @@
 
 {% block title %}Гидравлика Alpha-Hydro{% endblock %}
 
-{#
-{% block sidebar %}
-    {{ include('@layout/components/_sidebar.twig') }}
-{% endblock %}
-#}
+{% set catalogCategories = [
+    {"name":"Штуцера, фитинги, втулки", "link": path("catalog_category_lending"), "img": "files/images/category/icons/brc.png"},
+    {"name":"Трубы, шланги, РВД, защита для шлангов", "link": path("catalog_category_lending"), "img": "files/images/category/icons/hose.png"},
+    {"name":"Гидравлические принадлежности", "link": path("catalog_category_lending"), "img": "files/images/category/icons/connect.png"},
+    {"name":"Гидравлические двигатели, насосы, моторы", "link": path("catalog_category_lending"), "img": "files/images/category/icons/hydraulics.png"},
+    {"name":"Контрольно-измерительные приборы", "link": path("catalog_category_lending"), "img": "files/images/category/icons/manometers.png"},
+    {"name":"Уплотнения и уплотнительные кольца", "link": path("catalog_category_lending"), "img": "files/images/category/icons/sealing.png"},
+] %}
+
+{% set productions = [
+    {"name":"Гидростанции, гидравлические стенды и модули", "link": path('manufacture_category_list', {'path': 'gidrostancii'}), "img": "files/images/category/icons/production.png"},
+    {"name":"Гидроцилиндры", "link": path('manufacture_category_list', {'path': 'gidrocilindry'}), "img": "files/images/category/icons/gidrocilindry_icon.png"},
+] %}
+
+{% set partners = [
+    {"name":"Гидроаппаратура Wandfluh", "link": path("wandfluh.lending"), "img": "upload/wandfluh/img/wandfluh.png"},
+] %}
+
+
 
 {% block content %}
     <div class="container-fluid">
 
         <div class="row">
             <div class="col-md-6">
+                <img src="{{ asset("upload/pages/catalog560x325.png") }}" alt="Каталог продукции" class="img-responsive">
+            </div>
+            <div class="col-md-6">
                 <h1 class="text-size-header-large">Гидравлика
                     <small>гидравлическое оборудование</small>
                 </h1>
-                <p class="ah-info-block ah-info-block-info">Производство и поставка гидравлического оборудования и гидрокомпонентов. Опрессовка рукавов высокого
+                <p class="ah-info-block ah-info-block-info">Производство и поставка гидравлического оборудования и
+                    гидрокомпонентов. Опрессовка рукавов высокого
                     давления (РВД), фитингов, шлангов, труб и трубных соединений. Проектировка и производство
                     гидростанций и гидроцилиндров.</p>
-            </div>
-            <div class="col-md-6">
-                <img src="{{ asset("upload/pages/catalog560x325.png") }}" alt="Каталог продукции"
-                     class="img-responsive">
             </div>
         </div>
 
         <div class="row">
-            <div class="flex-box">
-                <div class="flex-box-item-3 text-center z-depth-1">
-                    <h2 class="h4">
-                        <a href="{{ path("catalog_category_lending") }}">
-                            Штуцера, фитинги, втулки
-                        </a>
-                    </h2>
-                </div>
-                <div class="flex-box-item-3 text-center z-depth-1">
-                    <h2 class="h4">
-                        <a href="{{ path("catalog_category_lending") }}">
-                            Трубы, шланги, РВД, защита для шлангов
-                        </a>
-                    </h2>
-                </div>
-                <div class="flex-box-item-3 text-center z-depth-1">
-                    <h2 class="h4">
-                        <a href="{{ path("catalog_category_lending") }}">
-                            Гидравлические принадлежности
-                        </a>
-                    </h2>
-                </div>
-                <div class="flex-box-item-3 text-center z-depth-1">
-                    <h2 class="h4">
-                        <a href="{{ path("catalog_category_lending") }}">
-                            Гидронасосы, гидроомоторы, гидравлические двигатели
-                        </a>
-                    </h2>
-                </div>
-                <div class="flex-box-item-3 text-center z-depth-1">
-                    <h2 class="h4">
-                        <a href="{{ path("catalog_category_lending") }}">
-                            Контрольно-измерительные приборы
-                        </a>
-                    </h2>
-                </div>
-                <div class="flex-box-item-3 text-center z-depth-1">
-                    <h2 class="h4">
-                        <a href="{{ path("catalog_category_lending") }}">
-                            Уплотнения и уплотнительные кольца
-                        </a>
-                    </h2>
-                </div>
-                <div class="flex-box-item-3 text-center z-depth-1">
-                    <h2 class="h4">
-                        <a href="{{ path('manufacture_category_list', {'path': 'gidrostancii'}) }}">
-                            Гидростанции, гидравлические стенды и модули
-                        </a>
-                    </h2>
-                </div>
-                <div class="flex-box-item-3 text-center z-depth-1">
-                    <h2 class="h4">
-                        <a href="{{ path("wandfluh.lending") }}">
-                            Гидроаппаратура Wandfluh
-                        </a>
-                    </h2>
-                </div>
-                <div class="flex-box-item-3 text-center z-depth-1">
-                    <h2 class="h4">
-                        <a href="{{ path('manufacture_category_list', {'path': 'gidrocilindry'}) }}">
-                            Гидроцилиндры
-                        </a>
-                    </h2>
+
+            {{ include('@layout/components/_sidebar.twig') }}
+
+            <div class="col-md-9">
+                <div class="flex-box">
+                    {% for item in catalogCategories %}
+                        <div class="flex-box-item-3 card">
+                            <div class="card-image">
+                                <img src="{{ asset(item.img) }}"/>
+                            </div>
+                            <div class="card-action text-center">
+                                <a href="{{ item.link }}">{{ item.name }}</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% for item in productions %}
+                        <div class="flex-box-item-3 card">
+                            <div class="card-image">
+                                <img src="{{ asset(item.img) }}"/>
+                            </div>
+                            <div class="card-action text-center">
+                                <a href="{{ item.link }}">{{ item.name }}</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% for item in partners %}
+                        <div class="flex-box-item-3 card">
+                            <div class="card-image">
+                                <img src="{{ asset(item.img) }}"/>
+                            </div>
+                            <div class="card-action text-center">
+                                <a href="{{ item.link }}">{{ item.name }}</a>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

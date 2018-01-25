@@ -1,8 +1,21 @@
 <div class="sidebar-dropdown hidden-sm col-md-3 sidebar">
     <ul class="list-group crop-bottom-shadow">
-        {% for i in 0..12 %}
+        <li class="list-group-item sidebar-heading">
+            <span class="span">Каталог</span>
+        </li>
+        {% for item in catalogCategories %}
             <li class="list-group-item sidebar-item">
-                <a href="{{ path('home') }}">Рукава высокого давления</a>
+                <a href="{{ item.link }}">{{item.name}}</a>
+            </li>
+        {% endfor %}
+        {% for item in productions %}
+            <li class="list-group-item sidebar-item">
+                <a href="{{ item.link }}">{{item.name}}</a>
+            </li>
+        {% endfor %}
+        {% for item in partners %}
+            <li class="list-group-item sidebar-item">
+                <a href="{{ item.link }}">{{item.name}}</a>
             </li>
         {% endfor %}
     </ul>

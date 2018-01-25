@@ -46,7 +46,7 @@ let config = {
 	}
 };
 
-if (ENVIRONMENT == 'production') {
+if (ENVIRONMENT === 'production') {
 	config.plugins.push(
 		new webpack.optimize.UglifyJsPlugin({
 			compress: {
