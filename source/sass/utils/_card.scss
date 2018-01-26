@@ -1,7 +1,10 @@
+@import "compass/css3/box-shadow";
+@import "compass/css3/transition";
 @import "variables";
+@import "../bootstrap/bootstrap-variables";
 
 .card-panel {
-  transition: box-shadow .25s;
+  @include transition(box-shadow .25s);
   padding: $card-padding;
   border-radius: 2px;
   @extend .z-depth-1;
@@ -12,7 +15,7 @@
   position: relative;
   background-color: $card-bg-color;
   transition: box-shadow .25s;
-  border-radius: 2px;
+  border-radius: $border-radius-base;
   @extend .z-depth-1;
 
   .card-title {
@@ -20,6 +23,36 @@
     font-weight: 300;
     &.activator {
       cursor: pointer;
+    }
+  }
+
+  &.hover{
+    @include transition(all .2s ease-in-out);
+    &:hover{
+      text-decoration: none;
+      cursor: pointer;
+      @extend .z-depth-2;
+    }
+    > a {
+      display: block;
+      border-radius: $border-radius-base;
+      position: relative;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      text-decoration: none;
+    }
+    .card-title{
+      position: relative;
+      border-top: 1px solid rgba(160,160,160,.2);
+      padding: 16px $card-padding;
+      text-transform: uppercase;
+      color: $card-link-color;
+      font-size: inherit;
+      font-weight: inherit;
     }
   }
 
@@ -114,7 +147,7 @@
     // Image background for content
     img {
       display: block;
-      border-radius: 2px 2px 0 0;
+      border-radius: $border-radius-base;
       position: relative;
       left: 0;
       right: 0;

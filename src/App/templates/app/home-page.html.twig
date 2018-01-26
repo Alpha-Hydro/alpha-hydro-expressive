@@ -21,62 +21,58 @@
 ] %}
 
 
-
 {% block content %}
-    <div class="container-fluid">
-
-        <div class="row">
-            <div class="col-md-6">
-                <img src="{{ asset("upload/pages/catalog560x325.png") }}" alt="Каталог продукции" class="img-responsive">
-            </div>
-            <div class="col-md-6">
-                <h1 class="text-size-header-large">Гидравлика
-                    <small>гидравлическое оборудование</small>
-                </h1>
-                <p class="ah-info-block ah-info-block-info">Производство и поставка гидравлического оборудования и
-                    гидрокомпонентов. Опрессовка рукавов высокого
-                    давления (РВД), фитингов, шлангов, труб и трубных соединений. Проектировка и производство
-                    гидростанций и гидроцилиндров.</p>
-            </div>
+    <div class="row">
+        <div class="col-md-6 hidden-sm hidden-xs">
+            <img src="{{ asset("upload/pages/catalog560x325.png") }}" alt="Каталог продукции" class="img-responsive">
         </div>
-
-        <div class="row">
-
-            {{ include('@layout/components/_sidebar.twig') }}
-
-            <div class="col-md-9">
-                <div class="flex-box">
-                    {% for item in catalogCategories %}
-                        <div class="flex-box-item-3 card">
+        <div class="col-md-6">
+            <h1 class="text-size-header-large">Гидравлика
+                <small>гидравлическое оборудование</small>
+            </h1>
+            <p class="ah-info-block ah-info-block-info">Производство и поставка гидравлического оборудования и гидрокомпонентов. Опрессовка рукавов высокого давления (РВД), фитингов, шлангов, труб и трубных соединений. Проектировка и производство гидростанций и гидроцилиндров.</p>
+        </div>
+    </div>
+    <div class="row">
+        {{ include('@app/components/_home_page_sidebar.twig') }}
+        <div class="col-md-9">
+            <div class="flex-box col-3">
+                {% for item in catalogCategories %}
+                    <div class="flex-box-item card hover">
+                        <a href="{{ item.link }}">
                             <div class="card-image">
                                 <img src="{{ asset(item.img) }}"/>
                             </div>
-                            <div class="card-action text-center">
-                                <a href="{{ item.link }}">{{ item.name }}</a>
+                            <div class="card-title bottom text-center">
+                                {{ item.name }}
                             </div>
-                        </div>
-                    {% endfor %}
-                    {% for item in productions %}
-                        <div class="flex-box-item-3 card">
+                        </a>
+                    </div>
+                {% endfor %}
+                {% for item in productions %}
+                    <div class="flex-box-item-3 card hover">
+                        <a href="{{ item.link }}">
                             <div class="card-image">
                                 <img src="{{ asset(item.img) }}"/>
                             </div>
-                            <div class="card-action text-center">
-                                <a href="{{ item.link }}">{{ item.name }}</a>
+                            <div class="card-title bottom text-center">
+                                {{ item.name }}
                             </div>
-                        </div>
-                    {% endfor %}
-                    {% for item in partners %}
-                        <div class="flex-box-item-3 card">
+                        </a>
+                    </div>
+                {% endfor %}
+                {% for item in partners %}
+                    <div class="flex-box-item-3 card hover">
+                        <a href="{{ item.link }}">
                             <div class="card-image">
                                 <img src="{{ asset(item.img) }}"/>
                             </div>
-                            <div class="card-action text-center">
-                                <a href="{{ item.link }}">{{ item.name }}</a>
+                            <div class="card-title bottom text-center">
+                                {{ item.name }}
                             </div>
-                        </div>
-                    {% endfor %}
-                </div>
+                        </a>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>

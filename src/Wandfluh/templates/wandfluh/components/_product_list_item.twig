@@ -15,9 +15,9 @@
                 {% for product in productControl %}
                     <tr>
                         <td><a href="{{ asset('upload/wandfluh/pdf/' ~ product.dataSheetPdf) }}" target="_blank">{{ product.dataSheetNo }}</a></td>
-                        <td>{{ product.productConstruction.name }}</td>
-                        <td>{{ product.productSize.name }}</td>
-                        <td>{{ product.productType.name }}</td>
+                        <td>{{ product.productConstruction.name | default('')}}</td>
+                        <td>{{ product.productSize.name | default('') }}</td>
+                        <td>{{ product.productType.name | default('') }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>

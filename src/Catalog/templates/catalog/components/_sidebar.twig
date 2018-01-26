@@ -1,4 +1,6 @@
-<div class="sidebar-dropdown hidden-sm col-md-3 sidebar">
+{% extends '@layout/components/_sidebar.twig' %}
+
+{% block sidebarList %}
     <ul class="list-group crop-bottom-shadow">
         {% if parentCategory is defined %}
             <li class="list-group-item sidebar-heading">
@@ -28,4 +30,4 @@
             {% endif %}
         {% endfor %}
     </ul>
-</div>
+{% endblock %}
