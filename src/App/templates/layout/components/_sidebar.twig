@@ -1,22 +1,5 @@
-<div class="sidebar-dropdown hidden-sm col-md-3 sidebar">
-    <ul class="list-group crop-bottom-shadow">
-        <li class="list-group-item sidebar-heading">
-            <span class="span">Каталог</span>
-        </li>
-        {% for item in catalogCategories %}
-            <li class="list-group-item sidebar-item">
-                <a href="{{ item.link }}">{{item.name}}</a>
-            </li>
-        {% endfor %}
-        {% for item in productions %}
-            <li class="list-group-item sidebar-item">
-                <a href="{{ item.link }}">{{item.name}}</a>
-            </li>
-        {% endfor %}
-        {% for item in partners %}
-            <li class="list-group-item sidebar-item">
-                <a href="{{ item.link }}">{{item.name}}</a>
-            </li>
-        {% endfor %}
-    </ul>
+<div class="col-md-3 hidden-sm">
+    <div class="sidebar-dropdown sidebar">
+        {% block sidebarList %}{% endblock %}
+    </div>
 </div>
