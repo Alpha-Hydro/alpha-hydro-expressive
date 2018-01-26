@@ -4,8 +4,16 @@
 
 $menu-line-height: 40px;
 
+@mixin sidebar-font-size(){
+  font-size: $alpha-font-size-small;
+  /* Large devices (large desktops, 1200px and up) */
+  @media (min-width: $screen-lg-min){
+    font-size: $alpha-font-size-default;
+  }
+}
+
 .sidebar {
-  font-size: $alpha-font-size-default;
+  @include sidebar-font-size();
   > ul {
     list-style: outside none none;
     margin: {
@@ -28,10 +36,18 @@ $menu-line-height: 40px;
   }
 
   &-heading {
-    border: none;
-    background-color: transparent;
-    font-size: ceil($alpha-font-size-default * 1.1);
+    background-color: lighten($alpha-gray-lighter, 3%);
+    font-weight: bolder;
+    text-decoration: underline;
     text-transform: uppercase;
+    /* Medium devices (desktops, 992px and up) */
+    @media (min-width: $screen-md-min) {
+      border: none;
+      background-color: transparent;
+      font-size: ceil($alpha-font-size-default * 1.1);
+      font-weight: normal;
+      text-decoration: none;
+    }
     .span {
       display: block;
       position: relative;
@@ -52,13 +68,15 @@ $menu-line-height: 40px;
       }
     }
   }
+
   &-item {
     background-color: lighten($alpha-gray-lighter, 3%);
+
     &.sidebar-item-current {
       background-color: $alpha-gray-dark;
       color: #FFFFFF;
       cursor: default;
-      font-size: $alpha-font-size-small;
+      @include sidebar-font-size();
       > span {
         display: block;
         padding: 10px 15px;
@@ -67,6 +85,7 @@ $menu-line-height: 40px;
         color: #ffffff;
       }
     }
+
     &.sidebar-item-hidden {
       background-color: #FFFFFF;
       > a {
@@ -76,6 +95,7 @@ $menu-line-height: 40px;
         opacity: .5;
       }
     }
+
     &:hover {
       background-color: $alpha-gray-dark;
       > a {
@@ -86,6 +106,7 @@ $menu-line-height: 40px;
         display: block;
       }
     }
+
     .sidebar-submenu {
       display: none;
       position: absolute;
@@ -134,11 +155,7 @@ $menu-line-height: 40px;
         width: 75%;
         max-width: 300px;
       }
-
-      @include transition(
-                      left .2s ease-in-out 0s
-      );
-
+      @include transition(left .2s ease-in-out 0s);
       &.open {
         left: 0;
         overflow: auto;

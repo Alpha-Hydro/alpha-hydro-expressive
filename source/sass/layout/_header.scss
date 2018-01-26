@@ -114,7 +114,9 @@ body{
       > i{
         font-size: 16pt;
       }
-      
+
+      min-width: 40px;
+
       @media (min-width: $screen-sm-min) {
         display: none;
       }
