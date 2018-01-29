@@ -100,3 +100,4 @@ extras/documentation
 #/public/img/main-menu-*.png
 #/public/img/icons-*.png
 #/public/img/buttons-*.png
+/composer.lock
