@@ -1,6 +1,9 @@
 <nav class="navbar main-menu">
     <div class="container main-menu-dropdown">
         <ul>
+            <li class="visible-sm">
+                <button class="btn btn-link sidebar-toggle" type="button"><i class="fa fa-bars"></i></button>
+            </li>
             <li>
                 <a href="{{ path('home') }}">
                     Главная
@@ -17,6 +20,11 @@
                 </a>
             </li>
             <li>
+                <a href="{{ path('wandfluh.lending') }}">
+                    Партнеры
+                </a>
+            </li>
+            <li>
                 <a href="{{ path('home') }}">
                     Клиентам
                 </a>
@@ -26,20 +34,22 @@
                     Новости
                 </a>
             </li>
-            <li>
+            {#<li>
                 <a href="{{ path('home') }}">
                     О компании
                 </a>
-            </li>
-            <li class="hidden-sm">
+            </li>#}
+            <li class="{#hidden-sm#}">
                 <a href="{{ path('home') }}">
                     Контакты
                 </a>
             </li>
-            <li class="visible-sm">
-                <button class="btn btn-link" type="submit"><i class="fa fa-search"></i></button>
-            </li>
         </ul>
-        {{ include('@layout/components/_search_form.twig') }}
+        <div class="visible-sm navbar-right">
+            <button class="btn btn-link" type="submit"><i class="fa fa-search"></i></button>
+        </div>
+        <div class="navbar-right col-md-4 pr0 hidden-xs hidden-sm">
+            {{ include('@layout/components/_search_form.twig') }}
+        </div>
     </div>
 </nav>

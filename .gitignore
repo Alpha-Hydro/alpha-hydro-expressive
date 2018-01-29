@@ -101,8 +101,8 @@ extras/documentation
 #/public/img/icons-*.png
 #/public/img/buttons-*.png
 data/*.sql
-source/*
-test/*
+source/
+test/
 config.rb
 LICENSE.md
 .babelrc

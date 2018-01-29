@@ -6,15 +6,19 @@
             <li class="list-group-item sidebar-heading">
                 {% if parentCategory is not null %}
                     <a href="{{ path('catalog_category_list', {'full_path': parentCategory.fullPath}) }}">
-                        {{ parentCategory.name }}
+                        {{ parentCategory.name ~ ' ...'}}
                         <span class="badge"><i class="fa fa-level-up fa-fw"></i></span>
                     </a>
                 {% else %}
                     <a href="{{ path('catalog_category_lending') }}">
-                        Каталог
+                        Каталог ...
                         <span class="badge"><i class="fa fa-level-up fa-fw"></i></span>
                     </a>
                 {% endif %}
+            </li>
+        {% else %}
+            <li class="list-group-item sidebar-heading">
+                <span class="span">Каталог</span>
             </li>
         {% endif %}
 

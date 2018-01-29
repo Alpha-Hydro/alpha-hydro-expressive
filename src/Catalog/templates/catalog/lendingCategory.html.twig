@@ -12,6 +12,7 @@
 
 {% block content %}
     <div  class="col-xs-12 col-sm-12 col-md-9">
+        {{ include('@catalog/components/_breadcrumb.twig') }}
         {{ include('@catalog/components/_categories_list_item.twig') }}
     </div>
 {% endblock %}
