@@ -1,13 +1,19 @@
 <div class="row hidden-xs">
     <div class="col-md-12">
-        <ul class="breadcrumb">
+        <ul class="breadcrumb mb1">
             <li><a href="/">Главная</a></li>
-            <li><a href="{{ path('catalog_category_lending') }}">Каталог</a></li>
-            {% for item in breadcrumb %}
-                <li><a href="{{ path('catalog_category_list', {'full_path': item.fullPath}) }}">{{ item.name }}</a></li>
-            {% endfor %}
+            {% if currentCategory is defined %}
+                <li><a href="{{ path('catalog_category_lending') }}">Каталог</a></li>
+            {% endif %}
+            {% if breadcrumb is defined %}
+                {% for item in breadcrumb %}
+                    <li>
+                        <a href="{{ path('catalog_category_list', {'full_path': item.fullPath}) }}">{{ item.name }}</a>
+                    </li>
+                {% endfor %}
+            {% endif %}
             {% if product is not defined %}
-                <li class="active"><span>{{ currentCategory.name }}</span></li>
+                <li class="active"><span>{{ currentCategory.name | default('Каталог') }}</span></li>
             {% endif %}
         </ul>
     </div>

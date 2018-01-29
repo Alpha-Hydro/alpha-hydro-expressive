@@ -4,35 +4,64 @@
 .flex-box{
   @include display-flex();
   @include flex-wrap(wrap);
+  padding: {
+    left: ($grid-gutter-width/2 - $padding-small-horizontal); //5px;
+    right: ($grid-gutter-width/2 - $padding-small-horizontal); //5px;
+  };
   &-item{
     margin: {
       top: 0;
-      bottom: 20px;
+      bottom: $padding-small-horizontal * 2;
       left: $padding-small-horizontal;
       right: $padding-small-horizontal;
     };
     padding: 0 5px;
+    //default
     @include flex(1 1 auto);
-    .col-4 &{
-      @include flex(1 1 calc(25% - #{$padding-small-horizontal * 2}));
-      max-width: calc(25% - #{$padding-small-horizontal * 2});
+    // up to 480px - 1 column
+    width: calc(100% - #{$padding-small-horizontal * 2});
+    // 480px and up - 2 columns
+    @media (min-width: $screen-xs-min) {
+      width: calc(50% - #{$padding-small-horizontal * 2});
+      max-width: calc(50% - #{$padding-small-horizontal * 2});
     }
-    .col-3 &{
-      @include flex(1 1 calc(100%/3 - #{$padding-small-horizontal * 2}));
+    // 768px and up - 3 columns
+    @media (min-width: $screen-sm-min){
+      width: calc(100%/3 - #{$padding-small-horizontal * 2});
       max-width: calc(100%/3 - #{$padding-small-horizontal * 2});
     }
-  }
-  &-item-3{
-    margin: {
-      top: 0;
-      bottom: 20px;
-      left: $padding-small-horizontal;
-      right: $padding-small-horizontal;
-    };
-    padding: 0 5px;
-    @include flex(1 1 calc(100%/3 - #{$padding-small-horizontal * 2}));
-  }
-  &-auto{
-    @include flex(1 1 auto);
+    // 1200px and up - 4 columns
+    @media (min-width: $screen-lg-min){
+      width: calc(25% - #{$padding-small-horizontal * 2});
+      max-width: calc(25% - #{$padding-small-horizontal * 2});
+    }
+
+    // fix width
+    // up to 480 px - 1 column
+    // 480px and up to 768px - 2 columns
+    .col-2 &{
+      //768px and up 2 columns
+      @media (min-width: $screen-sm-min){
+        @include flex(1 1 calc(50% - #{$padding-small-horizontal * 2}));
+        width: calc(50% - #{$padding-small-horizontal * 2});
+        max-width: calc(50% - #{$padding-small-horizontal * 2});
+      }
+    }
+    .col-3 &{
+      //768px and up 3 columns
+      @media (min-width: $screen-sm-min){
+        @include flex(1 1 calc(100%/3 - #{$padding-small-horizontal * 2}));
+        width: calc(100%/3 - #{$padding-small-horizontal * 2});
+        max-width: calc(100%/3 - #{$padding-small-horizontal * 2});
+      }
+    }
+    .col-4 &{
+      //768px and up 4 columns
+      @media (min-width: $screen-sm-min){
+        @include flex(1 1 calc(25% - #{$padding-small-horizontal * 2}));
+        width: calc(25% - #{$padding-small-horizontal * 2});
+        max-width: calc(25% - #{$padding-small-horizontal * 2});
+      }
+    }
   }
 }

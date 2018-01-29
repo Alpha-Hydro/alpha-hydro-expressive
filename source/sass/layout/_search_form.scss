@@ -6,7 +6,7 @@
 
 .navbar{
   .search-form{
-    padding-right: 10pt;
+    //padding-right: 10pt;
     input[type='text']{
       border: 1px solid $alpha-gray;
       @include box-shadow(inset $alpha-gray-light 0px 0px 8px);
