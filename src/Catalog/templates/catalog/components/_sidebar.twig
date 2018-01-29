@@ -6,7 +6,7 @@
             <li class="list-group-item sidebar-heading">
                 {% if parentCategory is not null %}
                     <a href="{{ path('catalog_category_list', {'full_path': parentCategory.fullPath}) }}">
-                        {{ parentCategory.name ~ ' ...'}}
+                        {{ parentCategory.name ~ ' ...' }}
                         <span class="badge"><i class="fa fa-level-up fa-fw"></i></span>
                     </a>
                 {% else %}
@@ -21,7 +21,6 @@
                 <span class="span">Каталог</span>
             </li>
         {% endif %}
-
         {% for category in sidebarListCategories %}
             {% if currentCategory is defined and category.id == currentCategory.id %}
                 <li class="list-group-item sidebar-item sidebar-item-current">
