@@ -24,7 +24,7 @@ ALTER TABLE wf_product ADD meta_keywords VARCHAR(255) NULL;
 ALTER TABLE wf_product ADD meta_title VARCHAR(255) NULL;
 ALTER TABLE wf_product MODIFY name VARCHAR(255) NOT NULL;
 
-INSERT INTO pages VALUES ('', 'wandfluh', 'Гидроаппаратура Wandfluh', NULL, NULL, NULL, 'Гидроаппаратура Wandfluh', NULL, NULL, 0, 1, 0, NULL, now());
+INSERT INTO pages VALUES (LAST_INSERT_ID(), 'wandfluh', 'Гидроаппаратура Wandfluh', NULL, NULL, NULL, 'Гидроаппаратура Wandfluh', NULL, NULL, 0, 1, 0, NULL, now());
 
 /*Убираем кавычки*/
 UPDATE wf_category SET name = REPLACE(name, '\"', '');
