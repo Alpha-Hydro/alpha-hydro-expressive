@@ -108,4 +108,4 @@ LICENSE.md
 .babelrc
 *.dist
 webpack.config.js
-/composer.lock
+composer.lock
