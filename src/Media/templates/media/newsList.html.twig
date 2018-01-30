@@ -1,5 +1,5 @@
 {% extends '@layout/default.html.twig' %}
-{% set pageHeader = page.title | default('Новости') %}
+{% set pageHeader = currentCategory.name | default('Новости') %}
 
 {% block title %}
     {{ pageHeader }}
@@ -7,4 +7,8 @@
 
 {% block pageHeader %}
     {{ include('@layout/components/_pageHeader.twig') }}
+{% endblock %}
+
+{% block sidebar %}
+    {{ include('@media/components/_sidebar.twig') }}
 {% endblock %}
