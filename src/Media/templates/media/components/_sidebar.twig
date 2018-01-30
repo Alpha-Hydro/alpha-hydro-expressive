@@ -10,7 +10,7 @@
                 </li>
             {% else %}
                 <li class="list-group-item sidebar-item">
-                    <a href="">{{ item.name }}</a>
+                    <a href="{{ path('media.list', {'media':item.path}) }}">{{ item.name }}</a>
                 </li>
             {% endif %}
         {% endfor %}

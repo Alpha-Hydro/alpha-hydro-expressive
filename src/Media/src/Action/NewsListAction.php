@@ -10,6 +10,8 @@
 namespace Media\Action;
 
 use Api\Entity\MediaCategories;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManager;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
@@ -47,29 +49,35 @@ class NewsListAction implements ServerMiddlewareInterface
     {
         /** @var RouteResult $routeResult */
         $routeResult = $request->getAttribute(RouteResult::class);
+        $routeMatchedParams = $routeResult->getMatchedParams();
+
+        $pathCategory = $routeMatchedParams['media'];
+
+        /** @var MediaCategories $mediaCategory */
+        $mediaCategory = $this->entityManager
+            ->getRepository(MediaCategories::class)
+            ->findOneByPath($pathCategory);
+
+        if (!$mediaCategory)
+            return new HtmlResponse($this->templateRenderer->render('error::404'), 404);
 
 
-//        $routeMatchedPath = $routeResult->getMatchedRoute()->getPath();
-//        $path = ltrim($routeMatchedPath, "\/");
-//
-//        /** @var MediaCategories $mediaCategory */
-//        $mediaCategory = $this->entityManager->getRepository(MediaCategories::class)
-//            ->findOneByPath($path);R
-//
-//        if (!$mediaCategory)
-//            return new HtmlResponse($this->templateRenderer->render('error::404'), 404);
-//
-//
-//        $mediaPosts = $mediaCategory->getMediaPosts();
-//
-//        $data = [
-//            'currentCategory' => $mediaCategory,
-//            'mediaPosts' => $mediaPosts,
-//            'sidebarListItem' => $this->entityManager->getRepository(MediaCategories::class)->findByActiveNoDeleted(),
-//        ];
-//
-//        return new HtmlResponse($this->templateRenderer->render('media::newsList', $data));
+        $criteria = Criteria::create()
+            ->where(Criteria::expr()->eq("active", "1"))
+            ->andWhere(Criteria::expr()->eq('deleted', "0"))
+            ->orderBy(['timestamp' => 'DESC'])
+        ;
 
-        return new JsonResponse($routeResult->getMatchedParams());
+        /** @var Collection $mediaPosts */
+        $mediaPosts = $mediaCategory->getMediaPosts()->matching($criteria);
+
+        $data = [
+            'currentCategory' => $mediaCategory,
+            'mediaPosts' => $mediaPosts,
+            'sidebarListItem' => $this->entityManager->getRepository(MediaCategories::class)->findByActiveNoDeleted(),
+        ];
+
+        return new HtmlResponse($this->templateRenderer->render('media::newsList', $data));
+
     }
 }

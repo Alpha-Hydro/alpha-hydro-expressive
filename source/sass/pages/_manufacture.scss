@@ -28,7 +28,7 @@
     &-auto{
       max-width: calc(100%);
       @media (min-width: $screen-xs-min) {
-      max-width: calc(50%);
+        max-width: calc(50%);
       }
       @media (min-width: $screen-sm-min) {
         max-width: calc(100%/3);

@@ -1,0 +1,24 @@
+@import "../base/variables";
+@import "compass/css3/transition";
+
+.media-item{
+  .media-object{
+    max-height: 100px;
+  }
+  .media-heading{
+    font-weight: bolder;
+    font-size: $alpha-font-size-default;
+    >a{
+      color: $alpha-blue-dark;
+      text-decoration: none;
+      //text-transform: uppercase;
+      @include transition(color .25s);
+      &:hover{
+        color: $alpha-gray;
+      }
+    }
+  }
+  &.line{
+    padding-bottom: 15px;
+  }
+}

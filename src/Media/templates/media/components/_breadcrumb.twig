@@ -1,0 +1,13 @@
+<div class="row hidden-xs">
+    <div class="col-md-12">
+        <ul class="breadcrumb">
+            <li><a href="/">Главная</a></li>
+            {% if post is not defined %}
+                <li class="active"><span>{{ currentCategory.name }}</span></li>
+            {% else %}
+                <li><a href="{{ path('media.list', {'media': currentCategory.path}) }}">{{ currentCategory.name }}</a></li>
+                <li class="active"><span>{{ post.name }}</span></li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
