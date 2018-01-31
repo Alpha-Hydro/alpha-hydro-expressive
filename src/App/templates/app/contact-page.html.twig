@@ -1,5 +1,5 @@
 {% extends '@layout/default.html.twig' %}
-{% set pageHeader = page.title | default('Гидравлика Alpha-Hydro') %}
+{% set pageHeader = page.title | default('Контакты') %}
 
 {% block title %}
     {{ pageHeader }}
@@ -7,5 +7,20 @@
 
 {% block pageHeader %}
     {{ include('@layout/components/_pageHeader.twig') }}
+{% endblock %}
+
+{% block sidebar %}
+    <div class="col-md-3">
+        <div class="sidebar">
+            {{ include('@app/components/_contact_sidebar.twig') }}
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+
+{% endblock %}
+
+{% block javascriptTop %}
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 {% endblock %}
 

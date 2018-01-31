@@ -1,5 +1,8 @@
 @import "../vendors/corpus/whitespace";
 @import "variables";
+html{
+  overflow-y: scroll;
+}
 
 .app {
   display: flex;

@@ -1,4 +1,4 @@
-@import "../bootstrap/bootstrap-variables";
+@import "../vendors/bootstrap-variables";
 
 // Font size
 // ==========================================================================
@@ -7,7 +7,7 @@ $alpha-font-size-default: $font-size-base; //12pt, ~16px;
 $alpha-font-size-smaller: ceil($alpha-font-size-default * 0.75); //~9pt, ~12px;
 $alpha-font-size-small: ceil($alpha-font-size-default * 0.8); //10pt, ~13px;
 $alpha-font-size-larger: ceil($alpha-font-size-default * 1.1); //14pt, ~18px;
-$alpha-font-size-large: ceil($alpha-font-size-default * 1.6); //~17pt, ~23px;
+$alpha-font-size-large: floor($alpha-font-size-default * 1.45); //~17pt, ~23px;
 
 // Color
 // ==========================================================================

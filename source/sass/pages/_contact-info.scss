@@ -1,0 +1,44 @@
+@import "../base/variables";
+
+.contact-info{
+  //max-width: 250px;
+  padding: {
+    top: 20px;
+    bottom: 0;
+    left: 25px;
+    right: 25px;
+  };
+  background-color: lighten($alpha-gray-lighter, 3%);
+  border: 1px solid #DDD;
+  h3{
+    margin:{
+      top: 0;
+      bottom: 0;
+    }
+    padding: 0;
+    font-family: Impact;
+    font-size: 16.5pt;
+    font-weight: normal;
+    color: $alpha-gray-darker;
+  }
+  img{
+    display: block;
+    width: 100%;
+    margin: {
+      top: 15px;
+      bottom: 30px;
+    };
+  }
+  .address{
+    font-size: 12pt;
+  }
+  .mail{
+    margin:{
+      top: 25px;
+      bottom: 25px;
+    }
+    .fa{
+      color: $alpha-blue;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 @import "compass/css3/box-shadow";
 @import "compass/css3/transition";
 @import "../base/variables";
-@import "../bootstrap/bootstrap-variables";
+@import "../vendors/bootstrap-variables";
 
 .card-panel {
   @include transition(box-shadow .25s);
