@@ -87,6 +87,17 @@ vendor\bin\doctrine orm:validate-schema --skip-sync
 > обычно это внешние и вторичные ключи, поэтому я ставлю `--skip-sync`
 
 **Repository**
+
 ```cmd
 vendor\bin\doctrine orm:generate-repositories --filter="\\Categories$" src
 ```
+
+**Error**
+
+```bash
+...'could not find driver'...
+```
+> Не могу найти указанный в настройках pdo driver .....
+
+1. Проверяем модули подключенные в php `php -m` - должны быть PDO и pdo_mysql
+2. Проверяем откуда подгружается сам php `php -r "var_dump(getenv('PHPBIN'));"`

@@ -24,23 +24,23 @@
                     Партнеры
                 </a>
             </li>
-            <li>
+            {#<li>
                 <a href="{{ path('home') }}">
                     Клиентам
                 </a>
-            </li>
+            </li>#}
             <li>
                 <a href="{{ path('media.list', {'media':'news'}) }}">
                     Новости
                 </a>
             </li>
-            {#<li>
+            <li>
                 <a href="{{ path('home') }}">
                     О компании
                 </a>
-            </li>#}
-            <li class="{#hidden-sm#}">
-                <a href="{{ path('home') }}">
+            </li>
+            <li>
+                <a href="{{ path('contact') }}">
                     Контакты
                 </a>
             </li>
