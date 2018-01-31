@@ -1,4 +1,5 @@
 @import "../base/variables";
+@import "../bootstrap/bootstrap-variables";
 @import "compass/css3/transition";
 
 .media-item{
@@ -9,12 +10,12 @@
     font-weight: bolder;
     font-size: $alpha-font-size-default;
     >a{
-      color: $alpha-blue-dark;
+      color: $gray-darker;
       text-decoration: none;
       //text-transform: uppercase;
       @include transition(color .25s);
       &:hover{
-        color: $alpha-gray;
+        color: $alpha-gray-darker;
       }
     }
   }

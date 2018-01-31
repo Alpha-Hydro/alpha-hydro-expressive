@@ -3,15 +3,14 @@
  * Created by Alpha-Hydro.
  * @link http://www.alpha-hydro.com
  * @author Vladimir Mikhaylov <admin@alpha-hydro.com>
- * @copyright Copyright (c) 2017, Alpha-Hydro
+ * @copyright Copyright (c) 2018, Alpha-Hydro
  *
  */
 
 namespace Media\Action;
 
+use Api\Entity\Media;
 use Api\Entity\MediaCategories;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManager;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
@@ -22,7 +21,7 @@ use Zend\Diactoros\Response\JsonResponse;
 use Zend\Expressive\Router\RouteResult;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
-class NewsListAction implements ServerMiddlewareInterface
+class NewsViewAction implements ServerMiddlewareInterface
 {
     /**
      * @var TemplateRendererInterface
@@ -51,33 +50,23 @@ class NewsListAction implements ServerMiddlewareInterface
         $routeResult = $request->getAttribute(RouteResult::class);
         $routeMatchedParams = $routeResult->getMatchedParams();
 
-        $pathCategory = $routeMatchedParams['media'];
+        $pathPost = $routeMatchedParams['post'];
 
-        /** @var MediaCategories $mediaCategory */
-        $mediaCategory = $this->entityManager
-            ->getRepository(MediaCategories::class)
-            ->findOneByPath($pathCategory);
+        /** @var Media $mediaPost */
+        $mediaPost = $this->entityManager
+            ->getRepository(Media::class)
+            ->findOneByPath($pathPost);
 
-        if (!$mediaCategory)
+        if (!$mediaPost)
             return new HtmlResponse($this->templateRenderer->render('error::404'), 404);
 
-
-        $criteria = Criteria::create()
-            ->where(Criteria::expr()->eq("active", "1"))
-            ->andWhere(Criteria::expr()->eq('deleted', "0"))
-            ->orderBy(['timestamp' => 'DESC'])
-        ;
-
-        /** @var Collection $mediaPosts */
-        $mediaPosts = $mediaCategory->getMediaPosts()->matching($criteria);
-
         $data = [
-            'currentCategory' => $mediaCategory,
-            'mediaPosts' => $mediaPosts,
+            'currentCategory' => $mediaPost->getMediaCategory(),
+            'post' => $mediaPost,
             'sidebarListItem' => $this->entityManager->getRepository(MediaCategories::class)->findByActiveNoDeleted(),
         ];
 
-        return new HtmlResponse($this->templateRenderer->render('media::mediaList', $data));
-
+        //return new JsonResponse([$mediaPost->getName()]);
+        return new HtmlResponse($this->templateRenderer->render('media::mediaView', $data));
     }
 }
