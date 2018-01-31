@@ -11,5 +11,7 @@ use Media\Action;
 use Zend\Expressive\Application;
 
 /** @var Application $app */
-$app->get('/news', Action\NewsListAction::class, 'news.list');
+$app->get('/{media:news|article|action}', Action\NewsListAction::class, 'media.list');
+$app->get('/{media:news|article|action}/{post:[\w\-\_]+}', Action\NewsViewAction::class, 'media.view');
+
 
