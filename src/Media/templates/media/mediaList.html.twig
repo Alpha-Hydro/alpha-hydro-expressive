@@ -1,0 +1,42 @@
+{% extends '@layout/default.html.twig' %}
+{% set pageHeader = currentCategory.name | default('Новости') %}
+
+{% block title %}
+    {{ pageHeader }}
+{% endblock %}
+
+{% block pageHeader %}
+    {{ include('@layout/components/_pageHeader.twig') }}
+{% endblock %}
+
+{% block sidebar %}
+    {{ include('@media/components/_sidebar.twig') }}
+{% endblock %}
+
+{% block content %}
+    <div class="col-xs-12 col-md-9">
+        {{ include('@media/components/_breadcrumb.twig') }}
+        <div class="row">
+            {% for post in mediaPosts %}
+                <div class="media media-item line line-dotted">
+                    <div class="media-left col-xs-4 col-sm-3">
+                        <div class="thumbnail col-xs-12 col-sm-10 hover-shadow">
+                            <a href="{{ path('media.view', {'media': currentCategory.path, 'post': post.path}) }}">
+                                <img src="{{ post.image | default(asset('upload//media/items/LOGO_shlang.png'))}}" alt="{{ post.name }}" class="media-object">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            <a href="{{ path('media.view', {'media': currentCategory.path, 'post': post.path}) }}">{{ post.name }}</a>
+                        </h4>
+                        <p class="text-muted text-size-small">
+                            <small><em>{{ post.timestamp | date('d.m.Y') ~ ' г.' }}</em></small>
+                        </p>
+                        {{ post.sContent | raw }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
