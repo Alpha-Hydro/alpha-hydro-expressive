@@ -1,0 +1,14 @@
+@import "../base/variables";
+@import "../vendors/bootstrap-variables";
+@import "compass/css3/transition";
+
+.popup-gallery{
+  a{
+    @include transition(all .2s ease-in-out);
+    &:hover{
+      border-color: #dddddd;
+      text-decoration: none;
+      @extend .z-depth-1;
+    }
+  }
+}

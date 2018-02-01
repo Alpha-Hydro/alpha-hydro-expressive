@@ -121,6 +121,25 @@ var email = login + '@' + server;
 var url = 'mailto:' + email;
 mailElement.html('<a href="' + url + '"><i class="fa fa-envelope"></i> ' + email + '</a>');
 
+(function ($) {
+	return $('.popup-gallery').magnificPopup({
+		delegate: 'a',
+		type: 'image',
+		mainClass: 'mfp-img-mobile',
+		gallery: {
+			enabled: true,
+			navigateByImgClick: true,
+			preload: [0, 1]
+		},
+		image: {
+			tError: 'The image could not be loaded.',
+			titleSrc: function titleSrc(item) {
+				return item.el.attr('title');
+			}
+		}
+	});
+})(jQuery);
+
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {

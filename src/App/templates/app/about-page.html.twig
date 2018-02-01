@@ -1,0 +1,47 @@
+{% extends '@layout/default.html.twig' %}
+{% set pageHeader = page.title | default('Контакты') %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/magnific/magnific-popup.css') }}" />
+{% endblock %}
+
+{% block title %}
+    {{ pageHeader }}
+{% endblock %}
+
+{% block pageHeader %}
+    {{ include('@layout/components/_pageHeader.twig') }}
+{% endblock %}
+
+{% block sidebar %}
+    <div class="col-md-3">
+        <div class="sidebar">
+            {{ include('@app/components/_contact_sidebar.twig') }}
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="col-md-9">
+        <div class="mt2">
+            {{ page.contentHtml | raw }}
+        </div>
+        <div class="popup-gallery mt2">
+            <div class="col-md-4 item">
+                <a href="/upload/about/IMG_5130s.jpg" class="thumbnail"><img src="/upload/about/thumbs/IMG_5130s_thumb.jpg" alt=""></a>
+            </div>
+            <div class="col-md-4 item">
+                <a href="/upload/about/IMG_5140s2.jpg" class="thumbnail"><img src="/upload/about/thumbs/IMG_5140s2_thumb.jpg" alt=""></a>
+            </div>
+            <div class="col-md-4 item">
+                <a href="/upload/about/IMG_5145as.jpg" class="thumbnail"><img src="/upload/about/thumbs/IMG_5145as_thumb.jpg" alt=""></a>
+            </div>
+            <div class="col-md-4 col-md-offset-2 item">
+                <a href="/upload/about/IMG_5164s.jpg" class="thumbnail"><img src="/upload/about/thumbs/IMG_5164s_thumb.jpg" alt=""></a>
+            </div>
+            <div class="col-md-4 item">
+                <a href="/upload/about/IMG_5170s.jpg" class="thumbnail"><img src="/upload/about/thumbs/IMG_5170s_thumb.jpg" alt=""></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
