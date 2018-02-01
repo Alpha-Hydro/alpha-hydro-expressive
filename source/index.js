@@ -40,3 +40,10 @@ mainMenuToggle.click(function (e) {
 		}
 	})
 });
+
+let mailElement = $('.mail');
+const login  = 'info';
+const server = 'alpha-hydro.com';
+const email  = login+'@'+server;
+const url = 'mailto:'+email;
+mailElement.html('<a href="'+url+'"><i class="fa fa-envelope"></i> '+email+'</a>');

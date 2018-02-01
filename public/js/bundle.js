@@ -114,6 +114,13 @@ mainMenuToggle.click(function (e) {
 	});
 });
 
+var mailElement = $('.mail');
+var login = 'info';
+var server = 'alpha-hydro.com';
+var email = login + '@' + server;
+var url = 'mailto:' + email;
+mailElement.html('<a href="' + url + '"><i class="fa fa-envelope"></i> ' + email + '</a>');
+
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
