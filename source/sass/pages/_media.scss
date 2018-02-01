@@ -7,12 +7,12 @@
     max-height: 100px;
   }
   .media-heading{
-    font-weight: bolder;
-    font-size: $alpha-font-size-default;
+    font-weight: 500;
+    //font-size: $alpha-font-size-default;
+    text-transform: uppercase;
     >a{
-      color: $gray-darker;
+      color: $gray-base;
       text-decoration: none;
-      //text-transform: uppercase;
       @include transition(color .25s);
       &:hover{
         color: $alpha-gray-darker;

@@ -42,3 +42,32 @@
     }
   }
 }
+
+.nav-pills{
+  &.contact{
+    margin: {
+      top: 15px;
+      bottom: 15px;
+    }
+  }
+  .pill-item{
+    margin: 0;
+    @media (min-width: $screen-xs-min){
+      margin-right: 25px;
+    }
+  }
+}
+
+.tab-content{
+  .tab-pane{
+    img {
+      max-width: 100%;
+      max-height: 450px;
+    }
+  }
+}
+
+.googleMap,
+.yandexMap {
+  height: 450px;
+}

@@ -134,4 +134,12 @@ body{
     }
   }
 
+  .navbar{
+    &.main-menu{
+      @media (max-width: $screen-xs-max) {
+        min-height: auto;
+        margin: 0;
+      }
+    }
+  }
 }
