@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap/ah-bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/global.css') }}" />
     {% block stylesheets %}{% endblock %}
+    {% block javascriptHead %}{% endblock %}
 </head>
 <body class="app">
     <header class="app-header">
@@ -36,6 +37,7 @@
     </footer>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="{{ asset('js/bundle.js') }}"></script>
+    {% block javascriptBottom %}{% endblock %}
     {% block javascript %}{% endblock %}
 </body>
 </html>
