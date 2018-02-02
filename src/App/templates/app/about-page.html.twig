@@ -21,56 +21,52 @@
     </div>
 {% endblock %}
 
+{% set galleryImage = [
+    {"img":"IMG_5130s.jpg", "thumb":"IMG_5130s_thumb.jpg", "ofset":""},
+    {"img":"IMG_5140s2.jpg", "thumb":"IMG_5140s2_thumb.jpg", "ofset":""},
+    {"img":"IMG_5145as.jpg", "thumb":"IMG_5145as_thumb.jpg", "ofset":""},
+    {"img":"IMG_5164s.jpg", "thumb":"IMG_5164s_thumb.jpg", "ofset":"col-md-offset-2"},
+    {"img":"IMG_5170s.jpg", "thumb":"IMG_5170s_thumb.jpg", "ofset":""},
+] %}
+
 {% block content %}
     <div class="col-md-9">
         <div class="mt2">
             {{ page.contentHtml | raw }}
         </div>
         <div class="popup-gallery mt2">
-            <div class="col-md-4 item">
-                <a href="/upload/about/IMG_5130s.jpg" class="thumbnail"><img
-                            src="/upload/about/thumbs/IMG_5130s_thumb.jpg" alt=""></a>
-            </div>
-            <div class="col-md-4 item">
-                <a href="/upload/about/IMG_5140s2.jpg" class="thumbnail"><img
-                            src="/upload/about/thumbs/IMG_5140s2_thumb.jpg" alt=""></a>
-            </div>
-            <div class="col-md-4 item">
-                <a href="/upload/about/IMG_5145as.jpg" class="thumbnail"><img
-                            src="/upload/about/thumbs/IMG_5145as_thumb.jpg" alt=""></a>
-            </div>
-            <div class="col-md-4 col-md-offset-2 item">
-                <a href="/upload/about/IMG_5164s.jpg" class="thumbnail"><img
-                            src="/upload/about/thumbs/IMG_5164s_thumb.jpg" alt=""></a>
-            </div>
-            <div class="col-md-4 item">
-                <a href="/upload/about/IMG_5170s.jpg" class="thumbnail"><img
-                            src="/upload/about/thumbs/IMG_5170s_thumb.jpg" alt=""></a>
-            </div>
+            {% for image in galleryImage %}
+                <div class="col-md-4 {{ image.ofset }} item">
+                    <a href="{{ asset('upload/about/' ~ image.img) }}" class="thumbnail">
+                        <img src="{{ asset('upload/about/thumbs/' ~ image.thumb) }}" alt="">
+                    </a>
+                </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}
+
 {% block javascriptBottom %}
     <script src="{{ asset('js/magnific/jquery.magnific-popup.min.js') }}"></script>
     <script>
-        (function ($) {
-            return $('.popup-gallery').magnificPopup({
-                delegate: 'a',
-                type: 'image',
-                mainClass: 'mfp-img-mobile',
-                gallery: {
-                    enabled: true,
-                    navigateByImgClick: true,
-                    preload: [0, 1]
-                },
-                image: {
-                    tError: 'The image could not be loaded.',
-                    titleSrc: function (item) {
-                        return item.el.attr('title');
-                    }
-                }
-            });
-        })(jQuery);
+			(function ($) {
+				return $('.popup-gallery').magnificPopup({
+					delegate: 'a',
+					type: 'image',
+					mainClass: 'mfp-img-mobile',
+					gallery: {
+						enabled: true,
+						navigateByImgClick: true,
+						preload: [0, 1]
+					},
+					image: {
+						tError: 'The image could not be loaded.',
+						titleSrc: function (item) {
+							return item.el.attr('title');
+						}
+					}
+				});
+			})(jQuery);
     </script>
 {% endblock %}
 

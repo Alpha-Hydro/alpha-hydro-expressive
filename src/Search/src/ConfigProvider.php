@@ -55,7 +55,7 @@ class ConfigProvider
     {
         return [
             'paths' => [
-                'search' => [__DIR__ . '/../templates/search'],
+                /*'search' => [__DIR__ . '/../templates/search'],*/
             ],
         ];
     }
