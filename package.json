@@ -25,7 +25,8 @@
   "homepage": "https://github.com/Alpha-Hydro/alpha-hydro-expressive#readme",
   "dependencies": {
     "bootstrap-sass": "^3.3.7",
-    "jquery": "^3.2.1"
+    "jquery": "^3.2.1",
+    "magnific-popup": "^1.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

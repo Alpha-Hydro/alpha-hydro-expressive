@@ -40,7 +40,8 @@
             "Media\\": "src/Media/src/",
             "wandfluh\\": "src/wandfluh/src/",
             "Wandfluh\\": "src/Wandfluh/src/",
-            "Utils\\": "src/Utils/src/"
+            "Utils\\": "src/Utils/src/",
+            "Search\\": "src/Search/src/"
         }
     },
     "autoload-dev": {
