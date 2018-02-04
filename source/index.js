@@ -1,5 +1,8 @@
 import "./javascript/bootstrap/modal";
 import "./javascript/bootstrap/tab";
+import search from "./javascript/app/search";
+
+search('#search-query');
 
 let sidebarToggle = $('.sidebar-toggle');
 let sidebarDropdown = $('.sidebar-dropdown');

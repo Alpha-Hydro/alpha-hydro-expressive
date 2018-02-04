@@ -1,0 +1,22 @@
+{% extends '@layout/default.html.twig' %}
+{% set pageHeader = 'Результаты поиска' %}
+
+{% block title %}
+    {{ pageHeader }}
+{% endblock %}
+
+{% block pageHeader %}
+    {{ include('@layout/components/_pageHeader.twig') }}
+{% endblock %}
+
+{% block sidebar %}
+    {{ include('@search/components/_search_page_sidebar.twig') }}
+{% endblock %}
+
+{% block content %}
+    <div class="col-xs-12 col-sm-12 col-md-9">
+        {% if productList is defined and productList is not null %}
+            {{ include('@search/components/_search_list_item.twig') }}
+        {% endif %}
+    </div>
+{% endblock %}

@@ -11,13 +11,11 @@ namespace Search\Action;
 use Api\Entity\Products;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Query\ResultSetMapping;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
-use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\JsonResponse;
-use Zend\Expressive\Router\RouteResult;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
 class SearchPageAction implements ServerMiddlewareInterface
@@ -48,13 +46,21 @@ class SearchPageAction implements ServerMiddlewareInterface
 
         $queryParams = $request->getQueryParams();
 
+        /** @var Products[] $resultSearch */
         $resultSearch = $this->entityManager->getRepository(Products::class)
             ->searchSqlQuery($queryParams['query']);
 
         $data = [];
         foreach ($resultSearch as $item)
-            $data[] = $item->getName();
+            $data['products'][] = [
+                'name' => $item->getName(),
+                'sku' => $item->getSku(),
+                'path' => $item->getFullPath(),
+            ];
 
-        return new JsonResponse($data);
+        if ($request->hasHeader('X-Requested-With'))
+            return new JsonResponse($data);
+
+        return new HtmlResponse($this->templateRenderer->render('search::search-page', ['productList' => $resultSearch]));
     }
 }
