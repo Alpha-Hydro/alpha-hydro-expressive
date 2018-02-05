@@ -17,6 +17,8 @@ use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\JsonResponse;
 use Zend\Expressive\Template\TemplateRendererInterface;
+use Zend\Paginator\Adapter\ArrayAdapter;
+use Zend\Paginator\Paginator;
 
 class SearchPageAction implements ServerMiddlewareInterface
 {
@@ -51,16 +53,28 @@ class SearchPageAction implements ServerMiddlewareInterface
             ->searchSqlQuery($queryParams['query']);
 
         $data = [];
-        foreach ($resultSearch as $item)
-            $data['products'][] = [
-                'name' => $item->getName(),
-                'sku' => $item->getSku(),
-                'path' => $item->getFullPath(),
+        if ($resultSearch){
+            $adapter = new ArrayAdapter($resultSearch);
+            $paginator = new Paginator($adapter);
+            $paginator->setDefaultItemCountPerPage(12);
+
+            $page = ($queryParams['page']) ? $queryParams['page'] : 1;
+            $paginator->setCurrentPageNumber($page);
+
+            if ($request->hasHeader('X-Requested-With')){
+                $paginator->setCurrentPageNumber(1);
+            }
+
+            $data = [
+                'productList' => $paginator->getCurrentItems(),
+                'currentPageNumber' => $paginator->getCurrentPageNumber(),
+                'total' => $paginator->getTotalItemCount()
             ];
+        }
 
         if ($request->hasHeader('X-Requested-With'))
             return new JsonResponse($data);
 
-        return new HtmlResponse($this->templateRenderer->render('search::search-page', ['productList' => $resultSearch]));
+        return new HtmlResponse($this->templateRenderer->render('search::search-page', $data));
     }
 }
