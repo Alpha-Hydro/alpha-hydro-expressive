@@ -1,0 +1,17 @@
+{% extends '@layout/defaultAdmin.html.twig' %}
+
+{% block title %}Catalog{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-4">
+            <a href="{{ path('admin.catalog.category') }}">Категории</a>
+        </div>
+        <div class="col-md-4">
+            <a href="">Продукты</a>
+        </div>
+        <div class="col-md-4">
+            <a href="">Архив</a>
+        </div>
+    </div>
+{% endblock %}

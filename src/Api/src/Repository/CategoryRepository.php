@@ -29,6 +29,32 @@ class CategoryRepository extends EntityRepository
         return $categories;
     }
 
+    public function findByNoDeleted($parentId = 0)
+    {
+        $categories = $this->findBy(
+            [
+                'parentId' => $parentId,
+                'deleted' => 0,
+            ],
+            ['sorting' => 'ASC']
+        );
+
+        return $categories;
+    }
+
+    public function findByDeleted($parentId = 0)
+    {
+        $categories = $this->findBy(
+            [
+                'parentId' => $parentId,
+                'deleted' => 1,
+            ],
+            ['sorting' => 'ASC']
+        );
+
+        return $categories;
+    }
+
     /**
      * @param int $parentId
      * @return array|int

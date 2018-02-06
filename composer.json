@@ -42,7 +42,8 @@
             "wandfluh\\": "src/wandfluh/src/",
             "Wandfluh\\": "src/Wandfluh/src/",
             "Utils\\": "src/Utils/src/",
-            "Search\\": "src/Search/src/"
+            "Search\\": "src/Search/src/",
+            "Admin\\": "src/Admin/src/"
         }
     },
     "autoload-dev": {
