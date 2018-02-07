@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Categories
  *
- * @ORM\Table(name="categories", indexes={@ORM\Index(name="order", columns={"order"}), @ORM\Index(name="parent_id", columns={"parent_id"})})
+ * @ORM\Table(name="categories", indexes={@ORM\Index(name="parent_id", columns={"parent_id"})})
  * @ORM\Entity(repositoryClass="Api\Repository\CategoryRepository")
  */
 class Categories
@@ -18,7 +18,7 @@ class Categories
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="bigint", precision=0, scale=0, nullable=false, unique=false)
+     * @ORM\Column(name="id", type="bigint", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -27,133 +27,126 @@ class Categories
     /**
      * @var integer
      *
-     * @ORM\Column(name="parent_id", type="bigint", precision=0, scale=0, nullable=false, unique=false)
+     * @ORM\Column(name="parent_id", type="bigint", nullable=false)
      */
     private $parentId;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string", length=255, precision=0, scale=0, nullable=true, unique=false)
+     * @ORM\Column(name="image", type="string", length=255, nullable=true)
      */
     private $image;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, precision=0, scale=0, nullable=false, unique=false)
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text", length=65535, precision=0, scale=0, nullable=true, unique=false)
+     * @ORM\Column(name="description", type="text", length=65535, nullable=true)
      */
     private $description;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="add_date", type="datetime", precision=0, scale=0, nullable=true, unique=false)
+     * @ORM\Column(name="add_date", type="datetime", nullable=true)
      */
     private $addDate;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="mod_date", type="datetime", precision=0, scale=0, nullable=true, unique=false)
+     * @ORM\Column(name="mod_date", type="datetime", nullable=true)
      */
     private $modDate;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="order", type="bigint", precision=0, scale=0, nullable=true, unique=false)
-     */
-    private $order;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="generate", type="boolean", precision=0, scale=0, nullable=true, unique=false)
+     * @ORM\Column(name="generate", type="integer", nullable=true)
      */
     private $generate;
 
     /**
-     * @var boolean
+     * @var integer
      *
-     * @ORM\Column(name="active", type="boolean", precision=0, scale=0, nullable=false, unique=false)
+     * @ORM\Column(name="active", type="integer", nullable=false)
      */
     private $active;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="full_path", type="string", length=255, precision=0, scale=0, nullable=true, unique=false)
+     * @ORM\Column(name="full_path", type="string", length=255, nullable=true)
      */
     private $fullPath;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="meta_description", type="text", precision=0, scale=0, nullable=true, unique=false)
+     * @ORM\Column(name="meta_description", type="text", length=65535, nullable=true)
      */
     private $metaDescription;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="meta_keywords", type="string", length=255, precision=0, scale=0, nullable=true, unique=false)
+     * @ORM\Column(name="meta_keywords", type="string", length=255, nullable=true)
      */
     private $metaKeywords;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="meta_title", type="string", length=255, precision=0, scale=0, nullable=true, unique=false)
+     * @ORM\Column(name="meta_title", type="string", length=255, nullable=true)
      */
     private $metaTitle;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="path", type="string", length=128, precision=0, scale=0, nullable=true, unique=false)
+     * @ORM\Column(name="path", type="string", length=128, nullable=true)
      */
     private $path;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="sorting", type="integer", precision=0, scale=0, nullable=false, unique=false)
+     * @ORM\Column(name="sorting", type="integer", nullable=false)
      */
     private $sorting;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="deleted", type="integer", precision=0, scale=0, nullable=false, unique=false)
+     * @ORM\Column(name="deleted", type="integer", nullable=false)
      */
     private $deleted;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="upload_path", type="string", length=128, precision=0, scale=0, nullable=true, unique=false)
+     * @ORM\Column(name="upload_path", type="string", length=128, nullable=true)
      */
     private $uploadPath;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="content_markdown", type="text", length=65535, precision=0, scale=0, nullable=true, unique=false)
+     * @ORM\Column(name="content_markdown", type="text", length=65535, nullable=true)
      */
     private $contentMarkdown;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="content_html", type="text", length=65535, precision=0, scale=0, nullable=true, unique=false)
+     * @ORM\Column(name="content_html", type="text", length=65535, nullable=true)
      */
     private $contentHtml;
 
@@ -345,33 +338,9 @@ class Categories
     }
 
     /**
-     * Set order
-     *
-     * @param integer $order
-     *
-     * @return Categories
-     */
-    public function setOrder($order)
-    {
-        $this->order = $order;
-
-        return $this;
-    }
-
-    /**
-     * Get order
-     *
-     * @return integer
-     */
-    public function getOrder()
-    {
-        return $this->order;
-    }
-
-    /**
      * Set generate
      *
-     * @param boolean $generate
+     * @param integer $generate
      *
      * @return Categories
      */
@@ -395,7 +364,7 @@ class Categories
     /**
      * Set active
      *
-     * @param boolean $active
+     * @param integer $active
      *
      * @return Categories
      */
@@ -409,7 +378,7 @@ class Categories
     /**
      * Get active
      *
-     * @return boolean
+     * @return integer
      */
     public function getActive()
     {

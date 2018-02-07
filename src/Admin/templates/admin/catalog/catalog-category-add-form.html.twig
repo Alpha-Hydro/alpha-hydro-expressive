@@ -1,0 +1,41 @@
+{% extends '@layout/defaultAdmin.html.twig' %}
+
+{% block title %}Add Category{% endblock %}
+
+{% import "@admin/components/_forms.twig" as forms %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-9">
+            <h1 class="page-header">Новая категория <small>Временная форма</small></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9">
+            <form class="form-horizontal" action="" method="post" enctype="application/x-www-form-urlencoded">
+                <div class="form-group">
+                    <label for="name" class="col-sm-3 control-label">Название категории</label>
+                    <div class="col-sm-9">
+                        {{ forms.input('category[name]', 'name', 'Наименование категории', 'required') }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="uploadPath" class="col-sm-3 control-label">Изображение</label>
+                    <div class="col-sm-5">
+                        {{ forms.input('category[uploadPath]', 'upload_path', 'папка с изображением', 'required') }}
+                    </div>
+                    <div class="col-sm-4">
+                        {{ forms.input('category[image]', 'image', 'файл изображения', 'required') }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-10">
+                        <button type="submit" class="btn btn-success">Сохранить</button>
+                        <a href="{{ path('admin.catalog.category') }}" class="btn btn-default">Отмена</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

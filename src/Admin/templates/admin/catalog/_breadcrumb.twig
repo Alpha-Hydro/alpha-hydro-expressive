@@ -1,0 +1,13 @@
+<ul class="breadcrumb">
+    {% if currentCategory is defined and currentCategory is not null %}
+        <li><a href="{{ path('admin.catalog.category') }}">Каталог</a></li>
+    {% endif %}
+    {% if breadcrumb is defined %}
+        {% for item in breadcrumb %}
+            <li>
+                <a href="{{ path('admin.catalog.category.id', {'id': item.id}) }}">{{ item.name }}</a>
+            </li>
+        {% endfor %}
+    {% endif %}
+    <li class="active"><span>{{ currentCategory.name | default('Каталог') }}</span></li>
+</ul>

@@ -9,7 +9,6 @@
 
 namespace Admin\Action\Catalog;
 
-use Api\Entity\Categories;
 use Catalog\Service\CategoriesService;
 use Doctrine\ORM\EntityManager;
 use Interop\Http\ServerMiddleware\DelegateInterface;
@@ -17,12 +16,12 @@ use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterfa
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Expressive\Router\RouteResult;
+use Zend\Diactoros\Response\JsonResponse;
+use Zend\Diactoros\Response\RedirectResponse;
+use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
-use Zend\Paginator\Adapter\ArrayAdapter;
-use Zend\Paginator\Paginator;
 
-class AdminCatalogCategoryAction implements ServerMiddlewareInterface
+class AdminCatalogCategoryAddPost implements ServerMiddlewareInterface
 {
     /**
      * @var TemplateRendererInterface
@@ -35,6 +34,12 @@ class AdminCatalogCategoryAction implements ServerMiddlewareInterface
     private $entityManager;
 
     /**
+     * @var RouterInterface
+     */
+    private $router;
+
+
+    /**
      * @var CategoriesService
      */
     private $categoriesService;
@@ -43,37 +48,35 @@ class AdminCatalogCategoryAction implements ServerMiddlewareInterface
      * PipelineLendingPageAction constructor.
      * @param TemplateRendererInterface $templateRenderer
      * @param EntityManager $entityManager
+     * @param CategoriesService $categoriesService
+     * @param RouterInterface $router
      */
-    public function __construct(TemplateRendererInterface $templateRenderer, EntityManager $entityManager, CategoriesService $categoriesService)
+    public function __construct(
+        TemplateRendererInterface $templateRenderer,
+        EntityManager $entityManager,
+        CategoriesService $categoriesService,
+        RouterInterface $router
+    )
     {
         $this->templateRenderer = $templateRenderer;
         $this->entityManager = $entityManager;
         $this->categoriesService = $categoriesService;
+        $this->router = $router;
     }
 
+    /**
+     * @param ServerRequestInterface $request
+     * @param DelegateInterface $delegate
+     * @return ResponseInterface|JsonResponse
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-        $queryParams = $request->getQueryParams();
+        $parsedBody = $request->getParsedBody();
 
-        $categories = $this->entityManager->getRepository(Categories::class)
-            ->findByNoDeleted();
+        $this->categoriesService->create($parsedBody);
 
-        $data = [];
-        if (!empty($categories)){
-            $paginatorAdapter = new ArrayAdapter($categories);
-            $paginator = new Paginator($paginatorAdapter);
-            $paginator->setDefaultItemCountPerPage(15);
+        return new RedirectResponse($this->router->generateUri('admin.catalog.category'));
 
-            $page = ($queryParams['page']) ? $queryParams['page'] : 1;
-            $paginator->setCurrentPageNumber($page);
-
-            $data = [
-                'itemList' => $paginator->getCurrentItems(),
-                'currentPageNumber' => $paginator->getCurrentPageNumber(),
-                'total' => $paginator->getTotalItemCount()
-            ];
-        }
-
-        return new HtmlResponse($this->templateRenderer->render('admin::catalog/catalog-category-list', $data));
     }
 }

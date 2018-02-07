@@ -3,12 +3,20 @@ const path = require('path');
 const ENVIRONMENT = process.env.NODE_ENV || 'development';
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const PATHS = {
+	src: path.resolve(__dirname, 'source'),
+	public: path.resolve(__dirname, 'public/js'),
+};
+
 let config = {
-	context: path.resolve(__dirname, 'source'),
-	entry: './index.js',
+	context: PATHS.src,
+	entry: {
+		bundle: './index.js',
+		admin: './admin.js'
+	},
 	output: {
-		filename: 'js/bundle.js',
-		path: path.resolve(__dirname, 'public')
+		filename: '[name].js',
+		path: PATHS.public
 	},
 	resolve: {
 		extensions: ['.js', '.jsx', '.css']

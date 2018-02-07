@@ -11,6 +11,7 @@ namespace Admin\Action\Catalog;
 
 use Api\Entity\Categories;
 use Catalog\Service\CategoriesService;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManager;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
@@ -22,7 +23,7 @@ use Zend\Expressive\Template\TemplateRendererInterface;
 use Zend\Paginator\Adapter\ArrayAdapter;
 use Zend\Paginator\Paginator;
 
-class AdminCatalogCategoryAction implements ServerMiddlewareInterface
+class AdminCatalogCategoryListAction implements ServerMiddlewareInterface
 {
     /**
      * @var TemplateRendererInterface
@@ -55,12 +56,26 @@ class AdminCatalogCategoryAction implements ServerMiddlewareInterface
     {
         $queryParams = $request->getQueryParams();
 
-        $categories = $this->entityManager->getRepository(Categories::class)
-            ->findByNoDeleted();
+        /** @var RouteResult $routeResult */
+        $routeResult = $request->getAttribute(RouteResult::class);
+        $routeMatchedParams = $routeResult->getMatchedParams();
+
+        /** @var Categories $currentCategory */
+        $currentCategory = $this->entityManager
+            ->getRepository(Categories::class)
+            ->find($routeMatchedParams['id']);
+
+        if(!$currentCategory)
+            return new HtmlResponse($this->templateRenderer->render('error::404'), 404);
+
+
+
+        //Получаем список категорий в текущей категории
+        $categoriesList = $currentCategory->getChildren();
 
         $data = [];
-        if (!empty($categories)){
-            $paginatorAdapter = new ArrayAdapter($categories);
+        if ($categoriesList->count() != 0){
+            $paginatorAdapter = new ArrayAdapter($categoriesList->toArray());
             $paginator = new Paginator($paginatorAdapter);
             $paginator->setDefaultItemCountPerPage(15);
 
@@ -73,6 +88,10 @@ class AdminCatalogCategoryAction implements ServerMiddlewareInterface
                 'total' => $paginator->getTotalItemCount()
             ];
         }
+        $data['currentCategory'] = $currentCategory;
+
+        $parentCategory = $currentCategory->getParent();
+        $data['breadcrumb'] = $this->categoriesService->getBreadcrumb($parentCategory);
 
         return new HtmlResponse($this->templateRenderer->render('admin::catalog/catalog-category-list', $data));
     }

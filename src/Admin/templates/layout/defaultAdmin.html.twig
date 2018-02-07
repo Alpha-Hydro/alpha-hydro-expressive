@@ -13,6 +13,7 @@
         .app-content { flex: 1; }
         .app-footer { padding-bottom: 1em; }
         .zf-green, h2 a { color: #68b604; }
+        h1 > small {display: block; }
     </style>
     {% block stylesheets %}{% endblock %}
 </head>
@@ -33,21 +34,19 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="{{ path('admin.home') }}" target="_blank">
+                            <a href="{{ path('admin.home') }}">
                                 <i class="fa fa-tachometer"></i> Dashboard
                             </a>
                         </li>
                         <li>
-                            <a href="{{ path('admin.catalog') }}" target="_blank">
+                            <a href="{{ path('admin.catalog') }}">
                                 <i class="fa fa-book"></i> Catalog
                             </a>
                         </li>
-                        <li>
-                            <a href="{{ path('api.ping') }}">
-                                Ping Test
-                            </a>
-                        </li>
+                        {% block navbarItem %}{% endblock %}
                     </ul>
+                    {% block navbarLeft %}{% endblock %}
+                    {% block navbarRight %}{% endblock %}
                 </div>
             </div>
         </nav>
