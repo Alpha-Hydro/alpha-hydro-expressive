@@ -11,6 +11,7 @@ namespace Admin\Action\Catalog;
 
 use Api\Entity\Categories;
 use Catalog\Service\CategoriesService;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManager;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
@@ -55,12 +56,18 @@ class AdminCatalogCategoryAction implements ServerMiddlewareInterface
     {
         $queryParams = $request->getQueryParams();
 
+        $criteria = Criteria::create()
+            ->where(Criteria::expr()->eq('deleted', 0))
+            ->andWhere(Criteria::expr()->eq('parentId', 0))
+            ->orWhere(Criteria::expr()->eq('parentId', null))
+            ->orderBy(['sorting' => 'ASC']);
+
         $categories = $this->entityManager->getRepository(Categories::class)
-            ->findByNoDeleted();
+            ->matching($criteria);
 
         $data = [];
         if (!empty($categories)){
-            $paginatorAdapter = new ArrayAdapter($categories);
+            $paginatorAdapter = new ArrayAdapter($categories->toArray());
             $paginator = new Paginator($paginatorAdapter);
             $paginator->setDefaultItemCountPerPage(15);
 

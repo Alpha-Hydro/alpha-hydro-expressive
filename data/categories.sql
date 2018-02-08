@@ -10,6 +10,9 @@ ALTER TABLE categories MODIFY active INT(11) NOT NULL;
 ALTER TABLE categories MODIFY meta_description TEXT;
 
 ALTER TABLE categories DROP `order`;
+ALTER TABLE categories MODIFY parent_id INT(11);
 
 DROP INDEX `parent_id` ON categories;
-ALTER TABLE categories MODIFY parent_id INT(11);
+CREATE INDEX fk_categories_categories_idx ON categories (parent_id);
+
+ALTER TABLE categories MODIFY id INT(11) NOT NULL AUTO_INCREMENT;
