@@ -1,0 +1,26 @@
+{% macro input(name, id, placeholder, required, value ) %}
+    <input type="text" class="form-control" placeholder="{{ placeholder|default('') }}..." name="{{ name }}"
+           id="{{ id }}" {{ required|default('') }} value="{{ value|default('') }}"/>
+{% endmacro %}
+
+{% macro inputGroupAddon(name, id, addon, placeholder, required, pattern ) %}
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="{{ placeholder|default('') }}..." name="{{ name }}"
+               id="{{ id }}" {{ required|default('') }} pattern="{{ pattern|default('*') }}"/>
+        <span class="input-group-addon">{{ addon }}</span>
+    </div>
+{% endmacro %}
+
+{% macro select(name, id, placeholder, optionItems, required) %}
+    <select name="{{ name }}" id="{{ id }}" class="form-control" {{ required|default('') }}>
+        <option value="0" disabled selected hidden>{{ placeholder|default('') }}...</option>
+        {% for item in optionItems %}
+            <option value="{{ item.id }}">{{ item.name }}</option>
+        {% endfor %}
+    </select>
+{% endmacro %}
+
+{% macro textarea(name, id, placeholder, required, rows) %}
+    <textarea name="{{ name }}" id="{{ id }}" class="form-control" {{ required|default('') }}
+              rows="{{ rows|default(3) }}" placeholder="{{ placeholder|default('') }}..."></textarea>
+{% endmacro %}

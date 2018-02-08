@@ -1,0 +1,61 @@
+{% extends '@layout/defaultAdmin.html.twig' %}
+
+{% block title %}Catalog{% endblock %}
+
+{% block navbarItem %}
+    <li>
+        <a href="{{ path('admin.catalog.category.add') }}">
+            <i class="fa fa-plus"></i> Новая категория
+        </a>
+    </li>
+{% endblock %}
+
+{% block content %}
+    {% include '@admin/catalog/_breadcrumb.twig' %}
+    {% if itemList is defined %}
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>Наименование</th>
+                <th>Дерево</th>
+                <th>url на сайт</th>
+                <th>Активность</th>
+                <th>Действия</th>
+            </tr>
+            </thead>
+            {% for item in itemList %}
+                <tr class="{{ item.active != 1 ? 'warning' : '' }}">
+                    <td>{{ item.id }}</td>
+                    <td><a href="{{ path('admin.catalog.category.id', {'id' : item.id  }) }}">{{ item.name }}</a></td>
+                    <td>
+                        {% if item.children|length > 0 %}
+                            <a href="" class="btn btn-default btn-sm">
+                                <i class="fa fa-sitemap"></i>
+                            </a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ path('catalog_category_list', {'full_path':item.fullPath}) }}" target="_blank">{{ item.fullPath }}</a>
+                    </td>
+                    <td>{{ item.active != 1 ? '<span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>' : '' }}</td>
+                    <td>
+                        <div class="btn-group btn-group-sm">
+                            <a href="{{ path('admin.catalog.category.update', {'id':item.id}) }}"
+                               class="btn btn-default">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                            </a>
+                            <button type="button" class="btn btn-default">
+                                <span class="glyphicon glyphicon-eye-{{ item.active != 1 ? 'open' : 'close' }}"
+                                      aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-default">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}

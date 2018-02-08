@@ -1,16 +1,23 @@
 <?php
+/**
+ * Created by Alpha-Hydro.
+ * @link http://www.alpha-hydro.com
+ * @author Vladimir Mikhaylov <admin@alpha-hydro.com>
+ * @copyright Copyright (c) 2018, Alpha-Hydro
+ *
+ */
 
-namespace App\Action;
+namespace Admin\Action;
 
-use Api\Entity\Categories;
 use Doctrine\ORM\EntityManager;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
-class HomePageAction implements ServerMiddlewareInterface
+class AdminHomeAction implements ServerMiddlewareInterface
 {
     /**
      * @var TemplateRendererInterface
@@ -35,13 +42,6 @@ class HomePageAction implements ServerMiddlewareInterface
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-        $catalogCategories = $this->entityManager->getRepository(Categories::class)
-            ->findByActiveNoDeleted(null);
-
-        $data = [
-            'catalogCategories' => $catalogCategories,
-        ];
-
-        return new HtmlResponse($this->templateRenderer->render('app::home-page', $data));
+        return new HtmlResponse($this->templateRenderer->render('admin::home-page'));
     }
 }

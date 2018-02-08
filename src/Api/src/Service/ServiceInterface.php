@@ -12,5 +12,14 @@ namespace Api\Service;
 
 interface ServiceInterface
 {
+    public function save($data, $id = null);
+
+    public function update($id, $data);
+
+    public function delete($id);
+
+    public function disable($id);
+
+    public function enable($id);
 
 }

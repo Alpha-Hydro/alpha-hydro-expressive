@@ -19,6 +19,7 @@
         "zendframework/zend-expressive-helpers": "^4.0",
         "zendframework/zend-expressive-twigrenderer": "^1.4",
         "zendframework/zend-expressive-zendrouter": "^2.0.1",
+        "zendframework/zend-paginator": "^2.8",
         "zendframework/zend-servicemanager": "^3.3",
         "zendframework/zend-stdlib": "^3.1"
     },
@@ -41,7 +42,8 @@
             "wandfluh\\": "src/wandfluh/src/",
             "Wandfluh\\": "src/Wandfluh/src/",
             "Utils\\": "src/Utils/src/",
-            "Search\\": "src/Search/src/"
+            "Search\\": "src/Search/src/",
+            "Admin\\": "src/Admin/src/"
         }
     },
     "autoload-dev": {
