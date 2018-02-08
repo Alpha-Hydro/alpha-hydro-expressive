@@ -1,6 +1,6 @@
-{% macro input(name, id, placeholder, required ) %}
+{% macro input(name, id, placeholder, required, value ) %}
     <input type="text" class="form-control" placeholder="{{ placeholder|default('') }}..." name="{{ name }}"
-           id="{{ id }}" {{ required|default('') }}/>
+           id="{{ id }}" {{ required|default('') }} value="{{ value|default('') }}"/>
 {% endmacro %}
 
 {% macro inputGroupAddon(name, id, addon, placeholder, required, pattern ) %}

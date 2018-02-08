@@ -23,13 +23,20 @@ class CategoriesService implements ServiceInterface
      */
     private $entityManager;
 
+
+    /**
+     * @var Slugify
+     */
+    private $slugifyFilter;
+
     /**
      * AdsService constructor.
      * @param EntityManager $entityManager
      */
-    public function __construct(EntityManager $entityManager)
+    public function __construct(EntityManager $entityManager, Slugify $slugify)
     {
         $this->entityManager = $entityManager;
+        $this->slugifyFilter = $slugify;
     }
 
     public function getBreadcrumb(Categories $category = null){
@@ -60,25 +67,56 @@ class CategoriesService implements ServiceInterface
     }
 
     /**
-     * @param $data
+     * @param array $data
+     * @param null | integer $id
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function create($data)
+    public function save($data, $id = null)
     {
-        $category = new Categories();
         $currentDate = new \DateTime('now');
-        $category->setAddDate($currentDate);
+        if ($id == null){
+            $category = new Categories();
+            $category->setAddDate($currentDate);
+        }
+        else{
+            $category = $this->entityManager->getRepository(Categories::class)
+                ->find($id);
+        }
         $category->setModDate($currentDate);
 
         $category->setName($data['category']['name']);
+
         $category->setUploadPath($data['category']['uploadPath']);
         $category->setImage($data['category']['image']);
         // TODO: upload image
 
-        $slugify = new Slugify();
-        $category->setPath($slugify->filter($data['category']['name']));
-        //$category->setFullPath($this->generateFullPath($category));
-        $category->setFullPath($slugify->filter($data['category']['name']));
+        if ($data['category']['parent'] && $data['category']['parent'] != 0){
+            $category->setParent(
+                $this->entityManager
+                    ->getRepository(Categories::class)
+                    ->find($data['category']['parent'])
+            );
+        }
+        else{
+            $category->setParent(null);
+        }
+
+        $this->slugifyFilter->setSeparator('-');
+        $category->setPath($this->slugifyFilter->filter($data['category']['name']));
+        $category->setFullPath($this->generateFullPath($category));
+
+        // TODO: setFullPath by children items
+        // TODO: setPath and setFullPath by hand
+        /*$category->setPath(
+            ($data['category']['path'])
+                ? $data['category']['path']
+                : $this->slugifyFilter->filter($data['category']['name'])
+        );
+        $category->setFullPath(
+            ($data['category']['fullPath'])
+                ? $data['category']['fullPath']
+                : $this->generateFullPath($category)
+        );*/
 
         $category->setDescription($data['category']['description']);
 
@@ -94,28 +132,22 @@ class CategoriesService implements ServiceInterface
         $category->setMetaDescription($data['category']['metaDescription']);
         $category->setMetaKeywords($data['category']['metaKeywords']);
 
-        if ($data['category']['parent']){
-            $category->setParent(
-                $this->entityManager
-                    ->getRepository(Categories::class)
-                    ->find($data['category']['parent'])
-            );
-        }
-        else {
-            $category->setParentId(0);
-        }
-
-        $category->setActive(1);
-        $category->setDeleted(0);
+        $category->setActive(($data['category']['active']) ? $data['category']['active'] : 1);
+        $category->setDeleted(($data['category']['deleted']) ? $data['category']['deleted']: 0);
         $category->setSorting(($data['category']['sorting']) ? $data['category']['sorting']: 0);
 
         $this->entityManager->persist($category);
         $this->entityManager->flush();
     }
 
+    /**
+     * @param $id
+     * @param $data
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function update($id, $data)
     {
-        // TODO: Implement update() method.
+        $this->save($data, $id);
     }
 
     public function delete($id)

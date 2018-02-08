@@ -37,4 +37,5 @@ $app->get('/admin/catalog', Admin\Action\Catalog\AdminCatalogAction::class, 'adm
 $app->get('/admin/catalog/category', Admin\Action\Catalog\AdminCatalogCategoryAction::class, 'admin.catalog.category');
 $app->get('/admin/catalog/category/{id:[\d]+}', Admin\Action\Catalog\AdminCatalogCategoryListAction::class, 'admin.catalog.category.id');
 $app->route('/admin/catalog/category/add', [Admin\Action\Catalog\AdminCatalogCategoryAddForm::class, Admin\Action\Catalog\AdminCatalogCategoryAddPost::class], ['GET', 'POST'],'admin.catalog.category.add');
+$app->route('/admin/catalog/category/update/{id:[\d]+}', [Admin\Action\Catalog\AdminCatalogCategoryUpdateForm::class, Admin\Action\Catalog\AdminCatalogCategoryUpdatePost::class], ['GET', 'POST'],'admin.catalog.category.update');
 

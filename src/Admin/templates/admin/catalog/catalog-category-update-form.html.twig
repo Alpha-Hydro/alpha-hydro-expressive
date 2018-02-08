@@ -1,0 +1,83 @@
+{% extends '@layout/defaultAdmin.html.twig' %}
+
+{% block title %}Update Category{% endblock %}
+
+{% import "@admin/components/_forms.twig" as forms %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-9">
+            <h1 class="page-header">{{ category.name }} <small>Временная форма</small></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9">
+            <form class="form-horizontal" action="" method="post" enctype="application/x-www-form-urlencoded">
+                <div class="form-group">
+                    <label for="name" class="col-sm-3 control-label">Название категории</label>
+                    <div class="col-sm-9">
+                        {{ forms.input('category[name]', 'name', 'Наименование категории', 'required', category.name) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="parent" class="col-sm-3 control-label">Родительская категория</label>
+                    <div class="col-sm-9">
+                        <select name="category[parent]" id="parent" class="form-control">
+                            <option value="0">Root (корневая)</option>
+                            {% for item in rootCategories %}
+                                <option value="{{ item.id }}" {% if category.parent is not null and category.parent.id == item.id %}selected{% endif %}>{{ item.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fullPath" class="col-sm-3 control-label">Url/Path</label>
+                    <div class="col-sm-5">
+                        {{ forms.input('category[fullPath]', 'full_path', 'full path', 'required', category.fullPath) }}
+                    </div>
+                    <div class="col-sm-4">
+                        {{ forms.input('category[path]', 'path', 'path', 'required', category.path) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="uploadPath" class="col-sm-3 control-label">Изображение</label>
+                    <div class="col-sm-5">
+                        {{ forms.input('category[uploadPath]', 'upload_path', 'папка с изображением', 'required', category.uploadPath) }}
+                    </div>
+                    <div class="col-sm-4">
+                        {{ forms.input('category[image]', 'image', 'файл изображения', 'required', category.image) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="sorting" class="col-sm-3 control-label">Сортировка</label>
+                    <div class="col-sm-2">
+                        {{ forms.input('category[sorting]', 'upload_path', 'папка с изображением', 'required', category.sorting) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <div class="checkbox">
+                            <label>
+                                <input name="category[active]" type="checkbox" value="{{ category.active }}"> Активность
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <hr/>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-10">
+                        <button type="submit" class="btn btn-success">Сохранить</button>
+                        <a href="{{ path('admin.catalog.category') }}" class="btn btn-default">Отмена</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

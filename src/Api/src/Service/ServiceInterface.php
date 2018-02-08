@@ -12,7 +12,7 @@ namespace Api\Service;
 
 interface ServiceInterface
 {
-    public function create($data);
+    public function save($data, $id = null);
 
     public function update($id, $data);
 

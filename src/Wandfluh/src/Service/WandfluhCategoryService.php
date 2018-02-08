@@ -89,9 +89,9 @@ class WandfluhCategoryService implements ServiceInterface
     }
 
 
-    public function create($data)
+    public function save($data)
     {
-        // TODO: Implement create() method.
+        // TODO: Implement save() method.
     }
 
     public function update($id, $data)

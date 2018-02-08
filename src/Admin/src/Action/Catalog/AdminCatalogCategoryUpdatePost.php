@@ -15,13 +15,11 @@ use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Diactoros\Response\JsonResponse;
 use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
-class AdminCatalogCategoryAddPost implements ServerMiddlewareInterface
+class AdminCatalogCategoryUpdatePost implements ServerMiddlewareInterface
 {
     /**
      * @var TemplateRendererInterface
@@ -67,16 +65,16 @@ class AdminCatalogCategoryAddPost implements ServerMiddlewareInterface
     /**
      * @param ServerRequestInterface $request
      * @param DelegateInterface $delegate
-     * @return ResponseInterface|JsonResponse
+     * @return RedirectResponse|ResponseInterface
      * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
+        $id = $request->getAttribute('id');
         $parsedBody = $request->getParsedBody();
 
-        $this->categoriesService->save($parsedBody);
+        $this->categoriesService->update($id, $parsedBody);
 
         return new RedirectResponse($this->router->generateUri('admin.catalog.category'));
-
     }
 }
