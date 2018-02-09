@@ -15,7 +15,16 @@ use Doctrine\ORM\EntityRepository;
  */
 class CategoryRepository extends EntityRepository
 {
-    public function findByActiveNoDeleted($parentId = 0)
+    public function findOneByFullPath($fullPath)
+    {
+        return $this->findOneBy([
+            'fullPath' => $fullPath,
+            'active' => 1,
+            'deleted' => 0,
+        ]);
+    }
+
+    public function findByActiveNoDeleted($parentId = null)
     {
         $categories = $this->findBy(
             [

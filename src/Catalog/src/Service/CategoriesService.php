@@ -105,7 +105,7 @@ class CategoriesService implements ServiceInterface
         $category->setPath($this->slugifyFilter->filter($data['category']['name']));
         $category->setFullPath($this->generateFullPath($category));
 
-        // TODO: setFullPath by children items
+        // TODO: recursive setFullPath by children items
         // TODO: setPath and setFullPath by hand
         /*$category->setPath(
             ($data['category']['path'])
@@ -155,13 +155,39 @@ class CategoriesService implements ServiceInterface
         // TODO: Implement delete() method.
     }
 
+    /**
+     * @param $id
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function disable($id)
     {
-        // TODO: Implement disable() method.
+        /** @var Categories $category */
+        $category = $this->entityManager->getRepository(Categories::class)
+            ->find($id);
+
+        $category->setActive(0)->setSorting(1000);
+
+        // TODO: recursive disabled children categories
+
+        $this->entityManager->persist($category);
+        $this->entityManager->flush();
     }
 
+    /**
+     * @param $id
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function enable($id)
     {
-        // TODO: Implement enable() method.
+        /** @var Categories $category */
+        $category = $this->entityManager->getRepository(Categories::class)
+            ->find($id);
+
+        $category->setActive(1)->setSorting(0);
+
+        // TODO: recursive enabled children categories
+
+        $this->entityManager->persist($category);
+        $this->entityManager->flush();
     }
 }
