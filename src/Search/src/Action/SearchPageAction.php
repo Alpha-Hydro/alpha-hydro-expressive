@@ -8,6 +8,7 @@
 
 namespace Search\Action;
 
+use Api\Entity\Categories;
 use Api\Entity\Products;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManager;
@@ -74,6 +75,11 @@ class SearchPageAction implements ServerMiddlewareInterface
 
         if ($request->hasHeader('X-Requested-With'))
             return new JsonResponse($data);
+
+        $catalogCategories = $this->entityManager->getRepository(Categories::class)
+            ->findByActiveNoDeleted(null);
+
+        $data['catalogCategories'] =  $catalogCategories;
 
         return new HtmlResponse($this->templateRenderer->render('search::search-page', $data));
     }
