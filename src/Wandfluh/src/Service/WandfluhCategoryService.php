@@ -9,7 +9,6 @@
 
 namespace Wandfluh\Service;
 
-
 use Api\Entity\WfCategory;
 use Api\Service\ServiceInterface;
 use Doctrine\ORM\EntityManager;
@@ -89,7 +88,7 @@ class WandfluhCategoryService implements ServiceInterface
     }
 
 
-    public function save($data)
+    public function save($data, $id = null)
     {
         // TODO: Implement save() method.
     }

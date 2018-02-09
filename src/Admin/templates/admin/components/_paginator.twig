@@ -1,0 +1,19 @@
+{% if pagination is defined %}
+    <nav>
+        <ul class="pagination pagination-sm pull-right">
+            <li class="{{ (pagination.current != pagination.first) ? '' : 'disabled' }}">
+                <a href="?page={{ pagination.first }}">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% for page in pagination.pagesInRange %}
+                <li class="{{ (pagination.current != page) ? '' : 'active' }}"><a href="?page={{ page }}">{{ page }}</a></li>
+            {% endfor %}
+            <li class="{{ (pagination.current != pagination.last) ? '' : 'disabled' }}">
+                <a href="?page={{ pagination.last }}">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+{% endif %}

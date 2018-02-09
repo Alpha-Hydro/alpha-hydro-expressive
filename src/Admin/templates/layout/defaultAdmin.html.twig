@@ -20,7 +20,7 @@
 <body class="app">
     <header class="app-header">
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="icon-bar"></span>
@@ -53,13 +53,13 @@
     </header>
 
     <div class="app-content">
-        <main class="container">
+        <main class="container-fluid">
             {% block content %}{% endblock %}
         </main>
     </div>
 
     <footer class="app-footer">
-        <div class="container">
+        <div class="container-fluid">
             <hr />
             {% block footer %}
                 <p>

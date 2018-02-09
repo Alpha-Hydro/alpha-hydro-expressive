@@ -47,7 +47,7 @@ class WandfluhProductService implements ServiceInterface
         return $result;
     }
 
-    public function save($data)
+    public function save($data, $id = null)
     {
         // TODO: Implement save() method.
     }

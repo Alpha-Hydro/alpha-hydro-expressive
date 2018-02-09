@@ -69,15 +69,14 @@ class AdminCatalogCategoryAction implements ServerMiddlewareInterface
         if (!empty($categories)){
             $paginatorAdapter = new ArrayAdapter($categories->toArray());
             $paginator = new Paginator($paginatorAdapter);
-            $paginator->setDefaultItemCountPerPage(15);
+            $paginator->setDefaultItemCountPerPage(17);
 
             $page = ($queryParams['page']) ? $queryParams['page'] : 1;
             $paginator->setCurrentPageNumber($page);
 
             $data = [
+                'pagination' => $paginator->getPages(),
                 'itemList' => $paginator->getCurrentItems(),
-                'currentPageNumber' => $paginator->getCurrentPageNumber(),
-                'total' => $paginator->getTotalItemCount()
             ];
         }
 

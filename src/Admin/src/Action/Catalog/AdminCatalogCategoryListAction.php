@@ -18,6 +18,7 @@ use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterfa
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
+use Zend\Diactoros\Response\JsonResponse;
 use Zend\Expressive\Router\RouteResult;
 use Zend\Expressive\Template\TemplateRendererInterface;
 use Zend\Paginator\Adapter\ArrayAdapter;
@@ -77,16 +78,17 @@ class AdminCatalogCategoryListAction implements ServerMiddlewareInterface
         if ($categoriesList->count() != 0){
             $paginatorAdapter = new ArrayAdapter($categoriesList->toArray());
             $paginator = new Paginator($paginatorAdapter);
-            $paginator->setDefaultItemCountPerPage(15);
+            $paginator->setDefaultItemCountPerPage(12);
 
             $page = ($queryParams['page']) ? $queryParams['page'] : 1;
             $paginator->setCurrentPageNumber($page);
 
             $data = [
+                'pagination' => $paginator->getPages(),
                 'itemList' => $paginator->getCurrentItems(),
-                'currentPageNumber' => $paginator->getCurrentPageNumber(),
-                'total' => $paginator->getTotalItemCount()
             ];
+
+            //return new JsonResponse($data);
         }
         $data['currentCategory'] = $currentCategory;
 
