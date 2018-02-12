@@ -31,7 +31,7 @@
 
 use Zend\Expressive\Application;
 
-$app->get('/admin', Admin\Action\AdminHomeAction::class, 'admin.home');
+$app->get('/admin', [Admin\Action\AuthAction::class, Admin\Action\AdminHomeAction::class], 'admin.home');
 
 $app->get('/admin/catalog', Admin\Action\Catalog\AdminCatalogAction::class, 'admin.catalog');
 $app->get('/admin/catalog/category', Admin\Action\Catalog\AdminCatalogCategoryAction::class, 'admin.catalog.category');
