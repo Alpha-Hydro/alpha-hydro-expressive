@@ -1,3 +1,17 @@
+CREATE TABLE role
+(
+  id   INT AUTO_INCREMENT
+    PRIMARY KEY,
+  name VARCHAR(42) NOT NULL
+)
+  ENGINE = InnoDB
+  COLLATE = utf8_unicode_ci;
+
+INSERT INTO role (name) VALUES ('administrator');
+INSERT INTO role (name) VALUES ('editor');
+INSERT INTO role (name) VALUES ('manager');
+INSERT INTO role (name) VALUES ('user');
+
 CREATE TABLE user
 (
   id                      INT AUTO_INCREMENT

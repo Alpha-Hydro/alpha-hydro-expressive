@@ -31,13 +31,44 @@
 
 use Zend\Expressive\Application;
 
-$app->get('/admin', [Admin\Action\AuthAction::class, Admin\Action\AdminHomeAction::class], 'admin.home');
+$app->get('/admin', [
+    Admin\Action\AuthAction::class,
+    Admin\Action\AdminHomeAction::class
+], 'admin.home');
 
-$app->get('/admin/catalog', Admin\Action\Catalog\AdminCatalogAction::class, 'admin.catalog');
-$app->get('/admin/catalog/category', Admin\Action\Catalog\AdminCatalogCategoryAction::class, 'admin.catalog.category');
-$app->get('/admin/catalog/category/{id:[\d]+}', Admin\Action\Catalog\AdminCatalogCategoryListAction::class, 'admin.catalog.category.id');
-$app->route('/admin/catalog/category/add', [Admin\Action\Catalog\AdminCatalogCategoryAddForm::class, Admin\Action\Catalog\AdminCatalogCategoryAddPost::class], ['GET', 'POST'],'admin.catalog.category.add');
-$app->route('/admin/catalog/category/update/{id:[\d]+}', [Admin\Action\Catalog\AdminCatalogCategoryUpdateForm::class, Admin\Action\Catalog\AdminCatalogCategoryUpdatePost::class], ['GET', 'POST'],'admin.catalog.category.update');
-$app->get('/admin/catalog/category/disable/{id:[\d]+}', Admin\Action\Catalog\AdminCatalogCategoryDisable::class,'admin.catalog.category.disable');
-$app->route('/admin/catalog/category/enable/{id:[\d]+}', Admin\Action\Catalog\AdminCatalogCategoryEnable::class, ['GET', 'POST'],'admin.catalog.category.enable');
+$app->get('/admin/catalog', [
+    Admin\Action\AuthAction::class,
+    Admin\Action\Catalog\AdminCatalogAction::class
+], 'admin.catalog');
+
+$app->get('/admin/catalog/category', [
+    Admin\Action\AuthAction::class,
+    Admin\Action\Catalog\AdminCatalogCategoryAction::class
+], 'admin.catalog.category');
+
+$app->get('/admin/catalog/category/{id:[\d]+}', [
+    Admin\Action\AuthAction::class,
+    Admin\Action\Catalog\AdminCatalogCategoryListAction::class
+], 'admin.catalog.category.id');
+$app->route('/admin/catalog/category/add', [
+    Admin\Action\AuthAction::class,
+    Admin\Action\Catalog\AdminCatalogCategoryAddForm::class,
+    Admin\Action\Catalog\AdminCatalogCategoryAddPost::class
+], ['GET', 'POST'],'admin.catalog.category.add');
+
+$app->route('/admin/catalog/category/update/{id:[\d]+}', [
+    Admin\Action\AuthAction::class,
+    Admin\Action\Catalog\AdminCatalogCategoryUpdateForm::class,
+    Admin\Action\Catalog\AdminCatalogCategoryUpdatePost::class
+], ['GET', 'POST'],'admin.catalog.category.update');
+
+$app->get('/admin/catalog/category/disable/{id:[\d]+}', [
+    Admin\Action\AuthAction::class,
+    Admin\Action\Catalog\AdminCatalogCategoryDisable::class
+],'admin.catalog.category.disable');
+
+$app->route('/admin/catalog/category/enable/{id:[\d]+}', [
+    Admin\Action\AuthAction::class,
+    Admin\Action\Catalog\AdminCatalogCategoryEnable::class
+], ['GET', 'POST'],'admin.catalog.category.enable');
 

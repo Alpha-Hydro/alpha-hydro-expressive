@@ -62,6 +62,6 @@ class FullPathMiddleware implements MiddlewareInterface
 
         //var_dump($request->getAttribute('full_path'));
 
-        return $delegate->process($request->withAttribute('categoryId', $categoryId));
+        return $delegate->process($request->withAttribute(self::class, $categoryId));
     }
 }
