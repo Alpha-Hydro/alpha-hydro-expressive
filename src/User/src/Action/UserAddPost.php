@@ -55,6 +55,7 @@ class UserAddPost implements ServerMiddlewareInterface
         else
             $this->userManager->createAdminUserIfNotExists();
 
-        return new RedirectResponse($request->getHeaderLine('referer'));
+        //return new RedirectResponse($request->getHeaderLine('referer'));
+        return new RedirectResponse('/login');
     }
 }

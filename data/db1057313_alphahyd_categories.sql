@@ -1,5 +1,19 @@
 USE db1057313_alphahyd;
 
+DROP INDEX `order` ON categories;
+ALTER TABLE categories MODIFY `order` INT(11);
+ALTER TABLE categories MODIFY generate INT(11);
+ALTER TABLE categories MODIFY active INT(11) NOT NULL;
+ALTER TABLE categories MODIFY meta_description TEXT;
+
+ALTER TABLE categories DROP `order`;
+ALTER TABLE categories MODIFY parent_id INT(11);
+
+DROP INDEX `parent_id` ON categories;
+CREATE INDEX fk_categories_categories_idx ON categories (parent_id);
+
+ALTER TABLE categories MODIFY id INT(11) NOT NULL AUTO_INCREMENT;
+
 UPDATE categories SET parent_id = 0, image = 'icons/connect.png', name = 'Соединительная арматура', description = null, add_date = '2012-04-17 10:30:04', mod_date = '2012-07-23 16:24:04', generate = 1, active = 0, full_path = 'soedinitelnaja-armatura', meta_description = null, meta_keywords = null, meta_title = null, path = 'soedinitelnaja-armatura', sorting = 1000, deleted = 0, upload_path = '/files/images/category/', content_markdown = null, content_html = null WHERE id = 1;
 UPDATE categories SET parent_id = 0, image = 'icons/bracket.png', name = 'Скобы', description = '', add_date = '2012-04-17 10:30:04', mod_date = '2012-07-23 16:32:01', generate = 1, active = 0, full_path = 'skoby', meta_description = null, meta_keywords = null, meta_title = null, path = 'skoby', sorting = 1000, deleted = 0, upload_path = '/files/images/category/', content_markdown = null, content_html = null WHERE id = 2;
 UPDATE categories SET parent_id = 1637, image = 'icons/hose.png', name = 'Шланги', description = null, add_date = '2012-04-17 10:30:04', mod_date = '2018-02-09 15:04:57', generate = 1, active = 1, full_path = 'shlangi', meta_description = null, meta_keywords = null, meta_title = 'Шланги', path = 'shlangi', sorting = 1, deleted = 0, upload_path = '/files/images/category/', content_markdown = null, content_html = null WHERE id = 3;
