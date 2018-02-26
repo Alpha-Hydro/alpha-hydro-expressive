@@ -44,6 +44,12 @@ class SearchPageAction implements ServerMiddlewareInterface
         $this->entityManager = $entityManager;
     }
 
+    /**
+     * @param ServerRequestInterface $request
+     * @param DelegateInterface $delegate
+     * @return \Psr\Http\Message\ResponseInterface|HtmlResponse|JsonResponse
+     * @throws \Doctrine\ORM\ORMException
+     */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
 

@@ -44,6 +44,7 @@ class ProductAction implements ServerMiddlewareInterface
      * @param DelegateInterface $delegate
      *
      * @return ResponseInterface
+     * @throws \Doctrine\ORM\ORMException
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {

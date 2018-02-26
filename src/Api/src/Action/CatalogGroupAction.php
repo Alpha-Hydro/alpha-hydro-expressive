@@ -7,7 +7,7 @@
  *
  */
 
-namespace App\Action;
+namespace Api\Action;
 
 use Api\Entity\Categories;
 use Doctrine\ORM\EntityManager;

@@ -30,6 +30,7 @@
 
 use Zend\Expressive\Application;
 
-$app->get('/', App\Action\HomePageAction::class, 'home');
-$app->get('/contacts', App\Action\ContactPageAction::class, 'contact');
-$app->get('/about', App\Action\AboutPageAction::class, 'about');
+$app->get('/api/ping', Api\Action\PingAction::class, 'api.ping');
+$app->get('/api/categories', Api\Action\CatalogGroupAction::class, 'api.categories');
+$app->get('/api/categories/tree', Api\Action\CatalogGroupTreeAction::class, 'api.categories.tree');
+$app->post('/api/webhook', Api\Action\WebhookAction::class, 'api.webhook');

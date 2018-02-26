@@ -4,6 +4,7 @@ namespace Api;
 use Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain;
 use Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
+use Zend\Expressive\Application;
 
 /**
  * The configuration provider for the Api module
@@ -40,6 +41,11 @@ class ConfigProvider
             'invokables' => [
             ],
             'factories'  => [
+            ],
+            'delegators' => [
+                Application::class => [
+                    Factory\RoutesDelegator::class,
+                ],
             ],
         ];
     }

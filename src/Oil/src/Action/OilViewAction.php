@@ -39,6 +39,12 @@ class OilViewAction implements ServerMiddlewareInterface
     }
 
 
+    /**
+     * @param ServerRequestInterface $request
+     * @param DelegateInterface $delegate
+     * @return ResponseInterface|HtmlResponse
+     * @throws \Doctrine\ORM\ORMException
+     */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         /** @var RouteResult $routeResult */
