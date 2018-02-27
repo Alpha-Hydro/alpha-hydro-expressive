@@ -3,7 +3,7 @@
  * Created by Alpha-Hydro.
  * @link http://www.alpha-hydro.com
  * @author Vladimir Mikhaylov <admin@alpha-hydro.com>
- * @copyright Copyright (c) 2017, Alpha-Hydro
+ * @copyright Copyright (c) 2018, Alpha-Hydro
  *
  */
 
@@ -17,7 +17,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\JsonResponse;
 
-class CatalogGroupTreeAction implements ServerMiddlewareInterface
+class CatalogCategoriesAction implements ServerMiddlewareInterface
 {
     /**
      * @var EntityManager
@@ -25,7 +25,7 @@ class CatalogGroupTreeAction implements ServerMiddlewareInterface
     private $entityManager;
 
     /**
-     * CatalogGroupAction constructor.
+     * CatalogCategoriesAction constructor.
      * @param EntityManager $entityManager
      */
     public function __construct(EntityManager $entityManager)
@@ -33,18 +33,26 @@ class CatalogGroupTreeAction implements ServerMiddlewareInterface
         $this->entityManager = $entityManager;
     }
 
-
     /**
      * @param ServerRequestInterface $request
      * @param DelegateInterface $delegate
-     * @return ResponseInterface|JsonResponse
+     * @return JsonResponse
      * @throws \Doctrine\ORM\ORMException
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-        $treeCategories = $this->entityManager->getRepository(Categories::class)
-        ->treeCategories();
+        $categories = $this->entityManager->getRepository(Categories::class)
+            ->findCategoriesByCountChildren(1);
 
-        return new JsonResponse($treeCategories);
+        $data = [];
+
+        /** @var Categories[] $categories */
+        foreach ($categories as $category){
+            $data[] = [
+                'name' => $category->getName(),
+            ];
+        }
+
+        return new JsonResponse($data);
     }
 }

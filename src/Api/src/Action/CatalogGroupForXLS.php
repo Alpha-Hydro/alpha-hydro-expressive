@@ -17,7 +17,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\JsonResponse;
 
-class CatalogGroupAction implements ServerMiddlewareInterface
+class CatalogGroupForXLS implements ServerMiddlewareInterface
 {
     /**
      * @var EntityManager
@@ -25,7 +25,7 @@ class CatalogGroupAction implements ServerMiddlewareInterface
     private $entityManager;
 
     /**
-     * CatalogGroupAction constructor.
+     * CatalogGroupForXLS constructor.
      * @param EntityManager $entityManager
      */
     public function __construct(EntityManager $entityManager)

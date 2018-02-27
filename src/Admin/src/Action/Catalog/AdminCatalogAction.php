@@ -9,6 +9,7 @@
 
 namespace Admin\Action\Catalog;
 
+use Api\Entity\Categories;
 use Doctrine\ORM\EntityManager;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
@@ -40,8 +41,18 @@ class AdminCatalogAction implements ServerMiddlewareInterface
         $this->entityManager = $entityManager;
     }
 
+    /**
+     * @param ServerRequestInterface $request
+     * @param DelegateInterface $delegate
+     * @return ResponseInterface|HtmlResponse
+     * @throws \Doctrine\ORM\ORMException
+     */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-        return new HtmlResponse($this->templateRenderer->render('admin::catalog/catalog'));
+        $categories = $this->entityManager->getRepository(Categories::class)
+            ->findByActiveNoDeleted();
+
+
+        return new HtmlResponse($this->templateRenderer->render('admin::catalog/catalog', ['categories' => $categories]));
     }
 }

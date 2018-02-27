@@ -28,17 +28,17 @@ class WandfluhSetPathAction implements ServerMiddlewareInterface
     /**
      * @var WandfluhCategoryService
      */
-    private $wandfluhService;
+    private $wandfluhCategoryService;
 
     /**
      * WandfluhSetPathAction constructor.
      * @param EntityManager $entityManager
-     * @param WandfluhCategoryService $wandfluhService
+     * @param WandfluhCategoryService $wandfluhCategoryService
      */
-    public function __construct(EntityManager $entityManager, WandfluhCategoryService $wandfluhService)
+    public function __construct(EntityManager $entityManager, WandfluhCategoryService $wandfluhCategoryService)
     {
         $this->entityManager = $entityManager;
-        $this->wandfluhService = $wandfluhService;
+        $this->wandfluhCategoryService = $wandfluhCategoryService;
     }
 
 
@@ -50,7 +50,7 @@ class WandfluhSetPathAction implements ServerMiddlewareInterface
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-        $this->wandfluhService->createPathCategory();
+        $this->wandfluhCategoryService->createPathCategory();
 
         $categories = $this->entityManager->getRepository(WfCategory::class)
             ->findAll();

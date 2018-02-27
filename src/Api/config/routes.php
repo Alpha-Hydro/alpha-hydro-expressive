@@ -31,6 +31,6 @@
 use Zend\Expressive\Application;
 
 $app->get('/api/ping', Api\Action\PingAction::class, 'api.ping');
-$app->get('/api/categories', Api\Action\CatalogGroupAction::class, 'api.categories');
-$app->get('/api/categories/tree', Api\Action\CatalogGroupTreeAction::class, 'api.categories.tree');
+$app->get('/api/categories', Api\Action\CatalogCategoriesAction::class, 'api.categories');
+$app->get('/api/categories/tree', Api\Action\CatalogGroupTree::class, 'api.categories.tree');
 $app->post('/api/webhook', Api\Action\WebhookAction::class, 'api.webhook');

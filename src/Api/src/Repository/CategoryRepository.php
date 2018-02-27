@@ -5,6 +5,7 @@ namespace Api\Repository;
 use Api\Entity\Categories;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
 
 
 /**
@@ -104,6 +105,34 @@ class CategoryRepository extends EntityRepository
         }
 
         return $result;
+    }
+
+    /**
+     * @param int $count
+     * @return array
+     */
+    public function findCategoriesByCountChildren($count = 0)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $rsm = new ResultSetMappingBuilder($entityManager);
+        $rsm->addRootEntityFromClassMetadata(Categories::class, 'c');
+
+        $nativeQuery = $entityManager->createNativeQuery(
+            "SELECT *
+                      FROM categories AS c1
+                      WHERE (
+                          SELECT COUNT(*)
+                          FROM categories AS c2
+                          WHERE c2.parent_id = c1.id) = ?
+                      AND c1.active != 0
+                      AND c1.deleted != 1
+                      ORDER BY c1.id;"
+            , $rsm
+        );
+        $nativeQuery->setParameter(1, $count);
+
+        return $nativeQuery->getResult();
     }
 
     private function _fetchSubCategoriesInArrayName(Collection $categories)

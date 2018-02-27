@@ -14,4 +14,15 @@
             <a href="">Архив</a>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-9">
+            <ul id="accordion" aria-multiselectable="true">
+                {% include '@admin/catalog/_category_list_tree.twig' with {'categories' : categories} %}
+            </ul>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+
 {% endblock %}
