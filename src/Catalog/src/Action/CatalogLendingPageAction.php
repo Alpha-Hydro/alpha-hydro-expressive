@@ -46,6 +46,7 @@ class CatalogLendingPageAction implements ServerMiddlewareInterface
      * @param DelegateInterface $delegate
      *
      * @return HtmlResponse
+     * @throws \Doctrine\ORM\ORMException
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {

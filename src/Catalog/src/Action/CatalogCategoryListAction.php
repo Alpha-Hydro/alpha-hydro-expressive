@@ -10,8 +10,6 @@
 namespace Catalog\Action;
 
 use Api\Entity\Categories;
-use Api\Entity\Products;
-use Api\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManager;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
@@ -41,7 +39,6 @@ class CatalogCategoryListAction implements ServerMiddlewareInterface
         $this->templateRenderer = $templateRenderer;
     }
 
-
     /**
      * Process an incoming server request and return a response, optionally delegating
      * to the next middleware component to create the response.
@@ -51,6 +48,7 @@ class CatalogCategoryListAction implements ServerMiddlewareInterface
      *
      *
      * @return ResponseInterface|HtmlResponse
+     * @throws \Doctrine\ORM\ORMException
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
@@ -84,7 +82,7 @@ class CatalogCategoryListAction implements ServerMiddlewareInterface
 
         //Получаем список протуктов в текущей категории
         $productList = null;
-        if ($categoriesList->count() == 0){
+        if ($categoriesList->count() == 0) {
             $productList = $currentCategory->getProducts();
         }
 
@@ -93,7 +91,7 @@ class CatalogCategoryListAction implements ServerMiddlewareInterface
             ->getRepository(Categories::class)
             ->findByActiveNoDeleted();
         $parentCategory = $currentCategory->getParent();
-        if ($parentCategory != null && $parentCategory->getId() != 0){
+        if ($parentCategory != null && $parentCategory->getId() != 0) {
             $sidebarListCategories = $parentCategory->getChildren();
         }
 
@@ -112,7 +110,8 @@ class CatalogCategoryListAction implements ServerMiddlewareInterface
         return new HtmlResponse($this->templateRenderer->render('catalog::listCategory', $data));
     }
 
-    private function getBreadcrumb(Categories $categories = null, &$result = []){
+    private function getBreadcrumb(Categories $categories = null, &$result = [])
+    {
         if ($categories == null)
             return null;
 

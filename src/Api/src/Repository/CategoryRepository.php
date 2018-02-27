@@ -82,7 +82,7 @@ class CategoryRepository extends EntityRepository
      * @param int $parentId
      * @return array|int
      */
-    public function treeCategories($parentId = 0)
+    public function treeCategories($parentId = null)
     {
 
         /** @var Collection $categories */
@@ -95,7 +95,11 @@ class CategoryRepository extends EntityRepository
         foreach ($categories as $category){
             $children = $category->getChildren();
             if ($children->count() != 0){
-                $result[][$category->getName()] = $this->_fetchSubCategoriesInArrayName($children);
+                $result[] = [
+                    'name' => $category->getName(),
+                    'link' => $category->getFullPath(),
+                    'children' => $this->_fetchSubCategoriesInArrayName($children),
+                ];
             }
         }
 
@@ -106,9 +110,14 @@ class CategoryRepository extends EntityRepository
     {
         $result = [];
 
+        /** @var Categories[] $categories */
         foreach ($categories as $category){
             if ($category->getChildren()->count() != 0)
-                $result[][$category->getName()] = $this->_fetchSubCategoriesInArrayName($category->getChildren());
+                $result[] = [
+                    'name' => $category->getName(),
+                    'link' => $category->getFullPath(),
+                    'children' => $this->_fetchSubCategoriesInArrayName($category->getChildren()),
+                ];
         }
 
         return $result;

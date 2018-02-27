@@ -67,7 +67,7 @@ typings/
 
 ### ZendFramework template
 # Composer files
-composer.phar
+# composer.phar
 vendor/
 
 # Local configs
