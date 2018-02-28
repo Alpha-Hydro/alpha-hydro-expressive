@@ -33,6 +33,7 @@ class FullPathMiddleware implements MiddlewareInterface
      * @param ServerRequestInterface $request
      * @param DelegateInterface $delegate
      * @return \Psr\Http\Message\ResponseInterface
+     * @throws \Doctrine\ORM\ORMException
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {

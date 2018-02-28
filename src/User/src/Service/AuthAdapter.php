@@ -61,6 +61,10 @@ class AuthAdapter implements AdapterInterface
     }
 
 
+    /**
+     * @return Result
+     * @throws \Doctrine\ORM\ORMException
+     */
     public function authenticate()
     {
         // Проверяем, есть ли в базе данных пользователь с таким адресом.
