@@ -60,16 +60,32 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 6:
+/***/ 5:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
+
+var linkCollapse = $('.collapseIn');
+linkCollapse.click(function (e) {
+	e.preventDefault();
+	e.stopPropagation();
+
+	var collapse = $($(this).attr('href'));
+	collapse.collapse('show');
+	collapse.siblings('a').css('font-weight', 'bold');
+	collapse.children('li').children('a').css('color', 'red');
+	collapse.parents('ul.collapse').collapse('show');
+
+	$('html,body').animate({
+		scrollTop: collapse.offset().top - ($(window).height() - collapse.outerHeight(true)) / 2
+	}, 500);
+});
 
 /***/ })
 

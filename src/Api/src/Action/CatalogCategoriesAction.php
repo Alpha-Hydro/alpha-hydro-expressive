@@ -49,6 +49,7 @@ class CatalogCategoriesAction implements ServerMiddlewareInterface
         /** @var Categories[] $categories */
         foreach ($categories as $category){
             $data[] = [
+                'id' => $category->getId(),
                 'name' => $category->getName(),
             ];
         }

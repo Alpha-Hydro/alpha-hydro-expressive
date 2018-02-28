@@ -21,8 +21,21 @@
             </ul>
         </div>
         <div class="col-md-3">
-
+            {% if categoriesOneChildren is defined %}
+                <ul>
+                    {% for cat in categoriesOneChildren %}
+                        <li>
+                            <a class="collapseIn" href="#collapse{{ cat.id }}">{{ cat.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         </div>
     </div>
 
 {% endblock %}
+
+{% block javascriptBottom %}
+    <script src="{{ asset('js/scrollto/jquery.scrollTo.min.js') }}"></script>
+{% endblock %}
+

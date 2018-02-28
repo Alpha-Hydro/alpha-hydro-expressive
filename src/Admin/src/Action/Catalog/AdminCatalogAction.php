@@ -52,7 +52,15 @@ class AdminCatalogAction implements ServerMiddlewareInterface
         $categories = $this->entityManager->getRepository(Categories::class)
             ->findByActiveNoDeleted();
 
+        $categoriesOneChildren = $this->entityManager->getRepository(Categories::class)
+            ->findCategoriesByCountChildren(1);
 
-        return new HtmlResponse($this->templateRenderer->render('admin::catalog/catalog', ['categories' => $categories]));
+        $data = [
+            'categories' => $categories,
+            'categoriesOneChildren' => $categoriesOneChildren,
+        ];
+
+
+        return new HtmlResponse($this->templateRenderer->render('admin::catalog/catalog', $data));
     }
 }
