@@ -14,7 +14,9 @@ use Psr\Http\Message\ServerRequestInterface;
 use User\Service\AuthAdapter;
 use Zend\Authentication\AuthenticationService;
 use Zend\Diactoros\Response\HtmlResponse;
+use Zend\Diactoros\Response\JsonResponse;
 use Zend\Diactoros\Response\RedirectResponse;
+use Zend\Expressive\Router\RouteResult;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
 class Login implements ServerMiddlewareInterface
@@ -50,6 +52,7 @@ class Login implements ServerMiddlewareInterface
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
+
         if ($request->getMethod() === 'POST') {
             return $this->authenticate($request);
         }
@@ -60,6 +63,7 @@ class Login implements ServerMiddlewareInterface
     public function authenticate(ServerRequestInterface $request)
     {
         $params = $request->getParsedBody();
+        $refererUri = $request->getHeaderLine('referer');
 
         if (empty($params['email'])) {
             return new HtmlResponse($this->templateRenderer->render('user::login', [
@@ -85,6 +89,7 @@ class Login implements ServerMiddlewareInterface
             ]));
         }
 
-        return new RedirectResponse('/admin');
+        return new RedirectResponse($refererUri);
+        //return new RedirectResponse('/admin');
     }
 }

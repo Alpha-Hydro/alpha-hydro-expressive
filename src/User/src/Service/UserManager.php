@@ -132,6 +132,7 @@ class UserManager
      * Checks whether an active user with given email address already exists in the database.
      * @param string $email
      * @return bool
+     * @throws \Doctrine\ORM\ORMException
      */
     public function checkUserExists($email) {
 
@@ -194,6 +195,7 @@ class UserManager
      * Checks whether the given password reset token is a valid one.
      * @param string $passwordResetToken
      * @return bool
+     * @throws \Doctrine\ORM\ORMException
      */
     public function validatePasswordResetToken($passwordResetToken)
     {
@@ -223,6 +225,7 @@ class UserManager
      * @param string $newPassword
      * @return bool
      * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Doctrine\ORM\ORMException
      */
     public function setNewPasswordByToken($passwordResetToken, $newPassword)
     {

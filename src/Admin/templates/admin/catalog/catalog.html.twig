@@ -2,16 +2,52 @@
 
 {% block title %}Catalog{% endblock %}
 
+{% block navbarItem %}
+    <li>
+        <a href="{{ path('admin.catalog.category') }}">
+            <i class="fa fa-list"></i> Категории
+        </a>
+    </li>
+{% endblock %}
+
 {% block content %}
     <div class="row">
-        <div class="col-md-4">
-            <a href="{{ path('admin.catalog.category') }}">Категории</a>
+        <div class="col-md-8">
+            <ul id="accordion" aria-multiselectable="true">
+                {% include '@admin/catalog/_category_list_tree.twig' with {'categories' : categories} %}
+            </ul>
         </div>
         <div class="col-md-4">
-            <a href="">Продукты</a>
-        </div>
-        <div class="col-md-4">
-            <a href="">Архив</a>
+            {% if categoriesOneChildren is defined %}
+                <div class="panel-group" id="accordionList" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordionList" href="#categoriesOneChildren" aria-expanded="true" aria-controls="collapseOne">
+                                    Категории с одной дочерней группой
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="categoriesOneChildren" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <ul>
+                                    {% for cat in categoriesOneChildren %}
+                                        <li>
+                                            <a class="collapseIn" href="#collapse{{ cat.id }}">{{ cat.name }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
         </div>
     </div>
+
 {% endblock %}
+
+{% block javascriptBottom %}
+    <script src="{{ asset('js/scrollto/jquery.scrollTo.min.js') }}"></script>
+{% endblock %}
+

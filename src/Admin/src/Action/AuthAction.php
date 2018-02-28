@@ -13,21 +13,28 @@ use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Authentication\AuthenticationService;
-use Zend\Diactoros\Response\RedirectResponse;
+use Zend\Diactoros\Response\HtmlResponse;
+use Zend\Expressive\Template\TemplateRendererInterface;
 
 class AuthAction implements ServerMiddlewareInterface
 {
+    /**
+     * @var TemplateRendererInterface
+     */
+    private $templateRenderer;
+
     private $auth;
 
-    public function __construct(AuthenticationService $auth)
+    public function __construct(AuthenticationService $auth, TemplateRendererInterface $templateRenderer)
     {
         $this->auth = $auth;
+        $this->templateRenderer = $templateRenderer;
     }
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         if (! $this->auth->hasIdentity()) {
-            return new RedirectResponse('/login');
+            return new HtmlResponse($this->templateRenderer->render('user::login'));
         }
 
         $identity = $this->auth->getIdentity();

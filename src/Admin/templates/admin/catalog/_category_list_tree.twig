@@ -1,0 +1,10 @@
+{% for category in categories %}
+    <li>
+        <a class="collapsed" href="#collapse{{ category.id }}" data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="collapse{{category.id}}">{{ category.name }}</a> <span>({{ category.children|length  }})</span>
+        {% if category.children %}
+            <ul id="collapse{{ category.id }}" class="collapse">
+                {% include '@admin/catalog/_category_list_tree.twig' with {'categories':category.children} %}
+            </ul>
+        {% endif %}
+    </li>
+{% endfor %}
