@@ -72,10 +72,24 @@
 
 
 var linkCollapse = $('.collapseIn');
+var clearFilter = $('#clearFilter');
+var clearFilterLink = clearFilter.children('a');
 
 linkCollapse.click(function (e) {
 	e.preventDefault();
 	e.stopPropagation();
+
+	clearFilter.removeClass('hidden');
+	clearFilterLink.one('click', function (el) {
+		el.preventDefault();
+		el.stopPropagation();
+
+		$('#accordion .collapse.in').collapse('hide');
+
+		clearFilter.addClass('hidden');
+
+		return false;
+	});
 
 	var collapse = $($(this).attr('href'));
 	collapse.collapse('show');

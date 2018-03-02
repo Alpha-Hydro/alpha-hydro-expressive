@@ -1,8 +1,22 @@
 let linkCollapse = $('.collapseIn');
+let clearFilter = $('#clearFilter');
+let clearFilterLink = clearFilter.children('a');
 
 linkCollapse.click(function (e) {
 	e.preventDefault();
 	e.stopPropagation();
+
+	clearFilter.removeClass('hidden');
+	clearFilterLink.one('click', function (el) {
+		el.preventDefault();
+		el.stopPropagation();
+
+		$('#accordion .collapse.in').collapse('hide');
+
+		clearFilter.addClass('hidden');
+
+		return false;
+	});
 
 	let collapse = $($(this).attr('href'));
 	collapse.collapse('show');
