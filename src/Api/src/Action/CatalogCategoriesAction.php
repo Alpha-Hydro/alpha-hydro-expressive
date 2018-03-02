@@ -41,18 +41,47 @@ class CatalogCategoriesAction implements ServerMiddlewareInterface
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-        $categories = $this->entityManager->getRepository(Categories::class)
-            ->findCategoriesByCountChildren(1);
-
+        $queryParams = $request->getQueryParams();
         $data = [];
 
-        /** @var Categories[] $categories */
-        foreach ($categories as $category){
-            $data[] = [
-                'id' => $category->getId(),
-                'name' => $category->getName(),
-            ];
+        $categoriesRepository = $this->entityManager->getRepository(Categories::class);
+
+        $categories = $categoriesRepository->findBy(
+            [
+                'active' => 1,
+                'deleted' => 0,
+            ]
+        );
+
+        if ($queryParams['countChild']){
+            $categories = $categoriesRepository
+                ->findCategoriesByCountChildren($queryParams['countChild']);
+
+            /** @var Categories[] $categories */
+            foreach ($categories as $category){
+                $data[] = [
+                    'id' => $category->getId(),
+                    'name' => $category->getName(),
+                ];
+            }
         }
+
+        if ($queryParams['double']){
+            foreach ($categories as $category){
+                $name = $category->getName();
+
+                /** @var Categories $child */
+                foreach ($category->getChildren() as $child){
+                    if ($child->getName() == $name)
+                        $data[] = [
+                            'id' => $category->getId(),
+                            'name' => $category->getName()
+                        ];
+                }
+            }
+        }
+
+
 
         return new JsonResponse($data);
     }

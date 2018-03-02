@@ -16,6 +16,11 @@ use Doctrine\ORM\Query\ResultSetMappingBuilder;
  */
 class CategoryRepository extends EntityRepository
 {
+    /**
+     * @param $fullPath
+     * @return null|object
+     * @TODO move to Service
+     */
     public function findOneByFullPath($fullPath)
     {
         return $this->findOneBy([
@@ -25,6 +30,11 @@ class CategoryRepository extends EntityRepository
         ]);
     }
 
+    /**
+     * @param null $parentId
+     * @return array
+     * @TODO move to Service
+     */
     public function findByActiveNoDeleted($parentId = null)
     {
         $categories = $this->findBy(
@@ -39,6 +49,10 @@ class CategoryRepository extends EntityRepository
         return $categories;
     }
 
+    /**
+     * @return array
+     * @TODO move to Service
+     */
     public function findByParentNull()
     {
         $categories = $this->findBy(
@@ -53,6 +67,11 @@ class CategoryRepository extends EntityRepository
         return $categories;
     }
 
+    /**
+     * @param int $parentId
+     * @return array
+     * @TODO move to Service
+     */
     public function findByNoDeleted($parentId = 0)
     {
         $categories = $this->findBy(
@@ -66,6 +85,11 @@ class CategoryRepository extends EntityRepository
         return $categories;
     }
 
+    /**
+     * @param int $parentId
+     * @return array
+     * @TODO move to Service
+     */
     public function findByDeleted($parentId = 0)
     {
         $categories = $this->findBy(
@@ -82,6 +106,7 @@ class CategoryRepository extends EntityRepository
     /**
      * @param int $parentId
      * @return array|int
+     * @TODO move to Service
      */
     public function treeCategories($parentId = null)
     {
@@ -135,6 +160,39 @@ class CategoryRepository extends EntityRepository
         return $nativeQuery->getResult();
     }
 
+    /**
+     * @return array
+     * @TODO move to Service
+     */
+    public function findCategoriesDoubleName(){
+
+        /** @var Collection | Categories[] $categories */
+        $categories = $this->findBy(
+            [
+                'active' => 1,
+                'deleted' => 0,
+            ]
+        );
+        $result = [];
+
+        foreach ($categories as $category){
+            $name = $category->getName();
+
+            /** @var Categories $child */
+            foreach ($category->getChildren() as $child){
+                if ($child->getName() == $name)
+                    $result[] = $category;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param Collection $categories
+     * @return array
+     * @TODO move to Service
+     */
     private function _fetchSubCategoriesInArrayName(Collection $categories)
     {
         $result = [];

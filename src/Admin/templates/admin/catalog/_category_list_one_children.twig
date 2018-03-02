@@ -1,0 +1,23 @@
+{% if categoriesOneChildren is defined %}
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordionList" href="#categoriesOneChildren"
+                   aria-expanded="true" aria-controls="collapseOne">
+                    Категории с одной дочерней группой
+                </a>
+            </h4>
+        </div>
+        <div id="categoriesOneChildren" class="panel-collapse collapse">
+            <div class="panel-body full-screen-height">
+                <ul>
+                    {% for cat in categoriesOneChildren %}
+                        <li>
+                            <a class="collapseIn" href="#collapse{{ cat.id }}">{{ cat.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endif %}

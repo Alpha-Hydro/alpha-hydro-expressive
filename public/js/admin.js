@@ -72,14 +72,37 @@
 
 
 var linkCollapse = $('.collapseIn');
+var clearFilter = $('#clearFilter');
+var clearFilterLink = clearFilter.children('a');
+
 linkCollapse.click(function (e) {
 	e.preventDefault();
 	e.stopPropagation();
 
+	clearFilter.removeClass('hidden');
+	clearFilterLink.one('click', function (el) {
+		el.preventDefault();
+		el.stopPropagation();
+
+		$('#accordion .collapse.in').collapse('hide');
+
+		clearFilter.addClass('hidden');
+
+		return false;
+	});
+
 	var collapse = $($(this).attr('href'));
 	collapse.collapse('show');
 	collapse.siblings('a').css('font-weight', 'bold');
-	collapse.children('li').children('a').css('color', 'red');
+
+	if (collapse.children('li').length === 1) {
+		collapse.children('li').children('a').css('color', 'red');
+	} else {
+		collapse.children('li').children('a').each(function () {
+			if ($(this).text() === collapse.siblings('a').text()) $(this).css('color', 'red');
+		});
+	}
+
 	collapse.parents('ul.collapse').collapse('show');
 
 	$('html,body').animate({
