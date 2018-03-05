@@ -9,6 +9,7 @@
 
 namespace Admin\Action\Catalog;
 
+use Admin\Action\AuthAction;
 use Doctrine\ORM\EntityManager;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
@@ -45,6 +46,6 @@ class AdminCatalogCategoryAddForm implements ServerMiddlewareInterface
         if ($request->getParsedBody())
             return $delegate->process($request);
 
-        return new HtmlResponse($this->templateRenderer->render('admin::catalog/catalog-category-add-form'));
+        return new HtmlResponse($this->templateRenderer->render('admin::catalog/catalog-category-add-form', ['identity' => $request->getAttribute(AuthAction::class),]));
     }
 }

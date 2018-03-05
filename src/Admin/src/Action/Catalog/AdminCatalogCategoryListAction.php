@@ -9,6 +9,7 @@
 
 namespace Admin\Action\Catalog;
 
+use Admin\Action\AuthAction;
 use Api\Entity\Categories;
 use Catalog\Service\CategoriesService;
 use Doctrine\Common\Collections\Criteria;
@@ -94,6 +95,7 @@ class AdminCatalogCategoryListAction implements ServerMiddlewareInterface
 
         $parentCategory = $currentCategory->getParent();
         $data['breadcrumb'] = $this->categoriesService->getBreadcrumb($parentCategory);
+        $data['identity'] = $request->getAttribute(AuthAction::class);
 
         return new HtmlResponse($this->templateRenderer->render('admin::catalog/catalog-category-list', $data));
     }

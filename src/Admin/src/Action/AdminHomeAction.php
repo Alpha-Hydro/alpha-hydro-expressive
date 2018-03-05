@@ -10,11 +10,14 @@
 namespace Admin\Action;
 
 use Doctrine\ORM\EntityManager;
+use FastRoute\Route;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
+use Zend\Diactoros\Response\JsonResponse;
+use Zend\Expressive\Router\RouteResult;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
 class AdminHomeAction implements ServerMiddlewareInterface
@@ -42,6 +45,7 @@ class AdminHomeAction implements ServerMiddlewareInterface
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-        return new HtmlResponse($this->templateRenderer->render('admin::home-page'));
+        $identity = $request->getAttribute(AuthAction::class);
+        return new HtmlResponse($this->templateRenderer->render('admin::home-page', ['identity' => $identity]));
     }
 }

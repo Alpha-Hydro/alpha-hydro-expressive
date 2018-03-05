@@ -132,8 +132,8 @@ class CategoriesService implements ServiceInterface
         $category->setMetaDescription($data['category']['metaDescription']);
         $category->setMetaKeywords($data['category']['metaKeywords']);
 
-        $category->setActive(($data['category']['active']) ? $data['category']['active'] : 1);
-        $category->setDeleted(($data['category']['deleted']) ? $data['category']['deleted']: 0);
+        $category->setActive(($data['category']['active']) ? 1 : 0);
+        $category->setDeleted(($data['category']['deleted']) ? 1 : 0);
         $category->setSorting(($data['category']['sorting']) ? $data['category']['sorting']: 0);
 
         $this->entityManager->persist($category);

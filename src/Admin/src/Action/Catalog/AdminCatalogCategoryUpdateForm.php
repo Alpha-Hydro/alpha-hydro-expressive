@@ -9,6 +9,7 @@
 
 namespace Admin\Action\Catalog;
 
+use Admin\Action\AuthAction;
 use Api\Entity\Categories;
 use Doctrine\ORM\EntityManager;
 use Interop\Http\ServerMiddleware\DelegateInterface;
@@ -43,6 +44,12 @@ class AdminCatalogCategoryUpdateForm implements ServerMiddlewareInterface
         $this->entityManager = $entityManager;
     }
 
+    /**
+     * @param ServerRequestInterface $request
+     * @param DelegateInterface $delegate
+     * @return ResponseInterface|HtmlResponse
+     * @throws \Doctrine\ORM\ORMException
+     */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         /** @var RouteResult $routeResult */
@@ -69,7 +76,8 @@ class AdminCatalogCategoryUpdateForm implements ServerMiddlewareInterface
 
         $data = [
             'category' => $category,
-            'rootCategories' => $rootCategories
+            'rootCategories' => $rootCategories,
+            'identity' => $request->getAttribute(AuthAction::class),
         ];
 
         return new HtmlResponse($this->templateRenderer
