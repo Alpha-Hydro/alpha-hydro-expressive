@@ -30,7 +30,10 @@
 
 use Zend\Expressive\Application;
 
-$app->get('/api/ping', Api\Action\PingAction::class, 'api.ping');
-$app->get('/api/categories', Api\Action\CatalogCategoriesAction::class, 'api.categories');
-$app->get('/api/categories/tree', Api\Action\CatalogGroupTree::class, 'api.categories.tree');
-$app->post('/api/webhook', Api\Action\WebhookAction::class, 'api.webhook');
+$app->get('/api/ping', Api\Action\PingAction::class);
+$app->get('/api/categories', Api\Action\CatalogCategoriesAction::class);
+$app->get('/api/categories/tree', Api\Action\CatalogGroupTree::class);
+$app->get('/api/categories/set-path', Utils\Action\CategoriesSetPathAction::class);
+
+$app->post('/api/webhook', Utils\Action\WebhookAction::class);
+

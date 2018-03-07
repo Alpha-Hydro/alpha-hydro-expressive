@@ -7,7 +7,7 @@
  *
  */
 
-namespace Api\Action;
+namespace Utils\Action;
 
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
@@ -23,7 +23,6 @@ class WebhookAction implements ServerMiddlewareInterface
         $localRepo = realpath(__DIR__ . '/../../../../');
 
         if ($parseBody["payload"]){
-            //shell_exec("cd {$localRepo } && git pull");
             shell_exec("cd {$localRepo } && git fetch --all && git reset --hard origin/public");
         }
 
