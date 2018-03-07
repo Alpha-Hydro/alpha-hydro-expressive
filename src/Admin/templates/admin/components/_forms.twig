@@ -3,6 +3,10 @@
            id="{{ id }}" {{ required|default('') }} value="{{ value|default('') }}"/>
 {% endmacro %}
 
+{% macro inputHidden(name, id, value ) %}
+    <input type="hidden" name="{{ name }}" id="{{ id }}" value="{{ value|default('') }}"/>
+{% endmacro %}
+
 {% macro inputGroupAddon(name, id, addon, placeholder, required, pattern ) %}
     <div class="input-group">
         <input type="text" class="form-control" placeholder="{{ placeholder|default('') }}..." name="{{ name }}"

@@ -9,6 +9,7 @@
 
 namespace Admin\Action\Catalog;
 
+use Admin\Action\AuthAction;
 use Api\Entity\Categories;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
@@ -69,7 +70,8 @@ class AdminCatalogAction implements ServerMiddlewareInterface
         $data = [
             'categories' => $categories,
             'categoriesOneChildren' => $categoriesOneChildren,
-            'categoriesDouble' => $categoriesDouble
+            'categoriesDouble' => $categoriesDouble,
+            'identity' => $request->getAttribute(AuthAction::class),
         ];
 
 

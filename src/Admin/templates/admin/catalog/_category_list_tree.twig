@@ -10,7 +10,7 @@
     <li class="pt1 list-style-none">
         <a class="collapsed" href="#collapse{{ category.id }}" data-toggle="collapse" data-parent="#accordion" aria-expanded="true" aria-controls="collapse{{category.id}}">{{ category.name }}</a>
         <span>({{ category.children|length  }})</span>
-        <a class="text-success" href="{{ path('admin.catalog.category.id', {'id' : category.id  }) }}" ><span class="fa fa-pencil ml1"></span></a>
+        <a class="text-success" href="{{ path('admin.catalog.category.update', {'id' : category.id  }) }}" ><span class="fa fa-pencil ml1"></span></a>
         {% if category.children %}
             <ul id="collapse{{ category.id }}" class="collapse">
                 {% include '@admin/catalog/_category_list_tree.twig' with {'categories':category.children} %}

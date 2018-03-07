@@ -7,7 +7,9 @@
 {% block content %}
     <div class="row">
         <div class="col-md-9">
-            <h1 class="page-header">{{ category.name }} <small>Временная форма</small></h1>
+            <h1 class="page-header">{{ category.name }}
+                <small>Временная форма</small>
+            </h1>
         </div>
     </div>
     <div class="row">
@@ -22,12 +24,22 @@
                 <div class="form-group">
                     <label for="parent" class="col-sm-3 control-label">Родительская категория</label>
                     <div class="col-sm-9">
-                        <select name="category[parent]" id="parent" class="form-control">
+                        <div class="input-group">
+                            {{ forms.inputHidden('category[parent]', 'parent', category.parent.id) }}
+                            {{ forms.input(null, 'parent_name', 'Родительская категория', null, category.parent.name | default('Каталог')) }}
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                        </div>
+                        {#TODO Modal select category#}
+                        {#<select name="category[parent]" id="parent" class="form-control">
                             <option value="0">Root (корневая)</option>
                             {% for item in rootCategories %}
                                 <option value="{{ item.id }}" {% if category.parent is not null and category.parent.id == item.id %}selected{% endif %}>{{ item.name }}</option>
                             {% endfor %}
-                        </select>
+                        </select>#}
                     </div>
                 </div>
                 <div class="form-group">
@@ -61,13 +73,13 @@
                     <div class="col-sm-offset-3 col-sm-9">
                         <div class="checkbox">
                             <label>
-                                <input name="category[active]" type="checkbox" value="{{ category.active }}"> Активность
+                                <input name="category[active]"
+                                       type="checkbox" {% if category.active == 1 %} checked="checked" {% endif %} >
+                                Активность
                             </label>
                         </div>
                     </div>
                 </div>
-
-
 
 
                 <hr/>

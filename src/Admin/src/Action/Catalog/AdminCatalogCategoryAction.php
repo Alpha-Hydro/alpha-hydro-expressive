@@ -9,6 +9,7 @@
 
 namespace Admin\Action\Catalog;
 
+use Admin\Action\AuthAction;
 use Api\Entity\Categories;
 use Catalog\Service\CategoriesService;
 use Doctrine\Common\Collections\Criteria;
@@ -77,6 +78,7 @@ class AdminCatalogCategoryAction implements ServerMiddlewareInterface
             $data = [
                 'pagination' => $paginator->getPages(),
                 'itemList' => $paginator->getCurrentItems(),
+                'identity' => $request->getAttribute(AuthAction::class),
             ];
         }
 
