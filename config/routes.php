@@ -33,3 +33,4 @@ use Zend\Expressive\Application;
 $app->get('/', App\Action\HomePageAction::class, 'home');
 $app->get('/contacts', App\Action\ContactPageAction::class, 'contact');
 $app->get('/about', App\Action\AboutPageAction::class, 'about');
+$app->get('/sitemap.xml', Utils\Action\SitemapAction::class);

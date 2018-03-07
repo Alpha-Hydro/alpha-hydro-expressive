@@ -56,6 +56,29 @@ class CategoriesService implements ServiceInterface
         return $result;
     }
 
+    /**
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function createPathCategory(){
+        /**@var Categories[] $categories*/
+        $categories = $this->entityManager->getRepository(Categories::class)
+            ->findAll();
+
+        foreach ($categories as $category) {
+            if ($category->getPath() == null){
+                $slugify = new Slugify();
+                $category->setPath($slugify->filter($category->getName()));
+            }
+
+            $fullPath = $this->generateFullPath($category);
+            $category->setFullPath($fullPath);
+
+            $this->entityManager->persist($category);
+        }
+
+        $this->entityManager->flush();
+    }
+
     public function generateFullPath(Categories $category)
     {
         $result = [];
