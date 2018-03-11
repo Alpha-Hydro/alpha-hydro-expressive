@@ -34,6 +34,7 @@ $app->get('/api/ping', Api\Action\PingAction::class);
 $app->get('/api/categories', Api\Action\CatalogCategoriesAction::class);
 $app->get('/api/categories/tree', Api\Action\CatalogGroupTree::class);
 $app->get('/api/categories/set-path', Utils\Action\CategoriesSetPathAction::class);
+$app->get('/api/products/set-path', Utils\Action\ProductsSetPathAction::class);
 
 $app->post('/api/webhook', Utils\Action\WebhookAction::class);
 
