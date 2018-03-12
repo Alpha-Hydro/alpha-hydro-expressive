@@ -32,6 +32,7 @@ class CategoriesService implements ServiceInterface
     /**
      * AdsService constructor.
      * @param EntityManager $entityManager
+     * @param Slugify $slugify
      */
     public function __construct(EntityManager $entityManager, Slugify $slugify)
     {

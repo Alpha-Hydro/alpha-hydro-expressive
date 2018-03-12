@@ -29,7 +29,7 @@
         <div class="container">
             <hr />
             {% block footer %}
-                <p>
+                <p class="text-center">
                     &copy; 2009 - {{ "now"|date("Y") }} Альфа-Гидро. Гидравлические системы и компоненты.
                 </p>
             {% endblock %}
@@ -39,5 +39,7 @@
     <script src="{{ asset('js/bundle.js') }}"></script>
     {% block javascriptBottom %}{% endblock %}
     {% block javascript %}{% endblock %}
+    {{ include('@layout/components/_yandex_counter.twig') }}
+    {{ include('@layout/components/_google_counter.twig') }}
 </body>
 </html>

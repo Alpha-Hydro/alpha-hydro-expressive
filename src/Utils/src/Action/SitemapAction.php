@@ -10,6 +10,7 @@
 namespace Utils\Action;
 
 use Api\Entity\Categories;
+use Api\Entity\Products;
 use Doctrine\ORM\EntityManager;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
@@ -54,6 +55,10 @@ class SitemapAction implements ServerMiddlewareInterface
             ]);
         foreach ($categories as $category){
             $xml->addChild('url')->addChild('loc', 'https://'.$host[0].'/'.$category->getFullPath());
+            /**@var Products[] $products*/
+            $products = $category->getProducts();
+            foreach ($products as $product)
+                $xml->addChild('url')->addChild('loc', 'https://'.$host[0].'/'.$product->getFullPath());
         }
 
         return new XmlResponse($xml->asXML());
