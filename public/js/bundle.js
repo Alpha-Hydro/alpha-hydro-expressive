@@ -82,7 +82,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 (0, _search2.default)('#search-query');
 
-var sidebarToggle = $('.sidebar-toggle');
+var sidebarToggle = $('#sidebar-toggle');
 var sidebarDropdown = $('.sidebar-dropdown');
 
 sidebarToggle.click(function (e) {
@@ -102,7 +102,7 @@ sidebarToggle.click(function (e) {
 	});
 });
 
-var mainMenuToggle = $('.main-menu-toggle');
+var mainMenuToggle = $('#main-menu-toggle');
 var mainMehuDropdown = $('.main-menu-dropdown');
 
 mainMenuToggle.click(function (e) {
