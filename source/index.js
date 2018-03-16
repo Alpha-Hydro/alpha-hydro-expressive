@@ -4,7 +4,7 @@ import search from "./javascript/app/search";
 
 search('#search-query');
 
-let sidebarToggle = $('#sidebar-toggle');
+let sidebarToggle = $('.sidebar-toggle');
 let sidebarDropdown = $('.sidebar-dropdown');
 
 sidebarToggle.click(function (e) {
@@ -24,7 +24,7 @@ sidebarToggle.click(function (e) {
 	})
 });
 
-let mainMenuToggle = $('#main-menu-toggle');
+let mainMenuToggle = $('.main-menu-toggle');
 let mainMehuDropdown = $('.main-menu-dropdown');
 
 mainMenuToggle.click(function (e) {

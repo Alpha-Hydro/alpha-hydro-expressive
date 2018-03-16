@@ -15,25 +15,9 @@
     <div class="container" role="banner">
         <div class="row">
             <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="visible-xs">
-                    <form class="input-group main-menu-form" role="search" id="search" action="{{ path('search') }}" method="get">
-                        <span class="input-group-btn">
-                            <button id="sidebar-toggle" type="button" class="main-menu-btn mlr1"><i class="fa fa-bars"></i></button>
-                        </span>
-                        {#<input type="text" name="query" class="form-control input-sm" placeholder="Поиск..."
-                               id="search-query"/>
-                        <span class="input-group-btn">
-                            <button id="main-menu-search" class="main-menu-btn search-btn" type="submit"><i class="fa fa-search"></i></button>
-                        </span>#}
-                        <span class="input-group-btn">
-                            <a href="{{ path('home') }}" class="logo svg"></a>
-                        </span>
-                        <span class="input-group-btn">
-                            <button id="main-menu-toggle" type="button" class="main-menu-btn mr1"><i class="fa fa-ellipsis-v"></i></button>
-                        </span>
-                    </form>
-                </div>
-                <a href="{{ path('home') }}" class="logo svg hidden-xs"></a>
+                <button type="button" class="sidebar-toggle"><i class="fa fa-bars"></i></button>
+                <button type="button" class="main-menu-toggle"><i class="fa fa-ellipsis-v"></i></button>
+                <a href="{{ path('home') }}" class="logo svg"></a>
             </div>
             <div class="col-md-8 col-sm-6 hidden-xs">
                 <div class="app-contacts">
