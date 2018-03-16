@@ -86,6 +86,7 @@ class SearchPageAction implements ServerMiddlewareInterface
             ->findByActiveNoDeleted(null);
 
         $data['catalogCategories'] =  $catalogCategories;
+        $data['searchQuery'] = $queryParams['query'];
 
         return new HtmlResponse($this->templateRenderer->render('search::search-page', $data));
     }

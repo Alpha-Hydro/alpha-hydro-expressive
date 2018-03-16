@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block pageHeader %}
-    {{ include('@layout/components/_pageHeader.twig') }}
+    {{ include('@search/components/_pageHeader.twig') }}
 {% endblock %}
 
 {% block sidebar %}
@@ -17,6 +17,11 @@
     <div class="col-xs-12 col-sm-12 col-md-9">
         {% if productList is defined and productList is not null %}
             {{ include('@search/components/_search_list_item.twig') }}
+        {% elseif searchQuery != '' %}
+            <p class="ah-info-block ah-info-block-danger">По Вашему запросу <kbd>{{ searchQuery }}</kbd> ничего не
+                найдено... Попробуйте повотрить поиск.</p>
+        {% else %}
+            <p class="ah-info-block ah-info-block-info">Введите поисковый запрос.</p>
         {% endif %}
     </div>
 {% endblock %}
