@@ -1,7 +1,10 @@
 RewriteEngine On
 
+RewriteCond %{HTTPS} =off
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [QSA,L]
+
 # Remove slash from end
-RewriteRule ^(.+)/$ http://%{HTTP_HOST}/$1 [R=301,L]
+RewriteRule ^(.+)/$ https://%{HTTP_HOST}/$1 [R=301,L]
 
 # The following rule tells Apache that if the requested filename
 # exists, simply serve it.
