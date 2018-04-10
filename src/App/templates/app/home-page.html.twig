@@ -7,8 +7,16 @@
 ] %}
 
 {% set partners = [
-    {"name":"Гидроаппаратура Wandfluh", "link": path("wandfluh.lending"), "img": "upload/wandfluh/img/wandfluh.png"},
+    {"name":"Гидроаппаратура Wandfluh", "link": path("wandfluh.lending"), "img": "files/images/category/icons/hydraulics.png"},
 ] %}
+
+{% block stylesheets %}
+    <style>
+        .card .card-image img {
+            max-height: 160px;
+        }
+    </style>
+{% endblock %}
 
 
 {% block content %}
