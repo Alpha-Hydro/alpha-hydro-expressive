@@ -25,7 +25,7 @@
                     <label for="parent" class="col-sm-3 control-label">Родительская категория</label>
                     <div class="col-sm-9">
                         <div class="input-group">
-                            {{ forms.inputHidden('category[parent]', 'parent', category.parent.id) }}
+                            {{ forms.inputHidden('category[parent]', 'parent', category.parent.id | default('0')) }}
                             {{ forms.input(null, 'parent_name', 'Родительская категория', null, category.parent.name | default('Каталог')) }}
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">
