@@ -20,7 +20,9 @@
             <div class="{{ post.image ? 'col-md-9' : 'col-md-12' }}">
                 {{ post.contentHtml | raw }}
                 <p class="text-muted">
-                    <small><em>{{ post.timestamp | date('d.m.Y') ~ ' г.' }}</em></small>
+                    <small>
+                        <em>{{ post.timestamp | date('d.m.Y') ~ ' г.' }}</em>
+                    </small>
                 </p>
             </div>
             {% if post.image is defined and post.image != '' %}
