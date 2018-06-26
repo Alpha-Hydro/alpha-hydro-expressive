@@ -1,5 +1,6 @@
 RewriteEngine On
 
+RewriteCond %{HTTP_HOST} !^beta\.alpha-hydro\.com$ [NC]
 RewriteCond %{HTTPS} =off
 RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [QSA,L]
 
