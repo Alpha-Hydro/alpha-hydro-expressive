@@ -23,7 +23,9 @@ class WebhookAction implements ServerMiddlewareInterface
         $localRepo = realpath(__DIR__ . '/../../../../');
 
         if ($parseBody["payload"]){
-            shell_exec("cd {$localRepo } && git fetch --all && git reset --hard origin/public");
+            shell_exec("cd {$localRepo }");
+            shell_exec("git fetch --all && git reset --hard origin/public");
+            shell_exec("rm -rf ./data/cache/twig/*");
         }
 
         return new JsonResponse(["OK"]);
