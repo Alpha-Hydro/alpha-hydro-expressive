@@ -3,9 +3,11 @@
         {% for category in categories %}
             <div class="flex-box-item card hover">
                 <a href="{{ path('catalog_category_list', {'full_path' : category.fullPath}) }}">
-                    <div class="card-image">
-                        <img src="{{ category.uploadPath ~ category.image }}" alt="{{ category.name }}"/>
-                    </div>
+                    {% if category.parent is null %}
+                        <div class="card-image">
+                            <img src="{{ category.uploadPath ~ category.image }}" alt="{{ category.name }}"/>
+                        </div>
+                    {% endif %}
                     <div class="card-title bottom text-center">
                         {{ category.name }}
                     </div>
