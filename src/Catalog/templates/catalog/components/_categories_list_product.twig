@@ -1,11 +1,16 @@
+
+
 <div class="product-list">
     {% for product in productList %}
         <div class="row product-item">
             <div class="col-sm-3">
                 <div class="thumbnail product-images">
                     <a href="{{ path('catalog_category_list', {'full_path': product.fullPath}) }}">
-                        <img src="{{ product.uploadPath }}{{ product.image }}"
-                             alt="{{ product.name }}">
+                        {% if product.draft is not null and product.draft != '' %}
+                            <img src="{{ product.uploadPathDraft ~ product.draft }}" alt="{{ product.name }}">
+                        {% else %}
+                            <img src="{{ asset('files/images/no-foto.jpg') }}" alt="{{ product.name }}">
+                        {% endif %}
                     </a>
                 </div>
             </div>
